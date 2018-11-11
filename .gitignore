@@ -1,0 +1,6 @@
+#Ignore All Doc Files
+*.doc
+#ignore All odt Files
+*.odt
+#Ignore Docs Folder
+Docs/

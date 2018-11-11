@@ -71,5 +71,25 @@ namespace Inz_Prot.Models
             return null;
         }
         
+        public static void AddUser(string Login,string Password, string Name, string Surname,string PESEL,Privileges level)
+        {
+            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@pesel,@lvl";
+
+            var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@login", Login);
+            query.Parameters.AddWithValue("@password", Password);
+            query.Parameters.AddWithValue("@Name", Name);
+            query.Parameters.AddWithValue("@Surname", Surname);
+            query.Parameters.AddWithValue("@pesel", PESEL);
+            query.Parameters.AddWithValue("@lvl", level);
+
+            dbTools.dbAgent.GetConnection().Open();
+
+            Debug.WriteLine(
+                query.ExecuteNonQuery());
+            
+        }
+
     }
 }
