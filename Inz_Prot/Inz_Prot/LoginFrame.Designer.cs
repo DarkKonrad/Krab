@@ -33,13 +33,14 @@
             this.txtbPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblLoginCredError = new System.Windows.Forms.Label();
+            this.lblGeneratedLogin = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnLogin.Location = new System.Drawing.Point(287, 259);
+            this.btnLogin.Location = new System.Drawing.Point(229, 234);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(145, 42);
             this.btnLogin.TabIndex = 0;
@@ -49,14 +50,14 @@
             // 
             // txtbLogin
             // 
-            this.txtbLogin.Location = new System.Drawing.Point(287, 129);
+            this.txtbLogin.Location = new System.Drawing.Point(229, 116);
             this.txtbLogin.Name = "txtbLogin";
             this.txtbLogin.Size = new System.Drawing.Size(145, 20);
             this.txtbLogin.TabIndex = 1;
             // 
             // txtbPassword
             // 
-            this.txtbPassword.Location = new System.Drawing.Point(287, 208);
+            this.txtbPassword.Location = new System.Drawing.Point(229, 183);
             this.txtbPassword.Name = "txtbPassword";
             this.txtbPassword.Size = new System.Drawing.Size(145, 20);
             this.txtbPassword.TabIndex = 2;
@@ -65,7 +66,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(336, 110);
+            this.label1.Location = new System.Drawing.Point(278, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 16);
             this.label1.TabIndex = 3;
@@ -75,20 +76,35 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(336, 192);
+            this.label2.Location = new System.Drawing.Point(278, 167);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Hasło";
             // 
-            // button1
+            // lblLoginCredError
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 42);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lblLoginCredError.AutoSize = true;
+            this.lblLoginCredError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblLoginCredError.ForeColor = System.Drawing.Color.Red;
+            this.lblLoginCredError.Location = new System.Drawing.Point(206, 330);
+            this.lblLoginCredError.Name = "lblLoginCredError";
+            this.lblLoginCredError.Size = new System.Drawing.Size(185, 20);
+            this.lblLoginCredError.TabIndex = 5;
+            this.lblLoginCredError.Text = "Błędny login lub hasło";
+            this.lblLoginCredError.Visible = false;
+            // 
+            // lblGeneratedLogin
+            // 
+            this.lblGeneratedLogin.AutoSize = true;
+            this.lblGeneratedLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblGeneratedLogin.ForeColor = System.Drawing.Color.Black;
+            this.lblGeneratedLogin.Location = new System.Drawing.Point(23, 22);
+            this.lblGeneratedLogin.Name = "lblGeneratedLogin";
+            this.lblGeneratedLogin.Size = new System.Drawing.Size(57, 20);
+            this.lblGeneratedLogin.TabIndex = 6;
+            this.lblGeneratedLogin.Text = "label3";
+            this.lblGeneratedLogin.Visible = false;
             // 
             // LoginForm
             // 
@@ -96,8 +112,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PaleGreen;
-            this.ClientSize = new System.Drawing.Size(707, 422);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(581, 411);
+            this.Controls.Add(this.lblGeneratedLogin);
+            this.Controls.Add(this.lblLoginCredError);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtbPassword);
@@ -117,7 +134,8 @@
         private System.Windows.Forms.TextBox txtbPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblLoginCredError;
+        private System.Windows.Forms.Label lblGeneratedLogin;
     }
 }
 

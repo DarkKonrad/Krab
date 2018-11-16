@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 namespace Inz_Prot.Models
-{   public class User
+{
+    public class User
     {
-      public enum Privileges
+        public enum Privileges
         {
-            Normal=1,
-            CEO=2,
-            Security=3,
-            HR=4
+            Normal = 1,
+            Admin = 2,
+            Security = 3,
+            HR = 4
         }
-        string name, surname;
+        string name, surname, login;
         DateTime bDayDate;
         int salary;
         Privileges privilege;
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
+        public string Login { get => login; set => login = value; }
 
-        public User(string name,string surname,Privileges privileges)
+        public User(string name, string surname, Privileges privileges)
         {
             this.name = name;
             this.surname = surname;
@@ -38,10 +40,11 @@ namespace Inz_Prot.Models
                 dbTools.dbAgent.GetConnection().Open();
 
                 string command = "Select * from user WHERE Login=@login AND Password=@password";
-                var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+                var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());             
+                var Password_Hashed = dbTools.Password_Hasher.Hash(Password);
 
                 query.Parameters.AddWithValue("@login", Login);
-                query.Parameters.AddWithValue("@password", Password);
+                query.Parameters.AddWithValue("@password", Password_Hashed);
 
                 var reader = query.ExecuteReader();
                 string imie = "";
@@ -51,10 +54,10 @@ namespace Inz_Prot.Models
                 {
                     imie = reader["Name"].ToString();
                     nazwisko = reader["Surname"].ToString();
-                    privTmp = (int)reader["Privileges"];
-
+                    privTmp = (int) reader["Privileges"];
+                    Login = reader["Login"].ToString();
                 }
-                return new User(imie, nazwisko, (Privileges)privTmp);
+                return new User(imie, nazwisko, (Privileges) privTmp);
             }
 
             catch (Exception ex)
@@ -70,8 +73,8 @@ namespace Inz_Prot.Models
             }
             return null;
         }
-        
-        public static void AddUser(string Login,string Password, string Name, string Surname,string PESEL,Privileges level)
+        // INSERT INTO sprawdzic manualnie poprawic 
+        public static void AddUser(string Login, string Password, string Name, string Surname, string PESEL, Privileges level)
         {
             string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@pesel,@lvl";
 
@@ -88,7 +91,117 @@ namespace Inz_Prot.Models
 
             Debug.WriteLine(
                 query.ExecuteNonQuery());
-            
+
+            dbTools.dbAgent.GetConnection().Close();
+        }
+        public static void AddUser(string Name, string Surname, string Password, Privileges level)
+        {
+            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@pesel,@lvl";
+
+            var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            // query.Parameters.AddWithValue("@login", Login);
+            query.Parameters.AddWithValue("@password", Password);
+            query.Parameters.AddWithValue("@Name", Name);
+            query.Parameters.AddWithValue("@Surname", Surname);
+            query.Parameters.AddWithValue("@lvl", level);
+            //  query.Parameters.AddWithValue("@pesel", PESEL);
+            dbTools.dbAgent.GetConnection().Open();
+
+            Debug.WriteLine(
+                query.ExecuteNonQuery());
+
+            dbTools.dbAgent.GetConnection().Close();
+        }
+    
+
+
+        public static string GenerateLogin(string name, string surname)
+        {
+            string login;
+            login = string.Concat(name.Substring(0, 1),
+            surname.Substring(0, 6));
+            login.Trim(' ');
+
+            return login;
+
+
+        }
+
+        //  Sprawdzic INSER INTO
+        public static User CreateAdmin(string name, string surname, string password)
+        {
+            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@lvl)";
+            var Password_Hashed = dbTools.Password_Hasher.Hash(password);
+            string login = User.GenerateLogin(name, surname);
+
+            var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@password", Password_Hashed);
+            query.Parameters.AddWithValue("@name", name);
+            query.Parameters.AddWithValue("login", login);
+            query.Parameters.AddWithValue("@lvl", User.Privileges.Admin);
+            query.Parameters.AddWithValue("@surname", surname);
+
+            dbTools.dbAgent.GetConnection().Open();
+
+            Debug.WriteLine(
+                query.ExecuteNonQuery());
+
+            dbTools.dbAgent.GetConnection().Close();
+
+            return GetUser(login, password);
+        }
+
+        /// <summary>
+        /// Making the form checking for default Login and password for Admin account
+        /// </summary>
+        /// <param name="Login"></param>
+        /// <param name="Password"></param>
+        public static bool CheckForAdmin()
+        {
+           
+                string command = "SELECT * FROM user WHERE Privileges = 2";
+                var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+
+                query.ExecuteNonQuery();
+
+               
+
+                var reader = query.ExecuteReader();
+
+
+                if (!reader.Read())
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+              catch(Exception ex)
+            {
+               
+                System.Windows.Forms.MessageBox.Show(
+                    ex.Message, "Wystapił błąd połączenia sieciowego",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Warning);
+
+                // Bardzo nieeleganckie, ale w przypadku gdy nie bedzie polaczenia a uzytkownik wprowadzi defaultowe dane,
+                // nie mozemy dopuscic, do sytuacji,w ktorej bedzie mogl dodac kolejnego admina.
+                return true;
+            }
+            finally
+            {
+                
+                dbTools.dbAgent.GetConnection().Close();
+            }
         }
 
     }

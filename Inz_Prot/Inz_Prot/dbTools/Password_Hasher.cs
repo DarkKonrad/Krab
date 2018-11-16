@@ -44,7 +44,7 @@ namespace Inz_Prot.dbTools
             var base64Hash = Convert.ToBase64String(hashBytes);
 
             // Format hash with extra information
-            return string.Format("$MYHASH$V1${0}${1}", iterations, base64Hash);
+            return string.Format("$XEREC$V1${0}${1}", iterations, base64Hash);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Inz_Prot.dbTools
         /// <returns>Is supported?</returns>
         public static bool IsHashSupported(string hashString)
         {
-            return hashString.Contains("$MYHASH$V1$");
+            return hashString.Contains("$XEREC$V1$V1$");
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Inz_Prot.dbTools
             }
 
             // Extract iteration and Base64 string
-            var splittedHashString = hashedPassword.Replace("$MYHASH$V1$", "").Split('$');
+            var splittedHashString = hashedPassword.Replace("$XEREC$V1$", "").Split('$');
             var iterations = int.Parse(splittedHashString[0]);
             var base64Hash = splittedHashString[1];
 

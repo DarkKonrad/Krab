@@ -20,3 +20,4 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\bin\Debug\MySql.Data.Entity.EF6.xml
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.LoginForm.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csproj.CopyComplete
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.Main_Window.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.AdminChangeCredentials.resources
