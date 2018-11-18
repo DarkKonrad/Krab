@@ -45,7 +45,7 @@
             // 
             this.Accept.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
             this.Accept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Accept.Location = new System.Drawing.Point(148, 268);
+            this.Accept.Location = new System.Drawing.Point(149, 279);
             this.Accept.Name = "Accept";
             this.Accept.Size = new System.Drawing.Size(187, 51);
             this.Accept.TabIndex = 0;
@@ -56,7 +56,7 @@
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtName.Location = new System.Drawing.Point(149, 120);
+            this.txtName.Location = new System.Drawing.Point(150, 131);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(187, 22);
             this.txtName.TabIndex = 1;
@@ -64,7 +64,7 @@
             // txtSurname
             // 
             this.txtSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtSurname.Location = new System.Drawing.Point(149, 156);
+            this.txtSurname.Location = new System.Drawing.Point(150, 167);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(187, 22);
             this.txtSurname.TabIndex = 2;
@@ -72,7 +72,7 @@
             // txtPass
             // 
             this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtPass.Location = new System.Drawing.Point(148, 196);
+            this.txtPass.Location = new System.Drawing.Point(149, 207);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(187, 22);
             this.txtPass.TabIndex = 3;
@@ -80,7 +80,7 @@
             // txtPassVer
             // 
             this.txtPassVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtPassVer.Location = new System.Drawing.Point(148, 233);
+            this.txtPassVer.Location = new System.Drawing.Point(149, 244);
             this.txtPassVer.Name = "txtPassVer";
             this.txtPassVer.Size = new System.Drawing.Size(187, 22);
             this.txtPassVer.TabIndex = 4;
@@ -89,7 +89,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(27, 123);
+            this.label1.Location = new System.Drawing.Point(28, 134);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 16);
             this.label1.TabIndex = 5;
@@ -99,7 +99,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(27, 159);
+            this.label2.Location = new System.Drawing.Point(28, 170);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 16);
             this.label2.TabIndex = 6;
@@ -109,7 +109,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(27, 199);
+            this.label3.Location = new System.Drawing.Point(28, 210);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 16);
             this.label3.TabIndex = 7;
@@ -119,7 +119,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(27, 236);
+            this.label4.Location = new System.Drawing.Point(28, 247);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 16);
             this.label4.TabIndex = 8;
@@ -131,17 +131,17 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label5.Location = new System.Drawing.Point(27, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(319, 64);
+            this.label5.Size = new System.Drawing.Size(355, 64);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Wypełnij uważnie poniższe pola. \r\n\r\nLogin zostanie wygenerowany po poprawnym\r\nwyp" +
-    "ełnieniu poniższych pól";
+            this.label5.Text = "Należy zmienić hasło oraz podać imię i nazwisko. \r\nNa ich podstawie zostanie wyge" +
+    "nerowany login, \r\nktorego nalezy uzywac celem uzyskania\r\ndostępu do systemu.";
             // 
             // lblWarning
             // 
             this.lblWarning.AutoSize = true;
             this.lblWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblWarning.ForeColor = System.Drawing.Color.Red;
-            this.lblWarning.Location = new System.Drawing.Point(12, 340);
+            this.lblWarning.Location = new System.Drawing.Point(13, 351);
             this.lblWarning.Name = "lblWarning";
             this.lblWarning.Size = new System.Drawing.Size(115, 16);
             this.lblWarning.TabIndex = 10;
@@ -165,7 +165,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.Accept);
             this.Name = "AdminChangeCredentials";
-            this.Text = "AdminChangeCredentials";
+            this.Text = "Zmiana Danych Dostępowych";
             this.ResumeLayout(false);
             this.PerformLayout();
 

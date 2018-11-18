@@ -21,7 +21,7 @@ namespace Inz_Prot
             InitializeComponent();
         }
 
-  public void SetGeneratedLoginLabel(string text)
+        public void SetGeneratedLoginLabel(string text)
         {
             this.lblGeneratedLogin.Text = text;
             lblGeneratedLogin.Visible = true;

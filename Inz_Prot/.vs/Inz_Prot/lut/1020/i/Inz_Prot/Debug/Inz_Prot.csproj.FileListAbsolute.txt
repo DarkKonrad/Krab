@@ -1,0 +1,11 @@
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\b\Inz_Prot.exe.config
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\b\Inz_Prot.exe
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.EmployeesManagmentForms.EmployeesForm.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.LoginForm.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.MainWindow.AdminChangeCredentials.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.MainWindow.Main_Window.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.Properties.Resources.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.csproj.GenerateResource.cache
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.csproj.CoreCompileInputs.cache
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.csproj.CopyComplete
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\1020\i\Inz_Prot\Debug\Inz_Prot.exe

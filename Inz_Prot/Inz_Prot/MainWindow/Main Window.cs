@@ -7,24 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Inz_Prot.Models;
 
 namespace Inz_Prot.MainWindow
 {
     public partial class Main_Window : Form
     {
+        User CurrentUser;
+
         private Main_Window()
         {
             InitializeComponent();
         }
 
-       public Main_Window(Models.User user)
+       public Main_Window(User user)
         {
             InitializeComponent();
-            labelUser.Text = user.Name + "  " + user.Surname;
+            labelUser.Text = user.Name + Environment.NewLine + user.Surname;
+            CurrentUser = user;
         }
 
-        private void Main_Window_Load(object sender, EventArgs e)
+        private void btnEmployees_Click(object sender, EventArgs e)
         {
 
         }

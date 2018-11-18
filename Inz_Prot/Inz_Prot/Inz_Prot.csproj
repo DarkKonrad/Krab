@@ -79,10 +79,10 @@
     <Compile Include="LoginFrame.Designer.cs">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\AdminChangeCredentials.cs">
+    <Compile Include="UserCreationForms\AdminChangeCredentials.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\AdminChangeCredentials.Designer.cs">
+    <Compile Include="UserCreationForms\AdminChangeCredentials.Designer.cs">
       <DependentUpon>AdminChangeCredentials.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Main Window.cs">
@@ -97,7 +97,7 @@
     <EmbeddedResource Include="LoginFrame.resx">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\AdminChangeCredentials.resx">
+    <EmbeddedResource Include="UserCreationForms\AdminChangeCredentials.resx">
       <DependentUpon>AdminChangeCredentials.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Main Window.resx">
@@ -126,5 +126,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

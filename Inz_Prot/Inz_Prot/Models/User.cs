@@ -50,22 +50,26 @@ namespace Inz_Prot.Models
                 string imie = "";
                 string nazwisko = "";
                 int privTmp = 0;
+               
                 while (reader.Read())
                 {
                     imie = reader["Name"].ToString();
                     nazwisko = reader["Surname"].ToString();
                     privTmp = (int) reader["Privileges"];
                     Login = reader["Login"].ToString();
+                    return new User(imie, nazwisko, (Privileges) privTmp);
                 }
-                return new User(imie, nazwisko, (Privileges) privTmp);
+               
             }
 
             catch (Exception ex)
             {
+                
                 Debug.WriteLine(ex.Message);
                 System.Windows.Forms.MessageBox.Show("Nieprawdiłowy login lub hasło", "Błąd",
                      System.Windows.Forms.MessageBoxButtons.OK,
                      System.Windows.Forms.MessageBoxIcon.Warning);
+                
             }
             finally
             {
@@ -76,10 +80,11 @@ namespace Inz_Prot.Models
         // INSERT INTO sprawdzic manualnie poprawic 
         public static void AddUser(string Login, string Password, string Name, string Surname, string PESEL, Privileges level)
         {
-            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@pesel,@lvl";
+            string command = "INSERT INTO user VALUES(@ID,@login,@password,@name,@surname,@pesel,@lvl";
 
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
+            query.Parameters.AddWithValue("@ID", null);
             query.Parameters.AddWithValue("@login", Login);
             query.Parameters.AddWithValue("@password", Password);
             query.Parameters.AddWithValue("@Name", Name);
@@ -120,7 +125,8 @@ namespace Inz_Prot.Models
         {
             string login;
             login = string.Concat(name.Substring(0, 1),
-            surname.Substring(0, 6));
+            surname.Substring(0, 
+            surname.Length>6 ? 6 : surname.Length ));
             login.Trim(' ');
 
             return login;
@@ -131,12 +137,13 @@ namespace Inz_Prot.Models
         //  Sprawdzic INSER INTO
         public static User CreateAdmin(string name, string surname, string password)
         {
-            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@lvl)";
+            string command = "INSERT INTO user (Login,Password,Name,Surname,Privileges) VALUES(@login,@password,@name,@surname,@lvl)";
             var Password_Hashed = dbTools.Password_Hasher.Hash(password);
             string login = User.GenerateLogin(name, surname);
 
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
+           // query.Parameters.AddWithValue("@ID", null);
             query.Parameters.AddWithValue("@password", Password_Hashed);
             query.Parameters.AddWithValue("@name", name);
             query.Parameters.AddWithValue("login", login);
