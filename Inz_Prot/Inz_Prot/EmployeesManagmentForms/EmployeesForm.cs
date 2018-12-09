@@ -16,5 +16,10 @@ namespace Inz_Prot.EmployeesManagmentForms
         {
             InitializeComponent();
         }
+
+        private void EmployeesForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

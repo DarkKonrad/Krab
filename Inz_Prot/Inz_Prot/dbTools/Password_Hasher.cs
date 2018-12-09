@@ -64,7 +64,7 @@ namespace Inz_Prot.dbTools
         /// <returns>Is supported?</returns>
         public static bool IsHashSupported(string hashString)
         {
-            return hashString.Contains("$XEREC$V1$V1$");
+            return hashString.Contains("$XEREC$V1$");
         }
 
         /// <summary>

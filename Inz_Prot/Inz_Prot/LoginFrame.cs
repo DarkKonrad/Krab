@@ -41,7 +41,7 @@ namespace Inz_Prot
                 }
             }
                 
-                Models.User usr = Models.User.GetUser(txtbLogin.Text, txtbPassword.Text);
+                Models.User usr = Models.User._GetUser(txtbLogin.Text, txtbPassword.Text);
             if (usr == null)
             {
                 lblLoginCredError.Visible = true;

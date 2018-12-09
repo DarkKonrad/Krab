@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.DataGridEmployees = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridEmployees)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // DataGridEmployees
+            // 
+            this.DataGridEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridEmployees.Location = new System.Drawing.Point(12, 12);
+            this.DataGridEmployees.Name = "DataGridEmployees";
+            this.DataGridEmployees.Size = new System.Drawing.Size(1042, 506);
+            this.DataGridEmployees.TabIndex = 0;
+            // 
+            // EmployeesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1066, 639);
+            this.Controls.Add(this.DataGridEmployees);
+            this.Name = "EmployeesForm";
             this.Text = "EmployeesForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.EmployeesForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridEmployees)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView DataGridEmployees;
     }
 }

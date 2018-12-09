@@ -4,3 +4,7 @@
 *.odt
 #Ignore Docs Folder
 Docs/
+#Ignore All Exe Files
+*.exe
+#Ignore ALl Binary Files
+/Inz_Prot/Inz_Prot/bin/Debug/
