@@ -9,7 +9,7 @@ namespace Inz_Prot.Models
 {
    public class Employee
     {
-        int? ID;
+        int? id;
         string name, surname, pesel,address,position;
         DateTime birthDay, hireFrom;
         DateTime? expDate;
@@ -25,6 +25,7 @@ namespace Inz_Prot.Models
         public DateTime HireFrom { get => hireFrom; set => hireFrom = value; }
         public DateTime? HireExp { get => expDate; set => expDate = value; }
         public string Position { get => position; set => position = value; }
+        public int? ID { get => id; set => id = value; }
 
 
         #endregion
@@ -48,24 +49,72 @@ namespace Inz_Prot.Models
             return int.Parse(( age.Days / 365 ).ToString());
             
         }
-        public static void AddEmployee(string name, string surname, string pesel, string address,string position, DateTime birthDay, DateTime hireFrom, DateTime? expDate)
+        public static void AddEmployee (Employee employee)
         {
-            string command = "INSERT INTO employees VALUES (@name,@surname,@pesel,@address,@birthDay,@hireDate,@expDate)";
+            string command = "INSERT INTO employees VALUES (@null,@name,@surname,@birthDay,@pesel,@address,@hireDate,@expDate,@position)";
+
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
+            query.Parameters.AddWithValue("@null", null);
+            query.Parameters.AddWithValue("@name",     employee.name);
+            query.Parameters.AddWithValue("@surname",  employee.surname);
+            query.Parameters.AddWithValue("@pesel",    employee.pesel);
+            query.Parameters.AddWithValue("@address",  employee.address);
+            query.Parameters.AddWithValue("@birthday", employee.birthDay.Date.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@hireDate", employee.hireFrom.Date.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@position",  employee.position);
+           // query.Parameters.AddWithValue("@expDate", employee.position);
+
+            if (!employee.expDate.HasValue)
+            {
+                query.Parameters.AddWithValue("@expDate", null);
+            }
+           else query.Parameters.AddWithValue("@expDate", employee.expDate.Value.Date.ToString("yyyy-MM-dd"));
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+
+                query.ExecuteNonQuery();
+
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Nastąpił błąd połączenia z bazą danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine(ex.Message + Environment.NewLine + ex.Data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Dodanie nowego pracownika nie powiodło się." + Environment.NewLine + " Jesli problem bedzie się powtarzać, skontaktuj się z producentem", "Nastąpił błąd połączenia z bazą danych" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+        }
+        public static void AddEmployee(string name, string surname, string pesel, string address,string position, DateTime birthDay, DateTime hireFrom, DateTime? expDate)
+        {
+            string command = "INSERT INTO employees VALUES (@null,@name,@surname,@birthDay,@pesel,@address,@birthDay,@hireDate,@expDate)";
+
+            var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@null", null);
             query.Parameters.AddWithValue("@name", name);
             query.Parameters.AddWithValue("@surname", surname);
+            query.Parameters.AddWithValue("@birthDay", birthDay);
             query.Parameters.AddWithValue("@pesel", pesel);
             query.Parameters.AddWithValue("@address", address);
-            query.Parameters.AddWithValue("@birthday",birthDay.Date.ToString("DD-MM-YYYY"));
-            query.Parameters.AddWithValue("@hireDate", hireFrom.Date.ToString("DD-MM-YYYY"));
+            query.Parameters.AddWithValue("@birthday",birthDay.Date.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@hireDate", hireFrom.Date.ToString("yyyy-MM-dd"));
             query.Parameters.AddWithValue("@adtPerm", position);
 
             if (!expDate.HasValue)
             {
-                query.Parameters.AddWithValue("@hireExp",null);
+                query.Parameters.AddWithValue("@expDate", null);
             }
-            query.Parameters.AddWithValue("@expDate", expDate.Value.Date.ToString("DD-MM-YYYY"));
+          else  query.Parameters.AddWithValue("@expDate", expDate.Value.Date.ToString("yyyy-MM-dd"));
 
             try
             {
@@ -89,8 +138,45 @@ namespace Inz_Prot.Models
                 dbTools.dbAgent.GetConnection().Close();
             }
         }
+       // ID Name Surname BirthdayDate PESEL Address HireDate HireExpirationDate Position
+        public static void EditEmployee( Employee employee)
+        {
+            string command = "UPDATE Employees SET Name=@name, Surname=@surname,BirthdayDate=@birthday,PESEL =@pesel,Address=@address,HireDate=@hiredate,HireExpirationDate=@hireExp,Position=@position WHERE ID=@id";
+            var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
-      
+            query.Parameters.AddWithValue("@id", employee.ID);
+            query.Parameters.AddWithValue("@name", employee.name);
+            query.Parameters.AddWithValue("@surname", employee.surname);
+            query.Parameters.AddWithValue("@birthday", employee.birthDay.Date.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@pesel", employee.pesel);                    
+            query.Parameters.AddWithValue("@address", employee.address);                
+            query.Parameters.AddWithValue("@hiredate", employee.hireFrom.Date.ToString("yyyy-MM-dd"));
+            query.Parameters.AddWithValue("@hireExp", employee.HireExp.HasValue ? employee.HireExp.Value.Date.ToString("yyyy-MM-dd") : null);
+            query.Parameters.AddWithValue("@position", employee.position);
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                query.ExecuteNonQuery();
+            }
+
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Nastąpił błąd połączenia z bazą danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine(ex.Message + Environment.NewLine + ex.Data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nieznany błąd" + Environment.NewLine + " Jesli problem bedzie się powtarzać, skontaktuj się z producentem", "Nastąpił błąd połączenia z bazą danych" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine(ex.Message + "  " + ex.StackTrace);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+
+        }
         public static List<Employee> GetAllEmployees( )
         {
             List<Employee> listOfEmployees = new List<Employee>();

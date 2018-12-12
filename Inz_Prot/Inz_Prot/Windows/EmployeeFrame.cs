@@ -21,6 +21,7 @@ namespace Inz_Prot.Windows
         void RefreshTable()
         {
             dataGridEmployee.Rows.Clear();
+            dataGridEmployee.MultiSelect = false;
             listOfEmployees = Models.Employee.GetAllEmployees();
             int i = 0;
 
@@ -43,15 +44,44 @@ namespace Inz_Prot.Windows
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //Hiding
         {
-
+            this.Hide();
+            this.Dispose();
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            var addEmployeeDialog = new DialogBoxes.AddNewEmployeeDialog();
+            var addEmployeeDialog = new DialogBoxes.AddEditEmployeeDialog();
             var dialogResult = addEmployeeDialog.ShowDialog();
+            var employee = addEmployeeDialog.GetDialogEmployee(dialogResult);
+            if (employee == null)
+                return;
+            Employee.AddEmployee(employee);
+            RefreshTable();
+        }
+
+        private void btnEditEmployee_Click(object sender, EventArgs e)
+        {
+            if(dataGridEmployee.SelectedRows.Count ==1)
+            {
+                // var Cells =  dataGridEmployee.SelectedRows[0].Cells;
+                //   foreach(DataGridViewCell cell in Cells )
+                //   {
+                //       dataGridEmployee.SelectedRows[0].i
+                //   }
+                var EditUserDialog = new DialogBoxes.AddEditEmployeeDialog(
+                    listOfEmployees[dataGridEmployee.SelectedRows[0].Index]);
+                var dialogResult = EditUserDialog.ShowDialog();
+                var employee = EditUserDialog.GetDialogEmployee(dialogResult,
+                   listOfEmployees[dataGridEmployee.SelectedRows[0].Index].ID );
+
+                if (employee == null)
+                    return;
+                Employee.EditEmployee(employee);
+                RefreshTable();
+
+            }
         }
     }
 }

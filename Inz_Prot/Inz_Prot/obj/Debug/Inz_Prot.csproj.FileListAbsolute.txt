@@ -23,4 +23,4 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.AdminCha
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csprojAssemblyReference.cache
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.EmployeesManagmentForms.EmployeesForm.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.EmployeeFrame.resources
-E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddNewEmployeeDialog.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddEditEmployeeDialog.resources

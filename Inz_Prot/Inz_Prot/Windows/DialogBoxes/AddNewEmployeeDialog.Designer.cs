@@ -1,6 +1,6 @@
 ﻿namespace Inz_Prot.Windows.DialogBoxes
 {
-    partial class AddNewEmployeeDialog
+    partial class AddEditEmployeeDialog
     {
         /// <summary>
         /// Required designer variable.
