@@ -29,7 +29,9 @@ namespace Inz_Prot.MainWindow
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
-
+            var emplForm = new Windows.EmployeeFrame();
+            emplForm.Show();
+           //this.Hide();
         }
     }
 }

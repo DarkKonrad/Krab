@@ -22,3 +22,4 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.Main_Win
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.AdminChangeCredentials.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csprojAssemblyReference.cache
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.EmployeesManagmentForms.EmployeesForm.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.EmployeeFrame.resources

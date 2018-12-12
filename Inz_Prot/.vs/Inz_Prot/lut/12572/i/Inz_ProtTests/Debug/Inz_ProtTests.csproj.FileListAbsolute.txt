@@ -1,0 +1,9 @@
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\b\Inz_ProtTests.dll
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_ProtTests\Debug\Inz_ProtTests.csprojAssemblyReference.cache
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_ProtTests\Debug\Inz_ProtTests.csproj.CoreCompileInputs.cache
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_ProtTests\Debug\Inz_ProtTests.csproj.CopyComplete
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_ProtTests\Debug\Inz_ProtTests.dll
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\b\Inz_ProtTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\b\Inz_ProtTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\b\Inz_ProtTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\b\Inz_ProtTests\bin\Debug\Inz_ProtTests.dll
