@@ -47,5 +47,11 @@ namespace Inz_Prot.Windows
         {
 
         }
+
+        private void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            var addEmployeeDialog = new DialogBoxes.AddNewEmployeeDialog();
+            var dialogResult = addEmployeeDialog.ShowDialog();
+        }
     }
 }
