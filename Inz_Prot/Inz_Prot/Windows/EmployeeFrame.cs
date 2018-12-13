@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inz_Prot.Models;
+using Inz_Prot.dbHelpers.TableEditors;
 namespace Inz_Prot.Windows
 {
     public partial class EmployeeFrame : Form
@@ -22,7 +23,7 @@ namespace Inz_Prot.Windows
         {
             dataGridEmployee.Rows.Clear();
             dataGridEmployee.MultiSelect = false;
-            listOfEmployees = Models.Employee.GetAllEmployees();
+            listOfEmployees = EmployeeHelper.GetAllEmployees();
             int i = 0;
 
             foreach (Employee employee in listOfEmployees)
@@ -57,7 +58,7 @@ namespace Inz_Prot.Windows
             var employee = addEmployeeDialog.GetDialogEmployee(dialogResult);
             if (employee == null)
                 return;
-            Employee.AddEmployee(employee);
+            EmployeeHelper.AddEmployee(employee);
             RefreshTable();
         }
 
@@ -78,7 +79,31 @@ namespace Inz_Prot.Windows
 
                 if (employee == null)
                     return;
-                Employee.EditEmployee(employee);
+                EmployeeHelper.EditEmployee(employee);
+                RefreshTable();
+
+            }
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            if (dataGridEmployee.SelectedRows.Count == 1)
+            {
+                // var Cells =  dataGridEmployee.SelectedRows[0].Cells;
+                //   foreach(DataGridViewCell cell in Cells )
+                //   {listOfEmployees[dataGridEmployee.SelectedRows[0].Index]
+                //       dataGridEmployee.SelectedRows[0].i
+                //   }
+                var employee = listOfEmployees[dataGridEmployee.SelectedRows[0].Index];
+                if (employee == null)
+                    return;
+
+                var dialogResult = MessageBox.Show("Potwierdź usunięcie pracownika: " + Environment.NewLine + Environment.NewLine + employee.Name + " " + employee.Surname +
+                    "Zmiany te sa NIEODWRACALNE", "Usuwanie pracownika z bazy danych", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+                if (dialogResult == DialogResult.OK)
+                   
+                EmployeeHelper.DeleteEmployee(employee);
                 RefreshTable();
 
             }

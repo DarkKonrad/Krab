@@ -71,6 +71,8 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
+    <Compile Include="dbHelpers\TableEditors\UserHelper.cs" />
     <Compile Include="dbTools\dbAgent.cs" />
     <Compile Include="dbTools\Password_Hasher.cs" />
     <Compile Include="EmployeesManagmentForms\EmployeesForm.cs">
@@ -107,6 +109,12 @@
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.Designer.cs">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\ConfirmDialogBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\ConfirmDialogBox.Designer.cs">
+      <DependentUpon>ConfirmDialogBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EmployeeFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="Windows\DialogBoxes\AddNewEmployeeDialog.resx">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\ConfirmDialogBox.resx">
+      <DependentUpon>ConfirmDialogBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>

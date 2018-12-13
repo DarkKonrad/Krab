@@ -5,6 +5,7 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.Lo
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.MainWindow.AdminChangeCredentials.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.MainWindow.Main_Window.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.Properties.Resources.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.Windows.DialogBoxes.AddEditEmployeeDialog.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.Windows.EmployeeFrame.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.csproj.GenerateResource.cache
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\.vs\Inz_Prot\lut\0\i\Inz_Prot\Debug\Inz_Prot.csproj.CoreCompileInputs.cache

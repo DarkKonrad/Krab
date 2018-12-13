@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-
+using Inz_Prot.dbHelpers.TableEditors;
 namespace Inz_Prot
 {
   
@@ -33,7 +33,7 @@ namespace Inz_Prot
             lblGeneratedLogin.Visible = false;
             if (string.Equals(txtbLogin.Text, "Admin01") && string.Equals(txtbPassword.Text, "AdminPassword"))
             {
-                if(Models.User.CheckForAdmin()==false)
+                if(UserHelper.CheckForAdmin()==false)
                 {
                     var CreateAdminForm = new MainWindow.AdminChangeCredentials(this);
                     CreateAdminForm.Show();
@@ -41,7 +41,7 @@ namespace Inz_Prot
                 }
             }
                 
-                Models.User usr = Models.User._GetUser(txtbLogin.Text, txtbPassword.Text);
+                Models.User usr = UserHelper.GetUser(txtbLogin.Text, txtbPassword.Text);
             if (usr == null)
             {
                 lblLoginCredError.Visible = true;
@@ -51,7 +51,7 @@ namespace Inz_Prot
             MainWindow.Main_Window MainWindow = new MainWindow.Main_Window(usr);
             this.Hide();
             MainWindow.Show();
-
+           // this.Dispose();
         }
     }
 }

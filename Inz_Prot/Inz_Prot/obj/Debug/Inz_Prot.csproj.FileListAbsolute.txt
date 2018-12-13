@@ -24,3 +24,4 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csprojAssemblyRefer
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.EmployeesManagmentForms.EmployeesForm.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.EmployeeFrame.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddEditEmployeeDialog.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.ConfirmDialogBox.resources
