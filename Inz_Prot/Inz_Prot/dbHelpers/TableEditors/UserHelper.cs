@@ -160,6 +160,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                 string imie = "";
                 string nazwisko = "";
+                string login = "";
                 int privTmp = 0, id=0;
                 string Password_Hashed = "";
                 if (reader.Read())
@@ -170,9 +171,9 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     imie = reader["Name"].ToString();
                     nazwisko = reader["Surname"].ToString();
                     privTmp = (int) reader["Privileges"];
-                    Login = reader["Login"].ToString();
+                    login = reader["Login"].ToString();
                     id = (int)reader["ID"];
-                    return new User(id,imie, nazwisko, (User.Privileges) privTmp);
+                    return new User(id,imie, nazwisko,Login, (User.Privileges) privTmp);
                 }
 
             }
@@ -249,6 +250,47 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         }
 
+        public static List<User> GetAllUsers()
+        {
+            List<User> listOfUsers = new List<User>();
+
+            string command = "SELECT * FROM user";
+            var query = new MySqlCommand(command, dbTools.dbAgent.GetConnection());
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                var reader = query.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    var Name = reader["Name"].ToString();
+                    var Surname = reader["Surname"].ToString();
+                    var Priv = (User.Privileges)reader["Privileges"];
+                    var Password = reader["Password"].ToString();
+                    var ID = (int)reader["ID"];
+                    var Login = reader["Login"].ToString();
+                    listOfUsers.Add(new User(ID, Name, Surname,Login, Priv
+                        ));
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Wystąpił błąd połączenia z bazą danych: " + Environment.NewLine + ex.Message +Environment.NewLine +
+                    "Jeśli błąd będzie się powtarzał skontakuj się z osobą odpowiedzialną za utrzymywanie bazy danych lub pomocą techniczną", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Wystąpił nienzany błąd: " + Environment.NewLine + ex.Message + Environment.NewLine +
+                   "Jeśli błąd będzie się powtarzał skontakuj się z osobą odpowiedzialną za utrzymywanie bazy danych lub pomocą techniczną", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            return listOfUsers;
+        }
         /// <summary>
         /// Making the form to check for default Login and password for Admin account
         /// </summary>

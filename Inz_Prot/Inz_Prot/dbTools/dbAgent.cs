@@ -32,6 +32,7 @@ namespace Inz_Prot.dbTools
         {
             MySqlConnectionStringBuilder connectionStringBuilder = new MySqlConnectionStringBuilder();
 
+          
             connectionStringBuilder.Server = Server;
             connectionStringBuilder.Database = DataBaseName;
             connectionStringBuilder.UserID = User;

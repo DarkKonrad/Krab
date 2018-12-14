@@ -26,6 +26,7 @@ namespace Inz_Prot.Models
         public string Surname { get => surname; set => surname = value; }
         public string Login { get => login; set => login = value; }
         public int ID { get => Id; set => Id = value; }
+        public Privileges Privilege { get => privilege; set => privilege = value; }
 
         public User(int ID,string name, string surname, Privileges privileges)
         {
@@ -35,11 +36,13 @@ namespace Inz_Prot.Models
             this.Id = ID;
         }
 
-        
-
-
-
-   
-
+        public User(int id, string name, string surname, string login,  Privileges privilege)
+        {
+            this.name = name;
+            this.surname = surname;
+            this.login = login;
+            Id = id;
+            this.privilege = privilege;
+        }
     }
 }

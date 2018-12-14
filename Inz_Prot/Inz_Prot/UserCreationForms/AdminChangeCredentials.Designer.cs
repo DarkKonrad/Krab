@@ -44,7 +44,7 @@
             // Accept
             // 
             this.Accept.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.Accept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Accept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Accept.Location = new System.Drawing.Point(149, 279);
             this.Accept.Name = "Accept";
             this.Accept.Size = new System.Drawing.Size(187, 51);
@@ -74,6 +74,7 @@
             this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtPass.Location = new System.Drawing.Point(149, 207);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(187, 22);
             this.txtPass.TabIndex = 3;
             // 
@@ -82,6 +83,7 @@
             this.txtPassVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtPassVer.Location = new System.Drawing.Point(149, 244);
             this.txtPassVer.Name = "txtPassVer";
+            this.txtPassVer.PasswordChar = '*';
             this.txtPassVer.Size = new System.Drawing.Size(187, 22);
             this.txtPassVer.TabIndex = 4;
             // 

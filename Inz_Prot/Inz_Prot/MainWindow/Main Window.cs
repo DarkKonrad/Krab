@@ -36,7 +36,8 @@ namespace Inz_Prot.MainWindow
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-        
+            var usersTable = new Windows.UserFrame();
+            usersTable.Show();
         }
 
         private void btnChangePassword_Click(object sender, EventArgs e)
