@@ -47,6 +47,8 @@ namespace Inz_Prot.dbTools
             return string.Format("$XEREC$V1${0}${1}", iterations, base64Hash);
         }
 
+       
+
         /// <summary>
         /// Creates a hash from a password with 10000 iterations
         /// </summary>

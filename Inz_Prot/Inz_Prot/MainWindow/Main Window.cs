@@ -33,5 +33,17 @@ namespace Inz_Prot.MainWindow
             emplForm.Show();
            //this.Hide();
         }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            var ChangePassForm = new Windows.DialogBoxes.ChangePassDialog(CurrentUser);
+            ChangePassForm.Show();
+
+        }
     }
 }

@@ -14,8 +14,7 @@ namespace Inz_Prot
   
     public partial class LoginForm : Form
     {
-      
-        
+ 
         public LoginForm()
         {
             InitializeComponent();

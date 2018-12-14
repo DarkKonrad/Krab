@@ -109,6 +109,12 @@
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.Designer.cs">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\ChangePassDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\ChangePassDialog.Designer.cs">
+      <DependentUpon>ChangePassDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DialogBoxes\ConfirmDialogBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,12 @@
     </Compile>
     <Compile Include="Windows\EmployeeFrame.Designer.cs">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\UserFrame.Designer.cs">
+      <DependentUpon>UserFrame.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="EmployeesManagmentForms\EmployeesForm.resx">
       <DependentUpon>EmployeesForm.cs</DependentUpon>
@@ -145,11 +157,17 @@
     <EmbeddedResource Include="Windows\DialogBoxes\AddNewEmployeeDialog.resx">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\ChangePassDialog.resx">
+      <DependentUpon>ChangePassDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ConfirmDialogBox.resx">
       <DependentUpon>ConfirmDialogBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\UserFrame.resx">
+      <DependentUpon>UserFrame.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

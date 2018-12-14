@@ -165,6 +165,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.Accept);
             this.Name = "AdminChangeCredentials";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Zmiana Danych Dostępowych";
             this.ResumeLayout(false);
             this.PerformLayout();

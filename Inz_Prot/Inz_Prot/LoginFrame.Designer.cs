@@ -50,16 +50,19 @@
             // 
             // txtbLogin
             // 
+            this.txtbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtbLogin.Location = new System.Drawing.Point(229, 116);
             this.txtbLogin.Name = "txtbLogin";
-            this.txtbLogin.Size = new System.Drawing.Size(145, 20);
+            this.txtbLogin.Size = new System.Drawing.Size(145, 22);
             this.txtbLogin.TabIndex = 1;
             // 
             // txtbPassword
             // 
+            this.txtbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtbPassword.Location = new System.Drawing.Point(229, 183);
             this.txtbPassword.Name = "txtbPassword";
-            this.txtbPassword.Size = new System.Drawing.Size(145, 20);
+            this.txtbPassword.PasswordChar = '*';
+            this.txtbPassword.Size = new System.Drawing.Size(145, 22);
             this.txtbPassword.TabIndex = 2;
             // 
             // label1

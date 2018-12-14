@@ -98,8 +98,7 @@ namespace Inz_Prot.Windows
                 if (employee == null)
                     return;
 
-                var dialogResult = MessageBox.Show("Potwierdź usunięcie pracownika: " + Environment.NewLine + Environment.NewLine + employee.Name + " " + employee.Surname +
-                    "Zmiany te sa NIEODWRACALNE", "Usuwanie pracownika z bazy danych", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                var dialogResult = MessageBox.Show("Potwierdź usunięcie pracownika: " + Environment.NewLine + Environment.NewLine + employee.Name + " " + employee.Surname + Environment.NewLine + "Zmiany te sa NIEODWRACALNE", "Usuwanie pracownika z bazy danych", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
 
                 if (dialogResult == DialogResult.OK)
                    

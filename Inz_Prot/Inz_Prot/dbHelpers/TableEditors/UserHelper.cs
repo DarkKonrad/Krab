@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Inz_Prot.Models;
 using System.Diagnostics;
-
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 namespace Inz_Prot.dbHelpers.TableEditors
 {
    public static class UserHelper
@@ -14,8 +15,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         {
             string command = "INSERT INTO user (Login,Password,Name,Surname,Privileges) VALUES(@login,@password,@name,@surname,@lvl)";
             var Password_Hashed = dbTools.Password_Hasher.Hash(password);
-            string login = User.GenerateLogin(name, surname);
-
+            string login = GenerateLogin(name, surname);
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
             // query.Parameters.AddWithValue("@ID", null);
@@ -34,12 +34,17 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             return GetUser(login, password);
         }
-
-        public static void _CreateAdmin(string name, string surname, string password)
+        public static bool VerifyPasswordRequirements(string password)
+        {
+            if (password.Length > 6 || password.Any(c => char.IsDigit(c)))
+                return true;
+            return false;
+        }
+        private static void _CreateAdmin(string name, string surname, string password)
         {
             string command = "INSERT INTO user (Login,Password,Name,Surname,Privileges) VALUES(@login,@password,@name,@surname,@lvl)";
             var Password_Hashed = dbTools.Password_Hasher.Hash(password);
-            string login = User.GenerateLogin(name, surname);
+            string login = GenerateLogin(name, surname);
 
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
@@ -60,51 +65,84 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         }
 
-
-        private static User GetUser_OLD(string Login, string Password)
+        public static void ChangePassword(User user,string Password)
         {
+            string command = " UPDATE  user SET Password=@pass WHERE ID=@id ";
+            string hashedPassword = dbTools.Password_Hasher.Hash(Password);
+            var query = new MySqlCommand(command, dbTools.dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@id", user.ID);
+            query.Parameters.AddWithValue("pass", hashedPassword);
             try
             {
-
-
-                string command = "SELECT * FROM user WHERE Login='@login' AND Password='@password'";
-                var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
-                var Password_Hashed = dbTools.Password_Hasher.Hash(Password);
-
-                query.Parameters.AddWithValue("@login", Login);
-                query.Parameters.AddWithValue("@password", Password_Hashed);
-
                 dbTools.dbAgent.GetConnection().Open();
-                var reader = query.ExecuteReader();
-                string imie = "";
-                string nazwisko = "";
-                int privTmp = 0;
-
-                while (reader.Read())
-                {
-                    imie = reader["Name"].ToString();
-                    nazwisko = reader["Surname"].ToString();
-                    privTmp = (int) reader["Privileges"];
-                    Login = reader["Login"].ToString();
-                    return new User(imie, nazwisko, (User.Privileges) privTmp);
-                }
+                query.ExecuteNonQuery();
 
             }
 
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
             catch (Exception ex)
             {
-
-                Debug.WriteLine(ex.Message);
-                System.Windows.Forms.MessageBox.Show("Nieprawdiłowy login lub hasło", "Błąd",
-                     System.Windows.Forms.MessageBoxButtons.OK,
-                     System.Windows.Forms.MessageBoxIcon.Warning);
-
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
             }
             finally
             {
                 dbTools.dbAgent.GetConnection().Close();
+
             }
-            return null;
+         
+        }
+      
+        public static bool VerifyPasswordFromDB(User user, string password)
+        {
+            string command = " SELECT Password FROM user WHERE ID=@id " ;
+            var query = new MySqlCommand(command, dbTools.dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@id", user.ID);
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                var reader=query.ExecuteReader();
+                string hashedPassword = "";
+                while(reader.Read())
+                {
+                    hashedPassword = reader["Password"].ToString();
+                }
+
+                if (dbTools.Password_Hasher.Verify(password, hashedPassword))
+                    return true;
+
+                
+            }
+            
+            catch(MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " +ex.Message);
+                Debug.WriteLine("Exception Error Code: "+ex.ErrorCode);
+                Debug.WriteLine("Exception Source: "+ ex.Source);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd "+ Environment.NewLine + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+                
+            }
+            return false;
         }
         public static User GetUser(string Login, string Password)
         {
@@ -122,7 +160,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                 string imie = "";
                 string nazwisko = "";
-                int privTmp = 0;
+                int privTmp = 0, id=0;
                 string Password_Hashed = "";
                 if (reader.Read())
                 {
@@ -133,11 +171,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     nazwisko = reader["Surname"].ToString();
                     privTmp = (int) reader["Privileges"];
                     Login = reader["Login"].ToString();
-                    return new User(imie, nazwisko, (User.Privileges) privTmp);
+                    id = (int)reader["ID"];
+                    return new User(id,imie, nazwisko, (User.Privileges) privTmp);
                 }
 
             }
-
+        
             catch (Exception ex)
             {
 

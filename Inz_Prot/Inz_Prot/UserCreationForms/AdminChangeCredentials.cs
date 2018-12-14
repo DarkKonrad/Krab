@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Inz_Prot.dbHelpers.TableEditors;
 namespace Inz_Prot.MainWindow
 {
     public partial class AdminChangeCredentials : Form
@@ -24,7 +24,7 @@ namespace Inz_Prot.MainWindow
         {
           if(txtPass.Text == txtPassVer.Text)
             {
-              var admin =  Models.User.CreateAdmin(txtName.Text, txtSurname.Text, txtPass.Text);
+              var admin =  UserHelper.CreateAdmin(txtName.Text, txtSurname.Text, txtPass.Text);
                 MessageBox.Show("Został wygenerowany unikalny login. Zapisz go oraz używaj od tego momentu w celu uzyskania dostępu do systemu",
                     "Wygenerowano login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loginForm.SetGeneratedLoginLabel("Twój wygenerowany login to:" + Environment.NewLine + admin.Login);
