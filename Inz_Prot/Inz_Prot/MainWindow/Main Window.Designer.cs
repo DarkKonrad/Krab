@@ -29,32 +29,47 @@
         private void InitializeComponent()
         {
             this.MainMenuPanel = new System.Windows.Forms.Panel();
+            this.btnStrServ = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
             this.PanelUser = new System.Windows.Forms.Panel();
             this.labelUser = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
-            this.btnStrServ = new System.Windows.Forms.Button();
             this.MainMenuPanel.SuspendLayout();
             this.PanelUser.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenuPanel
             // 
+            this.MainMenuPanel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainMenuPanel.Controls.Add(this.btnStrServ);
+            this.MainMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MainMenuPanel.Controls.Add(this.btnEmployees);
-            this.MainMenuPanel.Location = new System.Drawing.Point(221, 102);
+            this.MainMenuPanel.Controls.Add(this.btnStrServ);
+            this.MainMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainMenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MainMenuPanel.Name = "MainMenuPanel";
-            this.MainMenuPanel.Size = new System.Drawing.Size(298, 279);
+            this.MainMenuPanel.Size = new System.Drawing.Size(1144, 594);
             this.MainMenuPanel.TabIndex = 0;
+            this.MainMenuPanel.SizeChanged += new System.EventHandler(this.MainMenuPanel_SizeChanged);
+            // 
+            // btnStrServ
+            // 
+            this.btnStrServ.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnStrServ.Location = new System.Drawing.Point(443, 175);
+            this.btnStrServ.Name = "btnStrServ";
+            this.btnStrServ.Size = new System.Drawing.Size(260, 42);
+            this.btnStrServ.TabIndex = 1;
+            this.btnStrServ.Text = "Magazyn / Usługi";
+            this.btnStrServ.UseVisualStyleBackColor = true;
+            this.btnStrServ.Click += new System.EventHandler(this.btnStrServ_Click);
             // 
             // btnEmployees
             // 
             this.btnEmployees.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnEmployees.Location = new System.Drawing.Point(14, 19);
+            this.btnEmployees.Location = new System.Drawing.Point(443, 115);
             this.btnEmployees.Name = "btnEmployees";
             this.btnEmployees.Size = new System.Drawing.Size(260, 42);
             this.btnEmployees.TabIndex = 0;
@@ -64,10 +79,12 @@
             // 
             // PanelUser
             // 
+            this.PanelUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelUser.Controls.Add(this.labelUser);
-            this.PanelUser.Location = new System.Drawing.Point(12, 12);
+            this.PanelUser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelUser.Location = new System.Drawing.Point(0, 0);
             this.PanelUser.Name = "PanelUser";
-            this.PanelUser.Size = new System.Drawing.Size(194, 41);
+            this.PanelUser.Size = new System.Drawing.Size(1144, 41);
             this.PanelUser.TabIndex = 1;
             // 
             // labelUser
@@ -80,15 +97,16 @@
             this.labelUser.TabIndex = 0;
             this.labelUser.Text = "label1";
             // 
-            // panel1
+            // bottomPanel
             // 
-            this.panel1.Controls.Add(this.btnChangePassword);
-            this.panel1.Controls.Add(this.btnUsers);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 423);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(759, 100);
-            this.panel1.TabIndex = 3;
+            this.bottomPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottomPanel.Controls.Add(this.btnChangePassword);
+            this.bottomPanel.Controls.Add(this.btnUsers);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 494);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(1144, 100);
+            this.bottomPanel.TabIndex = 3;
             // 
             // btnChangePassword
             // 
@@ -103,8 +121,9 @@
             // 
             // btnUsers
             // 
+            this.btnUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnUsers.Location = new System.Drawing.Point(605, 27);
+            this.btnUsers.Location = new System.Drawing.Point(988, 25);
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(142, 61);
             this.btnUsers.TabIndex = 2;
@@ -112,22 +131,12 @@
             this.btnUsers.UseVisualStyleBackColor = true;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
-            // btnStrServ
-            // 
-            this.btnStrServ.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStrServ.Location = new System.Drawing.Point(14, 81);
-            this.btnStrServ.Name = "btnStrServ";
-            this.btnStrServ.Size = new System.Drawing.Size(260, 42);
-            this.btnStrServ.TabIndex = 1;
-            this.btnStrServ.Text = "Magazyn / Usługi";
-            this.btnStrServ.UseVisualStyleBackColor = true;
-            // 
             // Main_Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 523);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1144, 594);
+            this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.PanelUser);
             this.Controls.Add(this.MainMenuPanel);
             this.MinimumSize = new System.Drawing.Size(775, 562);
@@ -137,7 +146,7 @@
             this.MainMenuPanel.ResumeLayout(false);
             this.PanelUser.ResumeLayout(false);
             this.PanelUser.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.bottomPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -148,7 +157,7 @@
         private System.Windows.Forms.Button btnEmployees;
         private System.Windows.Forms.Panel PanelUser;
         private System.Windows.Forms.Label labelUser;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Button btnChangePassword;
         private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.Button btnStrServ;

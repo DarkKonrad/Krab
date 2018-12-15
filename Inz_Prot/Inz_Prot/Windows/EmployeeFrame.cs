@@ -47,6 +47,7 @@ namespace Inz_Prot.Windows
 
         private void button1_Click(object sender, EventArgs e) //Hiding
         {
+            Owner.Show();
             this.Hide();
             this.Dispose();
         }
@@ -54,6 +55,7 @@ namespace Inz_Prot.Windows
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             var addEmployeeDialog = new DialogBoxes.AddEditEmployeeDialog();
+            addEmployeeDialog.Parent = this;
             var dialogResult = addEmployeeDialog.ShowDialog();
             var employee = addEmployeeDialog.GetDialogEmployee(dialogResult);
             if (employee == null)
@@ -73,6 +75,7 @@ namespace Inz_Prot.Windows
                 //   }
                 var EditUserDialog = new DialogBoxes.AddEditEmployeeDialog(
                     listOfEmployees[dataGridEmployee.SelectedRows[0].Index]);
+                EditUserDialog.Parent = this;
                 var dialogResult = EditUserDialog.ShowDialog();
                 var employee = EditUserDialog.GetDialogEmployee(dialogResult,
                    listOfEmployees[dataGridEmployee.SelectedRows[0].Index].ID );
@@ -106,6 +109,13 @@ namespace Inz_Prot.Windows
                 RefreshTable();
 
             }
+        }
+
+        private void EmployeeFrame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+            this.Dispose();
         }
     }
 }

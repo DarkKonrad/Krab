@@ -72,22 +72,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
+    <Compile Include="dbHelpers\TableEditors\QualificationHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\UserHelper.cs" />
     <Compile Include="dbTools\dbAgent.cs" />
     <Compile Include="dbTools\Password_Hasher.cs" />
-    <Compile Include="EmployeesManagmentForms\EmployeesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeesManagmentForms\EmployeesForm.Designer.cs">
-      <DependentUpon>EmployeesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginFrame.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginFrame.Designer.cs">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbCustomTable\ColumnInfo.cs" />
+    <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Qualification.cs" />
     <Compile Include="UserCreationForms\AdminChangeCredentials.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,15 +125,19 @@
     <Compile Include="Windows\EmployeeFrame.Designer.cs">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SpecifiedControlls\dbRowTemplate.cs" />
+    <Compile Include="Windows\TableCreatorFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\TableCreatorFrame.Designer.cs">
+      <DependentUpon>TableCreatorFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\UserFrame.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\UserFrame.Designer.cs">
       <DependentUpon>UserFrame.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EmployeesManagmentForms\EmployeesForm.resx">
-      <DependentUpon>EmployeesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoginFrame.resx">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\TableCreatorFrame.resx">
+      <DependentUpon>TableCreatorFrame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\UserFrame.resx">
       <DependentUpon>UserFrame.cs</DependentUpon>

@@ -21,9 +21,9 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csproj.CopyComplete
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.Main_Window.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.MainWindow.AdminChangeCredentials.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csprojAssemblyReference.cache
-E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.EmployeesManagmentForms.EmployeesForm.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.EmployeeFrame.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddEditEmployeeDialog.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.ConfirmDialogBox.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.ChangePassDialog.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.UserFrame.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.TableCreatorFrame.resources

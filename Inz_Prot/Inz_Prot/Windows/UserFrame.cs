@@ -45,6 +45,19 @@ namespace Inz_Prot.Windows
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            Owner.Show();
+            this.Hide();
+            this.Dispose();
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserFrame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner.Show();
             this.Hide();
             this.Dispose();
         }

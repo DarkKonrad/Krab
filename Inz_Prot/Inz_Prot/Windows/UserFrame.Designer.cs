@@ -65,6 +65,7 @@
             this.btnAddUser.TabIndex = 1;
             this.btnAddUser.Text = "Dodaj Użytkownika";
             this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // btnEditUser
             // 
@@ -98,6 +99,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(368, 74);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -139,6 +141,7 @@
             this.Controls.Add(this.dataGridUsers);
             this.Name = "UserFrame";
             this.Text = "Spis Użytkowników";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserFrame_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -82,6 +82,7 @@
             // 
             // txtPosition
             // 
+            this.txtPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPosition.Location = new System.Drawing.Point(224, 303);
             this.txtPosition.Multiline = true;
             this.txtPosition.Name = "txtPosition";
@@ -111,6 +112,7 @@
             // 
             // dateTimeExp
             // 
+            this.dateTimeExp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimeExp.Location = new System.Drawing.Point(224, 262);
             this.dateTimeExp.Name = "dateTimeExp";
             this.dateTimeExp.Size = new System.Drawing.Size(235, 20);
@@ -128,6 +130,7 @@
             // 
             // dateTimeWorkStart
             // 
+            this.dateTimeWorkStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimeWorkStart.Location = new System.Drawing.Point(224, 213);
             this.dateTimeWorkStart.Name = "dateTimeWorkStart";
             this.dateTimeWorkStart.Size = new System.Drawing.Size(235, 20);
@@ -145,6 +148,7 @@
             // 
             // abortAddingEmployee
             // 
+            this.abortAddingEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.abortAddingEmployee.DialogResult = System.Windows.Forms.DialogResult.No;
             this.abortAddingEmployee.Location = new System.Drawing.Point(292, 379);
             this.abortAddingEmployee.Name = "abortAddingEmployee";
@@ -155,6 +159,7 @@
             // 
             // txtAddress
             // 
+            this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddress.Location = new System.Drawing.Point(224, 149);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
@@ -183,6 +188,7 @@
             // 
             // dateTimebDay
             // 
+            this.dateTimebDay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimebDay.Location = new System.Drawing.Point(224, 111);
             this.dateTimebDay.Name = "dateTimebDay";
             this.dateTimebDay.Size = new System.Drawing.Size(235, 20);
@@ -220,6 +226,7 @@
             // 
             // txtPESEL
             // 
+            this.txtPESEL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPESEL.Location = new System.Drawing.Point(224, 85);
             this.txtPESEL.Name = "txtPESEL";
             this.txtPESEL.Size = new System.Drawing.Size(235, 20);
@@ -227,6 +234,7 @@
             // 
             // txtSurname
             // 
+            this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSurname.Location = new System.Drawing.Point(224, 59);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(235, 20);
@@ -234,6 +242,7 @@
             // 
             // txtName
             // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(224, 33);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(235, 20);
@@ -249,7 +258,7 @@
             this.addEmployee.Text = "Dodaj Pracownika";
             this.addEmployee.UseVisualStyleBackColor = true;
             // 
-            // AddNewEmployeeDialog
+            // AddEditEmployeeDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -258,7 +267,8 @@
             this.Controls.Add(this.panel1);
             this.MaximumSize = new System.Drawing.Size(500, 500);
             this.MinimumSize = new System.Drawing.Size(491, 487);
-            this.Name = "AddNewEmployeeDialog";
+            this.Name = "AddEditEmployeeDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddNewEmployeeDialog";
             this.Load += new System.EventHandler(this.AddNewEmployeeDialog_Load);
             this.panel1.ResumeLayout(false);

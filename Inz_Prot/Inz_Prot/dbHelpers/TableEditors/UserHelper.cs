@@ -289,6 +289,10 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
             }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
             return listOfUsers;
         }
         /// <summary>
