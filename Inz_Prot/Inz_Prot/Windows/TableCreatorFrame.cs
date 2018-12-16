@@ -25,6 +25,11 @@ namespace Inz_Prot.Windows
             listOfRowTemplates.Add(tableRowTemplate);
             tableRowTemplate.Show();
             MainPanel.Refresh();
+            
+            foreach(dbRowTemplate dbRow in listOfRowTemplates)
+            {
+                dbRow.Refresh();
+            }
         }
     }
 }

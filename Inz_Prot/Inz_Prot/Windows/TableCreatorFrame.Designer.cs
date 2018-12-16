@@ -30,8 +30,8 @@
         {
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.MainPanel = new System.Windows.Forms.Panel();
             this.btnAddField = new System.Windows.Forms.Button();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,14 +52,6 @@
             this.bottomPanel.Size = new System.Drawing.Size(765, 100);
             this.bottomPanel.TabIndex = 1;
             // 
-            // MainPanel
-            // 
-            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 100);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(765, 343);
-            this.MainPanel.TabIndex = 2;
-            // 
             // btnAddField
             // 
             this.btnAddField.Location = new System.Drawing.Point(12, 19);
@@ -69,6 +61,14 @@
             this.btnAddField.Text = "Dodaj Pole";
             this.btnAddField.UseVisualStyleBackColor = true;
             this.btnAddField.Click += new System.EventHandler(this.btnAddField_Click);
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 100);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(765, 343);
+            this.MainPanel.TabIndex = 2;
             // 
             // TableCreatorFrame
             // 
