@@ -9,68 +9,84 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 {
    public class dbRowTemplate //: Control
     {
-        static int i = 0;
-        int orderNumer = 0;
         readonly static int space = 10;
         readonly static int txtColumnWidth = 150;
+        static int i = 0;
+
+        int index = 0;
+        readonly int containerPanelDefaultHeight;
+        string containerPanelName;
+
+        
         TextBox txtColumnName;
-        RadioButton numeric, description, planeText;
-        Label labelOrderNumber, label,typeLabel;
+        RadioButton radioTypeNumeric, radioDescription, radioPlaneText;
+        Label labelOrderNumber, labelGeneralDescr,typeLabel;
         Panel ownerPanel, containerPanel;
+
         Control[] controls;
         public dbRowTemplate(Panel MainPanel)
         {
             i++;
-            orderNumer = i;
-            
+            index = i;
+           containerPanelName="containerPanel"+index.ToString();
+
             #region Standard Allocation
-              ownerPanel = MainPanel;
+            ownerPanel = MainPanel;
          //   panel.Controls.Add(this);
             containerPanel = new Panel();
-                
+            containerPanelDefaultHeight = containerPanel.Height;
+            containerPanel.Name = containerPanelName;    
+
             txtColumnName = new TextBox();
 
             labelOrderNumber = new Label();
-            label = new Label();
+            labelGeneralDescr = new Label();
             typeLabel = new Label();
 
-            numeric = new RadioButton();
-            description = new RadioButton();
-            planeText = new RadioButton();
+            radioTypeNumeric = new RadioButton();
+            radioDescription = new RadioButton();
+            radioPlaneText = new RadioButton();
             #endregion
 
-            numeric.Text = "Typ liczbowy";
-            description.Text = "Opis";
-            planeText.Text="Krótki tekst";
+            radioTypeNumeric.Text = "Typ liczbowy";
+            radioDescription.Text = "Opis";
+            radioPlaneText.Text="Krótki tekst";
 
-            label.Text = "Nazwa pola";
+            labelGeneralDescr.Text = "Nazwa pola";
             typeLabel.Text = "Określ typ pola";
 
             //Individual Controls are added to Container Panel
+
+            
             containerPanel.Controls.Add(txtColumnName);
-            containerPanel.Controls.Add(numeric);
-            containerPanel.Controls.Add(description);
-            containerPanel.Controls.Add(planeText);
+            containerPanel.Controls.Add(radioTypeNumeric);
+            containerPanel.Controls.Add(radioDescription);
+            containerPanel.Controls.Add(radioPlaneText);
             containerPanel.Controls.Add(labelOrderNumber);
-            containerPanel.Controls.Add(label);
+            containerPanel.Controls.Add(labelGeneralDescr);
             containerPanel.Controls.Add(typeLabel);
 
-            controls = new Control[] { txtColumnName, numeric,description,planeText,labelOrderNumber,label,typeLabel,containerPanel };
+            controls = new Control[] { txtColumnName, radioTypeNumeric,radioDescription,radioPlaneText,labelOrderNumber,labelGeneralDescr,typeLabel,containerPanel };
             // We need to add ONLY container Panel NOT ANY OTHER CONTROL to main Panel
+
+            MainPanel.Height += containerPanel.Height;
             MainPanel.Controls.Add(containerPanel);
-         
-            // MAybe not neccessary
+            
             containerPanel.Location = new Point(
                   containerPanel.Location.X + 20,
-                  MainPanel.Height - 10);
-            MainPanel.Height += containerPanel.Height;
+                 MainPanel.Location.Y - 5);
+            
 
+          //  containerPanel.Parent = MainPanel;
+            
+
+            
             containerPanel.Dock = DockStyle.Top;
+            containerPanel.BringToFront();
+          //  containerPanel.Dock = DockStyle.Top;
             containerPanel.BorderStyle = BorderStyle.FixedSingle;
 
-            labelOrderNumber.Font = new Font("Arial", 18, FontStyle.Bold);
-
-
+           
             Refresh();
 
 
@@ -78,44 +94,49 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
         public void Refresh()
         {
-           
+            containerPanel.Height = containerPanelDefaultHeight - 30;
+            containerPanel.Dock = DockStyle.Top;
+
+
             txtColumnName.Location = new Point(
-            (int) (containerPanel.Width / 3),
-            (int) (containerPanel.Height / 2));
-            txtColumnName.Width = txtColumnWidth;
+            (int) (containerPanel.Width / 4),
+            (int) (containerPanel.Height / 3 -5));
+            txtColumnName.Width = txtColumnWidth + radioTypeNumeric.Width;
             txtColumnName.Refresh();
             txtColumnName.Show();
 
-            labelOrderNumber.Text = orderNumer.ToString();
+            labelOrderNumber.Font = new Font("Arial", 18, FontStyle.Bold);
+            labelOrderNumber.Width = 40;
+            labelOrderNumber.Text = index.ToString();
             labelOrderNumber.Location = new Point(
                 containerPanel.Location.X + 5,
                txtColumnName.Location.Y-10);
             labelOrderNumber.Refresh();
             
-            planeText.Location = new Point(
+            radioPlaneText.Location = new Point(
                 txtColumnName.Location.X,
                 txtColumnName.Height + txtColumnName.Location.Y + 5);
-            planeText.Checked = true;
-            planeText.Refresh();
+            radioPlaneText.Checked = true;
+            radioPlaneText.Refresh();
 
-            description.Location = new Point(
-                planeText.Location.X + planeText.Width - 20,
-                planeText.Location.Y);
-            description.Refresh();
+            radioDescription.Location = new Point(
+                radioPlaneText.Location.X + radioPlaneText.Width - 20,
+                radioPlaneText.Location.Y);
+            radioDescription.Refresh();
 
-            numeric.Location = new Point(
-                description.Location.X + description.Width -40,
-                planeText.Location.Y);
-            numeric.Refresh();
+            radioTypeNumeric.Location = new Point(
+                radioDescription.Location.X + radioDescription.Width -40,
+                radioPlaneText.Location.Y);
+            radioTypeNumeric.Refresh();
 
-            label.Location = new Point(
-                txtColumnName.Location.X - label.Width - 5,
+            labelGeneralDescr.Location = new Point(
+                txtColumnName.Location.X - labelGeneralDescr.Width - 5,
                 txtColumnName.Location.Y);
-            label.Refresh();
+            labelGeneralDescr.Refresh();
 
             typeLabel.Location = new Point(
-                planeText.Location.X - typeLabel.Width - 5,
-                planeText.Location.Y);
+                radioPlaneText.Location.X - typeLabel.Width - 5,
+                radioPlaneText.Location.Y);
             typeLabel.Refresh();
         }
 
@@ -128,14 +149,20 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         }
         #region Getters And Setters
         public TextBox TxtColumnName { get => txtColumnName; set => txtColumnName = value; }
-        public RadioButton Numeric { get => numeric; set => numeric = value; }
-        public RadioButton Description { get => description; set => description = value; }
-        public RadioButton PlaneText { get => planeText; set => planeText = value; }
+        public RadioButton Numeric { get => radioTypeNumeric; set => radioTypeNumeric = value; }
+        public RadioButton Description { get => radioDescription; set => radioDescription = value; }
+        public RadioButton PlaneText { get => radioPlaneText; set => radioPlaneText = value; }
         public Label OrderNumber { get => labelOrderNumber; set => labelOrderNumber = value; }
-        public Label Label { get => label; set => label = value; }
+        public Label Label { get => labelGeneralDescr; set => labelGeneralDescr = value; }
         public Panel OwnerPanel { get => ownerPanel; set => ownerPanel = value; }
         public Panel ContainerPanel { get => containerPanel; set => containerPanel = value; }
         public Control[] Controls { get => controls; set => controls = value; }
+        public int Index { get => index; set => index = value; }
         #endregion
+
+        public static dbRowTemplate Compare(dbRowTemplate A, dbRowTemplate B)
+        {
+            return A.index > B.index ? A : B;
+        }
     }
 }
