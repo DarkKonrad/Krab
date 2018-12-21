@@ -8,31 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inz_Prot.Windows.SpecifiedControlls;
-
+using Inz_Prot.Models.dbCustomTable;
 namespace Inz_Prot.Windows
 {
     public partial class TableCreatorFrame : Form
     {
-        List<dbRowTemplate> listOfRowTemplates;
-        List<Point> listOfOrder;
-        
-        private void SortRowsInOrder()
-        {
-            int i = 0;
-            foreach (dbRowTemplate dbRow in listOfRowTemplates)
-            {
-                var containerPanelActualIndex = MainPanel.Parent.Controls.GetChildIndex(dbRow.ContainerPanel);
-                var properIndex = dbRow.OrderNumber;
-
-                i++;
-            }
-        }
-        private void PROTOYPE_SortRowsInOrder()
-        {
-       
-        }
-
-
+        List<dbColumnTemplate> listOfColumnTemplates;
+      
 
         public void MoveUp()
         {
@@ -59,30 +41,128 @@ namespace Inz_Prot.Windows
         public TableCreatorFrame()
         {
             InitializeComponent();
-            listOfOrder = new List<Point>();
-            listOfRowTemplates = new List<dbRowTemplate>();
+            listOfColumnTemplates = new List<dbColumnTemplate>();
+            tableNameHelp.SetHelpString(txtTableName, " Nazwij swój zbiór danych. " + Environment.NewLine +"Przykład: \"Magazyn\" lub \"Usługi\" ");
+            tableNameHelp.SetShowHelp(txtTableName, true);
+        }
+
+        private void containerPanel_Click(object sender, EventArgs e)
+        {
+            Control control = (Control) sender;
+            
+            
+            foreach(dbColumnTemplate tmp in listOfColumnTemplates)
+            {
+                if (tmp.ContainerPanel.Name != control.Name)
+                {
+                    tmp.IsControlPanelClicked = false;
+                    tmp.ContainerPanel.BackColor = SystemColors.Control;
+                }
+                else
+                {
+                    tmp.IsControlPanelClicked = true;
+                    tmp.ContainerPanel.BackColor = Color.LightGreen;
+                }
+                    
+            }
+
+            
         }
 
         private void btnAddField_Click(object sender, EventArgs e)
         {
-            var tableRowTemplate = new dbRowTemplate(MainPanel);
-            listOfRowTemplates.Add(tableRowTemplate);
+            
+            var tableRowTemplate = new dbColumnTemplate(MainPanel,containerPanel_Click);
+            listOfColumnTemplates.Add(tableRowTemplate);
             tableRowTemplate.Show();
             MainPanel.Refresh();
-            listOfOrder.Add(tableRowTemplate.ContainerPanel.Location);
 
-            //    foreach(dbRowTemplate dbRow in listOfRowTemplates)
-            //    {
-            //        dbRow.Refresh();
-            //    }
-            //}
-
-            PROTOYPE_SortRowsInOrder();
 
         }
-        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
+
+        private bool AreRowsContainsSpecialChars()
         {
-          //  MainPanel.VerticalScroll.Value = vScrollBar.Value;
+            bool conatinsSpecialCharsOrEmpty = false;
+            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            {
+                dbColumn.TxtColumnName.Text.Trim();
+                if (Utilities.StringContainsSpecialChars(dbColumn.TxtColumnName.Text) || dbColumn.TxtColumnName.Text =="")
+                {                  
+                    dbColumn.ContainerPanel.BackColor = Color.Red;
+                    conatinsSpecialCharsOrEmpty = true;
+                }
+
+            }
+            txtTableName.Text.Trim();
+            if(txtTableName.Text =="" || Utilities.StringContainsSpecialChars(txtTableName.Text))
+            {
+                txtTableName.BackColor = Color.Red;
+                return false;
+            }
+            return conatinsSpecialCharsOrEmpty;
+        }
+        private void btnDeleteRow_Click(object sender, EventArgs e)
+        {
+           
+            foreach(dbColumnTemplate dbRow in listOfColumnTemplates)
+            {
+                if(dbRow.IsControlPanelClicked == true)
+                {          
+                    dbRow.Dispose();
+                    listOfColumnTemplates.Remove(dbRow);
+                    break;
+                }
+                
+            }
+
+            dbColumnTemplate.ReGenerateIndexes(listOfColumnTemplates);
+        }
+        private void SetCustomRowsBackgroundTransparent()
+        {
+            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            {
+                dbColumn.ContainerPanel.BackColor = SystemColors.Control;
+
+            }
+        }
+        private void btnAcceptAllRows_Click(object sender, EventArgs e)
+        {
+           // txtTableName.BackColor = 
+            lblInfo.Visible = false;
+            SetCustomRowsBackgroundTransparent();
+            if(AreRowsContainsSpecialChars())
+            {
+                lblInfo.Text = "Zawartosc pola nazwy nie może być pusta ani zawierać znaków specjalnych";
+                lblInfo.Visible = true;
+                return;
+            }
+
+            var tableInfo = new TableInfo(txtTableName.Text);
+
+            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            {
+                tableInfo.Add(dbColumn.GetColumnInfo());
+            }
+
+            tableInfo.Columns.Reverse();
+
+            dbHelpers.TableEditors.CustomTableHelper.AddCustomTable(tableInfo);
+
+            MessageBox.Show("Stworzenie nowego zbioru danych powidło się");
+
+            this.Hide();
+          //  Owner.Show();
+            this.Dispose();
+        }
+
+        private void txtTableName_MouseEnter(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void lblInfo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

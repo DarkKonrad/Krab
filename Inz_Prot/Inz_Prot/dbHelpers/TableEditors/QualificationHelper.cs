@@ -17,6 +17,8 @@ namespace Inz_Prot.dbHelpers.TableEditors
             string command = "INSERT INTO qualifications Qualification_Name,Qualification_Descr VALUES(@name,@description)";
             var query = new MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
+            
+
             query.Parameters.AddWithValue("@name", qualification.Name);
             query.Parameters.AddWithValue("@description", qualification.Description);
             try

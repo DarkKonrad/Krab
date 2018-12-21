@@ -5,30 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using Inz_Prot.Models.dbCustomTable;
 namespace Inz_Prot.Windows.SpecifiedControlls
 {
-   public class dbRowTemplate //: Control
+   public class dbColumnTemplate //: Control
     {
-        readonly static int space = 10;
-        readonly static int txtColumnWidth = 150;
-        static int i = 0;
+       private readonly static int space = 10;
+       private readonly static int txtColumnWidth = 150;
+       private static int i = 0;
+       private static int unique_Num = 1;
+       private int index = 0;
+       private readonly int containerPanelDefaultHeight;
+       private string containerPanelName;
 
-        int index = 0;
-        readonly int containerPanelDefaultHeight;
-        string containerPanelName;
+       private bool isControlPanelClicked = false;
+ 
+       private TextBox txtColumnName;
+       private RadioButton radioTypeNumeric, radioDescription, radioPlaneText,radioDataType;
+       private Label labelOrderNumber, labelGeneralDescr,typeLabel;
+       private Panel ownerPanel, containerPanel;
+   
 
-        
-        TextBox txtColumnName;
-        RadioButton radioTypeNumeric, radioDescription, radioPlaneText;
-        Label labelOrderNumber, labelGeneralDescr,typeLabel;
-        Panel ownerPanel, containerPanel;
+       private Control[] controls;
 
-        Control[] controls;
-        public dbRowTemplate(Panel MainPanel)
+        //Constructor
+        public dbColumnTemplate(Panel MainPanel, EventHandler panelClicked)
         {
             i++;
             index = i;
-           containerPanelName="containerPanel"+index.ToString();
+           containerPanelName="containerPanel"+unique_Num++.ToString();
 
             #region Standard Allocation
             ownerPanel = MainPanel;
@@ -46,15 +51,19 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             radioTypeNumeric = new RadioButton();
             radioDescription = new RadioButton();
             radioPlaneText = new RadioButton();
+            radioDataType = new RadioButton();
+         
             #endregion
 
             radioTypeNumeric.Text = "Typ liczbowy";
             radioDescription.Text = "Opis";
             radioPlaneText.Text="Krótki tekst";
+            radioDataType.Text = "Pole daty";
 
             labelGeneralDescr.Text = "Nazwa pola";
             typeLabel.Text = "Określ typ pola";
 
+         
             //Individual Controls are added to Container Panel
 
             
@@ -65,21 +74,18 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             containerPanel.Controls.Add(labelOrderNumber);
             containerPanel.Controls.Add(labelGeneralDescr);
             containerPanel.Controls.Add(typeLabel);
+            containerPanel.Controls.Add(radioDataType);
 
-            controls = new Control[] { txtColumnName, radioTypeNumeric,radioDescription,radioPlaneText,labelOrderNumber,labelGeneralDescr,typeLabel,containerPanel };
+            controls = new Control[] { txtColumnName, radioTypeNumeric,radioDescription,radioPlaneText,radioDataType,labelOrderNumber,labelGeneralDescr,typeLabel,containerPanel };
             // We need to add ONLY container Panel NOT ANY OTHER CONTROL to main Panel
-
+            containerPanel.Click += panelClicked;
+            
             MainPanel.Height += containerPanel.Height;
             MainPanel.Controls.Add(containerPanel);
             
             containerPanel.Location = new Point(
                   containerPanel.Location.X + 20,
                  MainPanel.Location.Y - 5);
-            
-
-          //  containerPanel.Parent = MainPanel;
-            
-
             
             containerPanel.Dock = DockStyle.Top;
             containerPanel.BringToFront();
@@ -92,11 +98,54 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
         }
 
+        public ColumnInfo GetColumnInfo()
+        {
+            
+            string buffor = txtColumnName.Text;
+            //StringBuilder sb = new StringBuilder();
+            //foreach (char c in buffor)
+            //{
+            //    if (( c >= '0' && c <= '9' ) || ( c >= 'A' && c <= 'Z' ) || ( c >= 'a' && c <= 'z' ) || c == '_')
+            //    {
+            //        sb.Append(c);
+            //    }
+            //}
+            //buffor = sb.ToString();
+            buffor.Trim();
+
+            if (radioDescription.Checked == true)
+            {
+                return new ColumnInfo(buffor, ColumnType.Description);
+            }
+            else if (radioPlaneText.Checked == true)
+            {
+                return new ColumnInfo(buffor, ColumnType.shortText);
+            }
+            else if (Numeric.Checked == true)
+            {
+                return new ColumnInfo(buffor, ColumnType.Numeric);
+            }
+            else
+                return new ColumnInfo(buffor, ColumnType.DataType);
+
+        }
+
+
+
+        public void Dispose()
+        {
+            foreach(Control control in controls)
+            {
+                control.Dispose();
+            }
+            
+        }
+
         public void Refresh()
         {
             containerPanel.Height = containerPanelDefaultHeight - 30;
             containerPanel.Dock = DockStyle.Top;
-
+            containerPanel.BringToFront();
 
             txtColumnName.Location = new Point(
             (int) (containerPanel.Width / 4),
@@ -129,6 +178,11 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 radioPlaneText.Location.Y);
             radioTypeNumeric.Refresh();
 
+            radioDataType.Location = new Point(
+                radioTypeNumeric.Location.X + radioTypeNumeric.Width - 20,
+                radioPlaneText.Location.Y);
+            radioDataType.Refresh();
+
             labelGeneralDescr.Location = new Point(
                 txtColumnName.Location.X - labelGeneralDescr.Width - 5,
                 txtColumnName.Location.Y);
@@ -138,6 +192,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 radioPlaneText.Location.X - typeLabel.Width - 5,
                 radioPlaneText.Location.Y);
             typeLabel.Refresh();
+
         }
 
         public void Show()
@@ -157,12 +212,34 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         public Panel OwnerPanel { get => ownerPanel; set => ownerPanel = value; }
         public Panel ContainerPanel { get => containerPanel; set => containerPanel = value; }
         public Control[] Controls { get => controls; set => controls = value; }
-        public int Index { get => index; set => index = value; }
+        public int Index { get => index; private set => index = value; }
+        public bool IsControlPanelClicked { get => isControlPanelClicked; set => isControlPanelClicked = value; }
+        public RadioButton RadioDataType { get => radioDataType; set => radioDataType = value; }
+
         #endregion
 
-        public static dbRowTemplate Compare(dbRowTemplate A, dbRowTemplate B)
+        public static dbColumnTemplate Compare(dbColumnTemplate A, dbColumnTemplate B)
         {
             return A.index > B.index ? A : B;
+        }
+
+        public static void ReGenerateIndexes(List<dbColumnTemplate> list)
+        {
+            i = 0;
+            list.Reverse();
+            foreach(dbColumnTemplate rowTemplate in list)
+            {
+                i++;
+                rowTemplate.index = i;
+                
+            }
+         //   list.Reverse();
+
+            foreach (dbColumnTemplate rowTemplate in list)
+            {
+                rowTemplate.Refresh();
+            }
+
         }
     }
 }
