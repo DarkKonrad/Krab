@@ -16,27 +16,16 @@ namespace Inz_Prot.Windows
         TableInfo userDefinedTable;
         CustomTableRows tableRows;
       
-        #region Buffors For Column Data
-        DateTime? buf_DataTime;
-        int? buf_Numeric;
-        string buf_shortText = "", buf_descr = "";
-        #endregion
+     
         public CustomTableFrame()
         {
             InitializeComponent();
-            // TOD O: CHECK FOR UDT 
+            // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
              userDefinedTable = CustomTableHelper.GetTableInfoAboutTables();
             InitDataGrid();
         }
         
-        private void clearBuffors()
-        {
-            buf_DataTime = null;
-            buf_descr = "";
-            buf_Numeric = null;
-            buf_shortText = "";
-
-        }
+ 
 
         private void InitDataGrid()
         {
@@ -50,11 +39,11 @@ namespace Inz_Prot.Windows
 
             int customRowCount = CustomTableHelper.GetRowCount(userDefinedTable.TableName);
             tableRows = CustomTableHelper.GetAllRowsFromCustomTable(userDefinedTable);
+
             for (int i = 0 ;i<customRowCount  ;i++)
             {
                 // Columns
                var currentRow = tableRows.Row[i];
-            //    clearBuffors();
                 dgCustomTable.Rows.Add(i+1);
                
                 // Columns of row
@@ -86,22 +75,7 @@ namespace Inz_Prot.Windows
                 }
                 
             }
-            //foreach(ColumnContent columnContent in listOfColumnContent)
-            //{
-            //    switch (columnContent.GetType())
-            //    {
-            //        case TypeCode.DateTime:
-            //            break;
-
-            //        case TypeCode.String:
-            //            break;
-
-            //        case TypeCode.Int32:
-            //            break;
-
-            //    }
-            //}
-
+     
         }
  
 
@@ -114,6 +88,8 @@ namespace Inz_Prot.Windows
         {
             var customTableDialog = new DialogBoxes.AddNewRowCustomTableDialog(userDefinedTable);
             var dialogResult = customTableDialog.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+                InitDataGrid();
         }
     }
 }

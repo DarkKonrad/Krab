@@ -85,9 +85,9 @@
     <Compile Include="LoginFrame.Designer.cs">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbCustomTable\ColumnContent.cs" />
+    <Compile Include="Models\dbCustomTable\CellContent.cs" />
     <Compile Include="Models\dbCustomTable\ColumnInfo.cs" />
-    <Compile Include="Models\dbCustomTable\CustomTableRow.cs" />
+    <Compile Include="Models\dbCustomTable\CustomTableRows.cs" />
     <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Qualification.cs" />

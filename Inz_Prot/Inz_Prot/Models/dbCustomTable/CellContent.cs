@@ -6,42 +6,48 @@ using System.Threading.Tasks;
 
 namespace Inz_Prot.Models.dbCustomTable
 {
-  public class ColumnContent
+  public class CellContent
     {
         DateTime? dateTime ;
         string shortText, description;
         int? numeric;
-
+        int id;
      private  object obj;
      private  TypeCode code;
-        private ColumnContent(object obj, TypeCode code)
+        private CellContent(object obj, TypeCode code)
         {
             this.obj = obj;
             this.code = code;
         }
         private object Obj { get => obj; set => obj = value; }
 
-        private ColumnContent() { }
-        public ColumnContent(DateTime dateTime)
+        private CellContent() { }
+     
+        public CellContent(DateTime dateTime,int rowID)
         {
             this.dateTime = dateTime;
-           
+            id = rowID;
         }
-        public ColumnContent(string text)
+        
+       
+
+        public CellContent(string text,int rowID)
         {
             if (text.Length <= 80)
             {
                 shortText = text;
             }
-            else 
+            else
             {
                 description = text;
             }
+            id = rowID;
         }
 
-        public ColumnContent(int num)
+        public CellContent(int num,int rowID)
         {
             numeric = num;
+            id = rowID;
         }
 
        public object Value { get
@@ -65,8 +71,10 @@ namespace Inz_Prot.Models.dbCustomTable
                 throw new Exception("ColumnContent Exception. Type of Data Error. See Value Getter");
             }
         }
-
-     
+        /// <summary>
+        /// Returns ID of row where cell belong
+        /// </summary>
+        public int ID { get => id; private set => id = value; }
 
         public TypeCode GetType()
         {

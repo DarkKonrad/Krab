@@ -16,6 +16,7 @@ namespace Inz_Prot.Windows.DialogBoxes
     {
         //CustomTableDialogControls customTableDialog;
         List<CustomTableDialogControls> listOfControls;
+        TableInfo tableInfo;
         private AddNewRowCustomTableDialog()
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace Inz_Prot.Windows.DialogBoxes
         {
             InitializeComponent();
             listOfControls = new List<CustomTableDialogControls>();
-
+            this.tableInfo = tableInfo;
             foreach(ColumnInfo columnInfo in tableInfo.Columns)
             {
                 listOfControls.Add(new CustomTableDialogControls(mainPanel, columnInfo));
@@ -41,14 +42,22 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            List<object> vals = new List<object>();
             foreach(CustomTableDialogControls dialogControls in listOfControls)
             {
                 // WSZYSTKO musi byc string
-                // kolejnosc parametrów taka jak kolejnosc kolumn w tabeli 
-                
-              //  CustomTableHelper.AddRowToCustomTable(tableInfo,
+                // kolejnosc parametrów taka jak kolejnosc kolumn w tabeli
+                vals.Add(dialogControls.Value);
 
             }
+            CustomTableHelper.AddRowToCustomTable(tableInfo, vals.ToArray());
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Dispose();
         }
     }
 }

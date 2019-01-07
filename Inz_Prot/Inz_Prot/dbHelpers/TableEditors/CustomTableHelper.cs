@@ -119,7 +119,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
     /// <returns></returns>
         public static CustomTableRows GetAllRowsFromCustomTable(TableInfo customTableInfo)
         {
-            List<ColumnContent> collection;
+            List<CellContent> collection;
             CustomTableRows customTableRow = new CustomTableRows();
           
             //TableInfo userDefinedTableContent = null;                                 TABLE CONTENTS ? 
@@ -134,7 +134,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                 while(reader.Read())
                 {
-                    collection = new List<ColumnContent>(); 
+                    collection = new List<CellContent>(); 
                     // for every columns in row
                     for (int i =0; i<customTableInfo.Count;i++)
                     {
@@ -143,19 +143,19 @@ namespace Inz_Prot.dbHelpers.TableEditors
                         {
                             case ColumnType.DataType:
                                 var DateTime = (DateTime) reader[customTableInfo.Columns[i].Name];
-                                collection.Add(new ColumnContent(DateTime));
+                                collection.Add(new CellContent(DateTime,(int)reader["ID"]));
                                 break;
                             case ColumnType.Description:
                                 var descr = reader[customTableInfo.Columns[i].Name].ToString();
-                                collection.Add(new ColumnContent(descr));
+                                collection.Add(new CellContent(descr, (int) reader["ID"]));
                                 break;
                             case ColumnType.shortText:
                                 var shrtText = reader[customTableInfo.Columns[i].Name].ToString();
-                                collection.Add(new ColumnContent(shrtText));
+                                collection.Add(new CellContent(shrtText, (int) reader["ID"]));
                                 break;
                             case ColumnType.Numeric:
                                 var num = (int) reader[customTableInfo.Columns[i].Name];
-                                collection.Add(new ColumnContent(num));
+                                collection.Add(new CellContent(num, (int) reader["ID"]));
                                 break;
 
                             default: throw new Exception("Custom Table Helper GetAllRowsFromCustomTable method, switch Error ");
@@ -270,7 +270,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         }
 
         /// <summary>
-        /// Count: Values -1 becous of ID field, parameters with index that exceed columns count will be ignored
+        /// Count: Values -1 becous of ID field
         /// </summary>
         /// <param name="tableInfo"></param>
         /// <param name="Values"></param>
@@ -292,6 +292,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             {
                 var query = new MySqlCommand(command, dbAgent.GetConnection());
 
+               
                 query.Parameters.AddWithValue("@ID", null);
                 //for (int i = tableInfo.Count - 1; i >= 0; i--)
                 //{
@@ -325,8 +326,91 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
 
         }
+        public static void AddRowToCustomTable(TableInfo tableInfo, params object[] Values )
+        {
+            string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
+
+            for (int i = 0; i < tableInfo.Count ; i++)
+            {
+                command += ",@param" + i.ToString();
+            }
+            command += ")";
+
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@ID", null);
+            for (int i = 0; i < tableInfo.Count ; i++)
+            {
+                query.Parameters.AddWithValue("@param" + i.ToString(), Values[i].ToString());
+            }
+            dbAgent.GetConnection().Open();
+            try
+            {
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+        }
 
 
+        public static void AddRowToCustomTable(TableInfo tableInfo,List<CellContent> tableRow)
+        {
+            string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
+
+            for(int i =0; i< tableInfo.Count - 1;i++)
+            {
+                command += ",@param" + i.ToString();
+            }
+            command += ")";
+
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@ID", null);
+
+            for (int i = 0; i < tableInfo.Count - 1; i++)
+            {
+                query.Parameters.AddWithValue("@param" + i.ToString(), tableRow[i].Value);
+            }
+
+            dbAgent.GetConnection().Open();
+            try
+            {
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+        }
 
     }
 }

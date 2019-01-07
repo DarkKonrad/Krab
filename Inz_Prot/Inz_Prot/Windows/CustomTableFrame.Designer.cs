@@ -45,10 +45,11 @@
             // 
             // dgCustomTable
             // 
-            this.dgCustomTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgCustomTable.AllowUserToAddRows = false;
+            this.dgCustomTable.AllowUserToDeleteRows = false;
+            this.dgCustomTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgCustomTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dgCustomTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgCustomTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCustomTable.Location = new System.Drawing.Point(3, 3);
             this.dgCustomTable.Name = "dgCustomTable";
             this.dgCustomTable.Size = new System.Drawing.Size(957, 402);

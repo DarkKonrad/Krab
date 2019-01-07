@@ -8,16 +8,16 @@ namespace Inz_Prot.Models.dbCustomTable
 {
    public class CustomTableRows
     {
-        List<List<ColumnContent>> tableRow;
+        List<List<CellContent>> tableRow;
 
      public CustomTableRows()
         {
-            tableRow = new List<List<ColumnContent>>();
+            tableRow = new List<List<CellContent>>();
         }
 
-        public List<List<ColumnContent>> Row { get => tableRow; private set => tableRow = value; }
+        public List<List<CellContent>> Row { get => tableRow; private set => tableRow = value; }
 
-        public void AddRow( List<ColumnContent> columnContent)
+        public void AddRow( List<CellContent> columnContent)
         {
             tableRow.Add(columnContent);
         }
