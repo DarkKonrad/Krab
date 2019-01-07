@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.MainMenuPanel = new System.Windows.Forms.Panel();
-            this.btnStrServ = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
+            this.btnAddTable = new System.Windows.Forms.Button();
             this.PanelUser = new System.Windows.Forms.Panel();
             this.labelUser = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
+            this.btnViewStorage = new System.Windows.Forms.Button();
             this.MainMenuPanel.SuspendLayout();
             this.PanelUser.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -46,25 +47,15 @@
             this.MainMenuPanel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MainMenuPanel.Controls.Add(this.btnViewStorage);
             this.MainMenuPanel.Controls.Add(this.btnEmployees);
-            this.MainMenuPanel.Controls.Add(this.btnStrServ);
+            this.MainMenuPanel.Controls.Add(this.btnAddTable);
             this.MainMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainMenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MainMenuPanel.Name = "MainMenuPanel";
             this.MainMenuPanel.Size = new System.Drawing.Size(1144, 594);
             this.MainMenuPanel.TabIndex = 0;
             this.MainMenuPanel.SizeChanged += new System.EventHandler(this.MainMenuPanel_SizeChanged);
-            // 
-            // btnStrServ
-            // 
-            this.btnStrServ.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStrServ.Location = new System.Drawing.Point(443, 175);
-            this.btnStrServ.Name = "btnStrServ";
-            this.btnStrServ.Size = new System.Drawing.Size(260, 42);
-            this.btnStrServ.TabIndex = 1;
-            this.btnStrServ.Text = "Magazyn / Usługi";
-            this.btnStrServ.UseVisualStyleBackColor = true;
-            this.btnStrServ.Click += new System.EventHandler(this.btnStrServ_Click);
             // 
             // btnEmployees
             // 
@@ -76,6 +67,17 @@
             this.btnEmployees.Text = "Pracownicy";
             this.btnEmployees.UseVisualStyleBackColor = true;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
+            // 
+            // btnAddTable
+            // 
+            this.btnAddTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnAddTable.Location = new System.Drawing.Point(443, 175);
+            this.btnAddTable.Name = "btnAddTable";
+            this.btnAddTable.Size = new System.Drawing.Size(260, 42);
+            this.btnAddTable.TabIndex = 1;
+            this.btnAddTable.Text = "Dodaj Magazyn / Usługi";
+            this.btnAddTable.UseVisualStyleBackColor = true;
+            this.btnAddTable.Click += new System.EventHandler(this.btnStrServ_Click);
             // 
             // PanelUser
             // 
@@ -131,6 +133,17 @@
             this.btnUsers.UseVisualStyleBackColor = true;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
+            // btnViewStorage
+            // 
+            this.btnViewStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnViewStorage.Location = new System.Drawing.Point(443, 237);
+            this.btnViewStorage.Name = "btnViewStorage";
+            this.btnViewStorage.Size = new System.Drawing.Size(260, 42);
+            this.btnViewStorage.TabIndex = 2;
+            this.btnViewStorage.Text = "Magazyn / Usługi";
+            this.btnViewStorage.UseVisualStyleBackColor = true;
+            this.btnViewStorage.Click += new System.EventHandler(this.btnViewStorage_Click);
+            // 
             // Main_Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +173,7 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Button btnChangePassword;
         private System.Windows.Forms.Button btnUsers;
-        private System.Windows.Forms.Button btnStrServ;
+        private System.Windows.Forms.Button btnAddTable;
+        private System.Windows.Forms.Button btnViewStorage;
     }
 }

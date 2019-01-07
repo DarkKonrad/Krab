@@ -28,6 +28,8 @@ namespace Inz_Prot.Models.dbCustomTable
         string name, type;
         int? typeCapacity;
         ColumnType columnT;
+   
+
 
         private ColumnInfo() { }
         private ColumnInfo(string name, string type)
@@ -96,7 +98,10 @@ namespace Inz_Prot.Models.dbCustomTable
             return type;
         }
         public string Name { get => name; set => name = value; }
-        public string Type { get => type; set => type = value; }
+        /// <summary>
+        /// Deprecated. Use ColumnType.
+        /// </summary>
+        public string Type_String { get => type; set => type = value; }
         public ColumnType ColumnType { get => columnT; set => columnT = value; }
         public int? TypeCapacity { get => typeCapacity; set => typeCapacity = value; }
     }

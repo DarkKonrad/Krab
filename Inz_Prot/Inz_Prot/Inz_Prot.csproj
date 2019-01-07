@@ -72,6 +72,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dbHelpers\dbTypes.cs" />
     <Compile Include="dbHelpers\TableEditors\CustomTableHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\QualificationHelper.cs" />
@@ -84,7 +85,9 @@
     <Compile Include="LoginFrame.Designer.cs">
       <DependentUpon>LoginFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbCustomTable\ColumnContent.cs" />
     <Compile Include="Models\dbCustomTable\ColumnInfo.cs" />
+    <Compile Include="Models\dbCustomTable\CustomTableRow.cs" />
     <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Qualification.cs" />
@@ -104,11 +107,23 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="Windows\CustomTableFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\CustomTableFrame.Designer.cs">
+      <DependentUpon>CustomTableFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.Designer.cs">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.Designer.cs">
+      <DependentUpon>AddNewRowCustomTableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\DialogBoxes\ChangePassDialog.cs">
       <SubType>Form</SubType>
@@ -116,18 +131,13 @@
     <Compile Include="Windows\DialogBoxes\ChangePassDialog.Designer.cs">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DialogBoxes\ConfirmDialogBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\DialogBoxes\ConfirmDialogBox.Designer.cs">
-      <DependentUpon>ConfirmDialogBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\EmployeeFrame.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\EmployeeFrame.Designer.cs">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SpecifiedControlls\CustomTableDialogControls.cs" />
     <Compile Include="Windows\SpecifiedControlls\dbRowTemplate.cs" />
     <Compile Include="Windows\TableCreatorFrame.cs">
       <SubType>Form</SubType>
@@ -159,14 +169,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Windows\CustomTableFrame.resx">
+      <DependentUpon>CustomTableFrame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\AddNewEmployeeDialog.resx">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.resx">
+      <DependentUpon>AddNewRowCustomTableDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChangePassDialog.resx">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\DialogBoxes\ConfirmDialogBox.resx">
-      <DependentUpon>ConfirmDialogBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
@@ -178,6 +191,8 @@
       <DependentUpon>UserFrame.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Inz_Prot.Models.dbCustomTable.ColumnInfo.datasource" />
+    <None Include="Properties\DataSources\Inz_Prot.Models.dbCustomTable.TableInfo.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

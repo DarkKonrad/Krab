@@ -125,8 +125,11 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             {
                 return new ColumnInfo(buffor, ColumnType.Numeric);
             }
-            else
+            else if(radioDataType.Checked == true)
                 return new ColumnInfo(buffor, ColumnType.DataType);
+
+            throw new Exception("GetColumnInfoProblem");
+            
 
         }
 
@@ -179,7 +182,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             radioTypeNumeric.Refresh();
 
             radioDataType.Location = new Point(
-                radioTypeNumeric.Location.X + radioTypeNumeric.Width - 20,
+                radioTypeNumeric.Location.X + radioTypeNumeric.Width - 15,
                 radioPlaneText.Location.Y);
             radioDataType.Refresh();
 

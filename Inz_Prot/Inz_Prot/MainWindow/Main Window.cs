@@ -78,5 +78,12 @@ namespace Inz_Prot.MainWindow
             var createTable = new TableCreatorFrame();
             createTable.Show();
         }
+
+        private void btnViewStorage_Click(object sender, EventArgs e)
+        {
+            var userDefinedTableFrame = new CustomTableFrame();
+            userDefinedTableFrame.Show(this);
+            this.Hide();
+        }
     }
 }

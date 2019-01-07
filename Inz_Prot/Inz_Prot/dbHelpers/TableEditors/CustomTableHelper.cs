@@ -12,6 +12,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 {
   public static class CustomTableHelper
     {
+        //private static List<ColumnInfo> listOfColumnInfosFromDb;
         public static void AddCustomTable(TableInfo tableInfo)
         {
             var createTableQuery = tableInfo.GetQuery();
@@ -23,7 +24,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             insertTableQuery.Parameters.AddWithValue("@null", null);
             insertTableQuery.Parameters.AddWithValue("@name", tableInfo.TableName.ToLower());
-            insertTableQuery.Parameters.AddWithValue("@types", tableInfo.GetColumnsTypeString());
+            insertTableQuery.Parameters.AddWithValue("@types", tableInfo.GetColumnsTypeAndNameString());
 
             dbAgent.GetConnection().Open();
             var transaction = dbAgent.GetConnection().BeginTransaction();
@@ -64,32 +65,31 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
 
         }
-      
-        public static void GetInfoAboutTables()
+        public static int GetRowCount(string tableName)
         {
-            string command = @"SELECT * FROM usertableinfo";
+            string command = string.Format("SELECT COUNT(*) FROM {0}",tableName);
             var query = new MySqlCommand(command, dbAgent.GetConnection());
-
+        
+            int RowsCount = -1;
             dbAgent.GetConnection().Open();
-
-
-
             try
             {
                 var reader = query.ExecuteReader();
-                
+
                 while(reader.Read())
                 {
-
-
+                    //  RowsCount = (int) reader["COUNT(*)"]; // WARNING !
+                    RowsCount = int.Parse(reader["COUNT(*)"].ToString());
                 }
+
+                
             }
 
             catch (MySqlException ex)
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            
+                
 
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
@@ -102,6 +102,92 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("CustomTableHelper: Get Row Count");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+            return RowsCount;
+        }
+
+    /// <summary>
+    /// Returns ROWS from User Defined Custom Table. Requires TableInfo with information about columns and it's type of data.
+    /// Obtainable with GetInfoAboutTables.
+    /// </summary>
+    /// <returns></returns>
+        public static CustomTableRows GetAllRowsFromCustomTable(TableInfo customTableInfo)
+        {
+            List<ColumnContent> collection;
+            CustomTableRows customTableRow = new CustomTableRows();
+          
+            //TableInfo userDefinedTableContent = null;                                 TABLE CONTENTS ? 
+            string command = @"SELECT * FROM " + customTableInfo.TableName;
+
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            dbAgent.GetConnection().Open();
+            try
+            {
+                var reader = query.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    collection = new List<ColumnContent>(); 
+                    // for every columns in row
+                    for (int i =0; i<customTableInfo.Count;i++)
+                    {
+                        // To determine what action we need to do, we need to check for every column type.
+                        switch (customTableInfo.Columns[i].ColumnType)
+                        {
+                            case ColumnType.DataType:
+                                var DateTime = (DateTime) reader[customTableInfo.Columns[i].Name];
+                                collection.Add(new ColumnContent(DateTime));
+                                break;
+                            case ColumnType.Description:
+                                var descr = reader[customTableInfo.Columns[i].Name].ToString();
+                                collection.Add(new ColumnContent(descr));
+                                break;
+                            case ColumnType.shortText:
+                                var shrtText = reader[customTableInfo.Columns[i].Name].ToString();
+                                collection.Add(new ColumnContent(shrtText));
+                                break;
+                            case ColumnType.Numeric:
+                                var num = (int) reader[customTableInfo.Columns[i].Name];
+                                collection.Add(new ColumnContent(num));
+                                break;
+
+                            default: throw new Exception("Custom Table Helper GetAllRowsFromCustomTable method, switch Error ");
+                               
+                        }
+
+
+                    }
+                    // ROWS
+                    customTableRow.AddRow(collection);
+                }
+
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+               
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch (Exception ex)
+            {
+               
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine(" Custom Table Helper GetAllRowsFromCustomDb");
             }
             finally
             {
@@ -109,7 +195,137 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             }
 
+            return customTableRow;
         }
+
+        /// <summary>
+        /// Returns TableInfo object with information about User Defined - Custom Table WITHOUT its rows
+        /// </summary>
+        /// <returns></returns>
+        public static TableInfo GetTableInfoAboutTables()
+        {
+            List<ColumnInfo> columns = new List<ColumnInfo>();
+            TableInfo tableInfo = null;
+            string command = @"SELECT * FROM usertableinfo";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            dbAgent.GetConnection().Open();
+
+            try
+            {
+                var reader = query.ExecuteReader();
+
+                int id = 0;
+                string rawColumns_SingleString="",rawTableName="";
+
+                while(reader.Read())
+                {
+                    id = (int) reader["ID"];
+                    rawTableName = reader["TableName"].ToString();
+                    rawColumns_SingleString= reader["ColumnsType"].ToString();
+                }
+                tableInfo = new TableInfo(rawTableName);
+                var rawColumns = rawColumns_SingleString.Split('|');
+             //   List<string[]> columnsSeparatedNames = new List<string[]>();
+                
+                for (int i = 0; i < rawColumns.Length; i++)
+                {
+                    var buff = rawColumns[i].Split('#');
+                    //columnsSeparatedNames.Add(buff);
+                    //columns.Add(new ColumnInfo(
+                    //    buff[0], dbTypes.RawStringColumnTypePairs[buff[1]]
+                    //    ));
+                    tableInfo.Add(new ColumnInfo(
+                        buff[0], dbTypes.RawStringColumnTypePairs[buff[1]]
+                        ));
+                }
+            }
+         
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+               
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+                
+            }
+            return tableInfo;
+        }
+
+        /// <summary>
+        /// Count: Values -1 becous of ID field, parameters with index that exceed columns count will be ignored
+        /// </summary>
+        /// <param name="tableInfo"></param>
+        /// <param name="Values"></param>
+        public static void AddRowToCustomTable(TableInfo tableInfo, params string[] Values)
+        {
+            string command = @"INSERT INTO " + tableInfo.TableName + @"VALUES (@ID";
+            dbAgent.GetConnection().Open();
+
+            //for(int i = tableInfo.Count-1;i>=0; i-- )
+            //{
+            //    command += @",@param" + i.ToString();
+            //}
+            for (int i = 0; i < tableInfo.Count - 1; i++)
+            {
+                command += @",@param" + i.ToString();
+            }
+            command += ")";
+            try
+            {
+                var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+                query.Parameters.AddWithValue("@ID", null);
+                //for (int i = tableInfo.Count - 1; i >= 0; i--)
+                //{
+                //    query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
+                //}
+                
+                for (int i = 0; i < tableInfo.Count -1;i++)
+                {
+                    query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
+                }
+                query.ExecuteNonQuery();
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+        }
+
 
 
     }

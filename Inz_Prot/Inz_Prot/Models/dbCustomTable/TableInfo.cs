@@ -117,13 +117,29 @@ namespace Inz_Prot.Models.dbCustomTable
             for (int i = columns.Count - 1; i >= 0; i--)
             {
                 if (i != 0)
-                    columnsType += columns[i].Type + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" ) + "|";
+                    columnsType += columns[i].Type_String + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" ) + "|";
                 else
-                    columnsType += columns[i].Type + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" );
+                    columnsType += columns[i].Type_String + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" );
             }
 
             return columnsType;
         }
-   
+
+
+        public string GetColumnsTypeAndNameString()
+        {
+            string columnsType = "";
+
+            for (int i = columns.Count - 1; i >= 0; i--)
+            {
+                if (i != 0)
+                    columnsType += columns[i].Name+"#"+ columns[i].Type_String + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" ) + "|";
+                else
+                    columnsType += columns[i].Name+"#" +columns[i].Type_String + ( columns[i].TypeCapacity.HasValue ? "$" + columns[i].TypeCapacity.Value.ToString() : "" );
+            }
+
+            return columnsType;
+        }
+
     }
 }
