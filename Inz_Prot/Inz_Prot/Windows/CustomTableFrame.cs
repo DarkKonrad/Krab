@@ -44,12 +44,12 @@ namespace Inz_Prot.Windows
             {
                 // Columns
                var currentRow = tableRows.Row[i];
-                dgCustomTable.Rows.Add(i+1);
-               
+                dgCustomTable.Rows.Add(1);
+                dgCustomTable.Rows[i].Cells[0].Value = i + 1;
                 // Columns of row
-                for(int j=0;j<currentRow.Count ;j++)
+                for (int j=0;j<currentRow.Count ;j++)
                 {
-                    // SWITCH
+                   
 
                     switch (currentRow[j].GetType())
                     {
@@ -90,6 +90,13 @@ namespace Inz_Prot.Windows
             var dialogResult = customTableDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 InitDataGrid();
+        }
+
+        private void CustomTableFrame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+            this.Dispose();
         }
     }
 }

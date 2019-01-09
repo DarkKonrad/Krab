@@ -43,7 +43,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 if(columnInfo.ColumnType == ColumnType.DataType)
                 {
                     var dataVal = timePicker.Value;
-                    strValue = dataVal.ToString("dd-MM-yyyy HH-mm-ss");
+                    strValue = dataVal.ToString("yyyy-MM-dd HH-mm-ss");
 
                     return strValue;
                 }
@@ -97,6 +97,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             if (columnInfo.ColumnType == ColumnType.DataType)
             {
                 TimePicker = new DateTimePicker();
+                
             //    btnChooseFromDataTimePicker = new Button();
                 controls = new Control[] { /*txtInputValue, */TimePicker, /* btnChooseFromDataTimePicker,*/ LabelColumnName };
             }

@@ -341,7 +341,17 @@ namespace Inz_Prot.dbHelpers.TableEditors
             query.Parameters.AddWithValue("@ID", null);
             for (int i = 0; i < tableInfo.Count ; i++)
             {
-                query.Parameters.AddWithValue("@param" + i.ToString(), Values[i].ToString());
+                //  var valueDateTime = Values[i] as DateTime?;
+                //  // new datetime ?
+                //  if (valueDateTime != null)
+                //  {
+                //    //  var valueDateTime = (DateTime) Values[i];
+                //       query.Parameters.AddWithValue("@param" + i.ToString(), valueDateTime.Value.ToString("yyyy-MM-dd HH-mm-ss"));
+                //    //  query.Parameters.AddWithValue("@param" + i.ToString(), (DateTime) (Values[i]).ToString("MM-dd-yyyy HH-mm-ss"));
+                //  }
+
+                //else  
+                query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
             }
             dbAgent.GetConnection().Open();
             try

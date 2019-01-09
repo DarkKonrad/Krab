@@ -47,6 +47,7 @@ namespace Inz_Prot.Windows.DialogBoxes
             {
                 // WSZYSTKO musi byc string
                 // kolejnosc parametrów taka jak kolejnosc kolumn w tabeli
+               
                 vals.Add(dialogControls.Value);
 
             }

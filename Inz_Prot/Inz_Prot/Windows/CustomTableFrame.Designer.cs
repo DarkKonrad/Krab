@@ -74,6 +74,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "CustomTableFrame";
             this.Text = "CustomTableFrame";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomTableFrame_FormClosed);
             this.Load += new System.EventHandler(this.CustomTableFrame_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).EndInit();
