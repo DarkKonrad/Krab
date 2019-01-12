@@ -88,6 +88,7 @@
     <Compile Include="Models\dbCustomTable\CellContent.cs" />
     <Compile Include="Models\dbCustomTable\ColumnInfo.cs" />
     <Compile Include="Models\dbCustomTable\CustomTableRows.cs" />
+    <Compile Include="Models\dbCustomTable\RowInfo.cs" />
     <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Qualification.cs" />
@@ -119,11 +120,11 @@
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.Designer.cs">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.cs">
+    <Compile Include="Windows\DialogBoxes\AddEditNewRowCustomTableDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.Designer.cs">
-      <DependentUpon>AddNewRowCustomTableDialog.cs</DependentUpon>
+    <Compile Include="Windows\DialogBoxes\AddEditNewRowCustomTableDialog.Designer.cs">
+      <DependentUpon>AddEditNewRowCustomTableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\DialogBoxes\ChangePassDialog.cs">
       <SubType>Form</SubType>
@@ -138,7 +139,7 @@
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\SpecifiedControlls\CustomTableDialogControls.cs" />
-    <Compile Include="Windows\SpecifiedControlls\dbRowTemplate.cs" />
+    <Compile Include="Windows\SpecifiedControlls\TableTemplate.cs" />
     <Compile Include="Windows\TableCreatorFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,8 +176,8 @@
     <EmbeddedResource Include="Windows\DialogBoxes\AddNewEmployeeDialog.resx">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\DialogBoxes\AddNewRowCustomTableDialog.resx">
-      <DependentUpon>AddNewRowCustomTableDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\DialogBoxes\AddEditNewRowCustomTableDialog.resx">
+      <DependentUpon>AddEditNewRowCustomTableDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChangePassDialog.resx">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>

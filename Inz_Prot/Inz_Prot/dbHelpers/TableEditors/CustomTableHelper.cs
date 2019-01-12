@@ -94,6 +94,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
                 Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Error: CustomTableHelper: Get Row Count");
             }
             catch (Exception ex)
             {
@@ -102,7 +103,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
-                Debug.WriteLine("CustomTableHelper: Get Row Count");
+                Debug.WriteLine("Error: CustomTableHelper: Get Row Count");
             }
             finally
             {
@@ -112,11 +113,11 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return RowsCount;
         }
 
-    /// <summary>
-    /// Returns ROWS from User Defined Custom Table. Requires TableInfo with information about columns and it's type of data.
-    /// Obtainable with GetInfoAboutTables.
-    /// </summary>
-    /// <returns></returns>
+        /// <summary>
+        /// Returns ROWS from User Defined Custom Table. Requires TableInfo with information about columns and it's type of data.
+        /// Obtainable with GetInfoAboutTables.
+        /// </summary>
+        /// <returns></returns>
         public static CustomTableRows GetAllRowsFromCustomTable(TableInfo customTableInfo)
         {
             List<CellContent> collection;
@@ -139,22 +140,22 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     for (int i =0; i<customTableInfo.Count;i++)
                     {
                         // To determine what action we need to do, we need to check for every column type.
-                        switch (customTableInfo.Columns[i].ColumnType)
+                        switch (customTableInfo.ColumnInfos_Row[i].ColumnType)
                         {
                             case ColumnType.DataType:
-                                var DateTime = (DateTime) reader[customTableInfo.Columns[i].Name];
+                                var DateTime = (DateTime) reader[customTableInfo.ColumnInfos_Row[i].Name];
                                 collection.Add(new CellContent(DateTime,(int)reader["ID"]));
                                 break;
                             case ColumnType.Description:
-                                var descr = reader[customTableInfo.Columns[i].Name].ToString();
+                                var descr = reader[customTableInfo.ColumnInfos_Row[i].Name].ToString();
                                 collection.Add(new CellContent(descr, (int) reader["ID"]));
                                 break;
-                            case ColumnType.shortText:
-                                var shrtText = reader[customTableInfo.Columns[i].Name].ToString();
+                            case ColumnType.ShortText:
+                                var shrtText = reader[customTableInfo.ColumnInfos_Row[i].Name].ToString();
                                 collection.Add(new CellContent(shrtText, (int) reader["ID"]));
                                 break;
                             case ColumnType.Numeric:
-                                var num = (int) reader[customTableInfo.Columns[i].Name];
+                                var num = (int) reader[customTableInfo.ColumnInfos_Row[i].Name];
                                 collection.Add(new CellContent(num, (int) reader["ID"]));
                                 break;
 
@@ -204,6 +205,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         /// <returns></returns>
         public static TableInfo GetTableInfoAboutTables()
         {
+            // należy dorobić wersję,która udostępni wszystkie wiersze
             List<ColumnInfo> columns = new List<ColumnInfo>();
             TableInfo tableInfo = null;
             string command = @"SELECT * FROM usertableinfo";
@@ -226,17 +228,14 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 }
                 tableInfo = new TableInfo(rawTableName);
                 var rawColumns = rawColumns_SingleString.Split('|');
-             //   List<string[]> columnsSeparatedNames = new List<string[]>();
                 
                 for (int i = 0; i < rawColumns.Length; i++)
                 {
                     var buff = rawColumns[i].Split('#');
-                    //columnsSeparatedNames.Add(buff);
-                    //columns.Add(new ColumnInfo(
-                    //    buff[0], dbTypes.RawStringColumnTypePairs[buff[1]]
-                    //    ));
+
                     tableInfo.Add(new ColumnInfo(
-                        buff[0], dbTypes.RawStringColumnTypePairs[buff[1]]
+                        buff[0], 
+                        dbTypes.RawStringColumnTypePairs[buff[1]]
                         ));
                 }
             }
@@ -245,20 +244,18 @@ namespace Inz_Prot.dbHelpers.TableEditors
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            
-
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
                 Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRTS VERSION ");
                 Debug.WriteLine(ex.TargetSite);
             }
             catch (Exception ex)
             {
-               
-
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRTS VERSION ");
                 Debug.WriteLine(ex.TargetSite);
             }
             finally
@@ -326,6 +323,42 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
 
         }
+
+        public static void EditCustomTableCell(int rowID,TableInfo tableInfo, string ColumnName, object Value)
+        {
+            string command = @"UPDATE " + tableInfo.TableName + "SET " + ColumnName + " = " + @"value WHERE ID = @id";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@id", rowID);
+            query.Parameters.AddWithValue("@value", Value);
+            dbAgent.GetConnection().Open();
+
+            try
+            {
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: EditCustomTableCell");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: EditCustomTableCell");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+        }
         public static void AddRowToCustomTable(TableInfo tableInfo, params object[] Values )
         {
             string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
@@ -341,16 +374,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             query.Parameters.AddWithValue("@ID", null);
             for (int i = 0; i < tableInfo.Count ; i++)
             {
-                //  var valueDateTime = Values[i] as DateTime?;
-                //  // new datetime ?
-                //  if (valueDateTime != null)
-                //  {
-                //    //  var valueDateTime = (DateTime) Values[i];
-                //       query.Parameters.AddWithValue("@param" + i.ToString(), valueDateTime.Value.ToString("yyyy-MM-dd HH-mm-ss"));
-                //    //  query.Parameters.AddWithValue("@param" + i.ToString(), (DateTime) (Values[i]).ToString("MM-dd-yyyy HH-mm-ss"));
-                //  }
 
-                //else  
                 query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
             }
             dbAgent.GetConnection().Open();

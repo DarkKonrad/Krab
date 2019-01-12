@@ -12,13 +12,14 @@ namespace Inz_Prot.Models.dbCustomTable
         string shortText, description;
         int? numeric;
         int id;
-     private  object obj;
-     private  TypeCode code;
+        private  object obj;
+        private  TypeCode code;
         private CellContent(object obj, TypeCode code)
         {
             this.obj = obj;
             this.code = code;
         }
+        
         private object Obj { get => obj; set => obj = value; }
 
         private CellContent() { }
@@ -76,7 +77,7 @@ namespace Inz_Prot.Models.dbCustomTable
         /// </summary>
         public int ID { get => id; private set => id = value; }
 
-        public TypeCode GetType()
+        public new TypeCode GetType()// !new
         {
             if (dateTime != null)
             {

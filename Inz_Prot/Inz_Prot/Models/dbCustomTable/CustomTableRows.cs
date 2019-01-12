@@ -10,7 +10,7 @@ namespace Inz_Prot.Models.dbCustomTable
     {
         List<List<CellContent>> tableRow;
 
-     public CustomTableRows()
+        public CustomTableRows()
         {
             tableRow = new List<List<CellContent>>();
         }

@@ -28,6 +28,8 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
         Control[] controls;
 
+      //  bool ContainerPanelClicked { get; set; }
+
         public TextBox TxtInputValue { get => txtInputValue; set => txtInputValue = value; }
         public DateTimePicker TimePicker { get => timePicker; set => timePicker = value; }
         public Label LabelColumnName { get => labelColumnName; set => labelColumnName = value; }
@@ -36,7 +38,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         public ColumnInfo ColumnInfo { get => columnInfo; private set => columnInfo = value; }
         public Control[] Controls { get => controls; private set => controls = value; }
 
-        public string Value { get 
+        public string ValueString { get 
             {
                 string strValue ="";
                 
@@ -56,6 +58,36 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             }
         }
 
+        public TypeCode Type
+        {
+            get
+            {
+                if (columnInfo.ColumnType == ColumnType.Description)
+                {
+
+                    return TypeCode.String;
+
+                }
+                else if (columnInfo.ColumnType == ColumnType.ShortText)
+                {
+
+                    return TypeCode.Char;
+
+                }
+                else if (columnInfo.ColumnType == ColumnType.Numeric)
+                {
+
+                    return TypeCode.Int32;
+
+                }
+                else if (columnInfo.ColumnType == ColumnType.DataType)
+                {
+                    return TypeCode.DateTime;
+                }
+                    
+                    throw new Exception("Invalid ColumnType" + Environment.NewLine + "Error: CustomTableDialogControls");
+            }
+        }
         private bool AreInputDataCorrect()
         {
 
@@ -66,7 +98,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                     return false;
                 }
             }
-            else if (columnInfo.ColumnType == ColumnType.shortText)
+            else if (columnInfo.ColumnType == ColumnType.ShortText)
             {
                 if (txtInputValue.Text.Length > 80)
                 {

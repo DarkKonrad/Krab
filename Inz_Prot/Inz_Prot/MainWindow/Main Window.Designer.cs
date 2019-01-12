@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.MainMenuPanel = new System.Windows.Forms.Panel();
+            this.btnViewStorage = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
             this.btnAddTable = new System.Windows.Forms.Button();
             this.PanelUser = new System.Windows.Forms.Panel();
@@ -36,7 +37,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
-            this.btnViewStorage = new System.Windows.Forms.Button();
             this.MainMenuPanel.SuspendLayout();
             this.PanelUser.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -56,6 +56,17 @@
             this.MainMenuPanel.Size = new System.Drawing.Size(1144, 594);
             this.MainMenuPanel.TabIndex = 0;
             this.MainMenuPanel.SizeChanged += new System.EventHandler(this.MainMenuPanel_SizeChanged);
+            // 
+            // btnViewStorage
+            // 
+            this.btnViewStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnViewStorage.Location = new System.Drawing.Point(443, 237);
+            this.btnViewStorage.Name = "btnViewStorage";
+            this.btnViewStorage.Size = new System.Drawing.Size(260, 42);
+            this.btnViewStorage.TabIndex = 2;
+            this.btnViewStorage.Text = "Magazyn / Usługi";
+            this.btnViewStorage.UseVisualStyleBackColor = true;
+            this.btnViewStorage.Click += new System.EventHandler(this.btnViewStorage_Click);
             // 
             // btnEmployees
             // 
@@ -133,17 +144,6 @@
             this.btnUsers.UseVisualStyleBackColor = true;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
-            // btnViewStorage
-            // 
-            this.btnViewStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnViewStorage.Location = new System.Drawing.Point(443, 237);
-            this.btnViewStorage.Name = "btnViewStorage";
-            this.btnViewStorage.Size = new System.Drawing.Size(260, 42);
-            this.btnViewStorage.TabIndex = 2;
-            this.btnViewStorage.Text = "Magazyn / Usługi";
-            this.btnViewStorage.UseVisualStyleBackColor = true;
-            this.btnViewStorage.Click += new System.EventHandler(this.btnViewStorage_Click);
-            // 
             // Main_Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +156,7 @@
             this.Name = "Main_Window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Główne Okno";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_Window_FormClosed);
             this.MainMenuPanel.ResumeLayout(false);
             this.PanelUser.ResumeLayout(false);
             this.PanelUser.PerformLayout();

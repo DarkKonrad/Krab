@@ -13,7 +13,7 @@ namespace Inz_Prot.Windows
 {
     public partial class TableCreatorFrame : Form
     {
-        List<dbColumnTemplate> listOfColumnTemplates;
+        List<TableTemplate> listOfColumnTemplates;
       
 
         public void MoveUp()
@@ -41,7 +41,7 @@ namespace Inz_Prot.Windows
         public TableCreatorFrame()
         {
             InitializeComponent();
-            listOfColumnTemplates = new List<dbColumnTemplate>();
+            listOfColumnTemplates = new List<TableTemplate>();
             tableNameHelp.SetHelpString(txtTableName, " Nazwij swój zbiór danych. " + Environment.NewLine +"Przykład: \"Magazyn\" lub \"Usługi\" ");
             tableNameHelp.SetShowHelp(txtTableName, true);
         }
@@ -51,7 +51,7 @@ namespace Inz_Prot.Windows
             Control control = (Control) sender;
             
             
-            foreach(dbColumnTemplate tmp in listOfColumnTemplates)
+            foreach(TableTemplate tmp in listOfColumnTemplates)
             {
                 if (tmp.ContainerPanel.Name != control.Name)
                 {
@@ -72,7 +72,7 @@ namespace Inz_Prot.Windows
         private void btnAddField_Click(object sender, EventArgs e)
         {
             
-            var tableRowTemplate = new dbColumnTemplate(MainPanel,containerPanel_Click);
+            var tableRowTemplate = new TableTemplate(MainPanel,containerPanel_Click);
             listOfColumnTemplates.Add(tableRowTemplate);
             tableRowTemplate.Show();
             MainPanel.Refresh();
@@ -83,7 +83,7 @@ namespace Inz_Prot.Windows
         private bool AreRowsContainsSpecialChars()
         {
             bool conatinsSpecialCharsOrEmpty = false;
-            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            foreach (TableTemplate dbColumn in listOfColumnTemplates)
             {
                 dbColumn.TxtColumnName.Text.Trim();
                 if (Utilities.StringContainsSpecialChars(dbColumn.TxtColumnName.Text) || dbColumn.TxtColumnName.Text =="")
@@ -101,10 +101,11 @@ namespace Inz_Prot.Windows
             }
             return conatinsSpecialCharsOrEmpty;
         }
+
         private void btnDeleteRow_Click(object sender, EventArgs e)
         {
            
-            foreach(dbColumnTemplate dbRow in listOfColumnTemplates)
+            foreach(TableTemplate dbRow in listOfColumnTemplates)
             {
                 if(dbRow.IsControlPanelClicked == true)
                 {          
@@ -115,11 +116,11 @@ namespace Inz_Prot.Windows
                 
             }
 
-            dbColumnTemplate.ReGenerateIndexes(listOfColumnTemplates);
+            TableTemplate.ReGenerateIndexes(listOfColumnTemplates);
         }
         private void SetCustomRowsBackgroundTransparent()
         {
-            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            foreach (TableTemplate dbColumn in listOfColumnTemplates)
             {
                 dbColumn.ContainerPanel.BackColor = SystemColors.Control;
 
@@ -139,12 +140,12 @@ namespace Inz_Prot.Windows
 
             var tableInfo = new TableInfo(txtTableName.Text);
 
-            foreach (dbColumnTemplate dbColumn in listOfColumnTemplates)
+            foreach (TableTemplate dbColumn in listOfColumnTemplates)
             {
                 tableInfo.Add(dbColumn.GetColumnInfo());
             }
 
-            tableInfo.Columns.Reverse();
+            tableInfo.ColumnInfos_Row.Reverse();
 
             dbHelpers.TableEditors.CustomTableHelper.AddCustomTable(tableInfo);
 

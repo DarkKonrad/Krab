@@ -1,6 +1,6 @@
 ﻿namespace Inz_Prot.Windows.DialogBoxes
 {
-    partial class AddNewRowCustomTableDialog
+    partial class AddEditNewRowCustomTableDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -32,6 +32,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.lblError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +61,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblError);
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -76,6 +78,18 @@
             this.mainPanel.Size = new System.Drawing.Size(518, 377);
             this.mainPanel.TabIndex = 4;
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(119, 16);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(51, 16);
+            this.lblError.TabIndex = 3;
+            this.lblError.Text = "label1";
+            this.lblError.Visible = false;
+            // 
             // AddNewRowCustomTableDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,6 +100,7 @@
             this.Name = "AddNewRowCustomTableDialog";
             this.Text = "AddNewRowCustomTableDialog";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -95,5 +110,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.Label lblError;
     }
 }

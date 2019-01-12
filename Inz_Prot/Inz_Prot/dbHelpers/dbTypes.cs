@@ -8,12 +8,15 @@ namespace Inz_Prot.dbHelpers
 {
    public static  class dbTypes
     {
-        public static string VARCHAR = "VARCHAR";
-        public static string INT = "INT";
-        public static string DATETYPE = "DATETIME";
+        public static readonly string VARCHAR = "VARCHAR";
+        public static readonly string INT = "INT";
+        public static readonly string DATETYPE = "DATETIME";
+   
+        public static readonly string VARCHAR80 = "VARCHAR80";
+        public static readonly string VARCHAR2048 = "VARCHAR2048";
 
-        public static string VARCHAR80 = "VARCHAR80";
-        public static string VARCHAR2048 = "VARCHAR2048";
+        public static readonly int MAKS_DESCRIPTION_LENGHT = 2048;
+        public static readonly int MAKS_SHORTTEXT_LENGHT = 80;
 
         static Dictionary<string, ColumnType> stringColumnTypePairs;
         static Dictionary<string, ColumnType> rawStringColumnTypePairs;
@@ -24,7 +27,7 @@ namespace Inz_Prot.dbHelpers
                 if (stringColumnTypePairs == null)
                 {
                     rawStringColumnTypePairs = new Dictionary<string, ColumnType>();
-                    rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.shortText);
+                    rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.ShortText);
                     rawStringColumnTypePairs.Add("VARCHAR$2048", ColumnType.Description);
                     rawStringColumnTypePairs.Add("INT", ColumnType.Numeric);
                     rawStringColumnTypePairs.Add("DATETIME", ColumnType.DataType); //DATATYPE
@@ -55,7 +58,7 @@ namespace Inz_Prot.dbHelpers
             if (stringColumnTypePairs == null)
             {
                 stringColumnTypePairs = new Dictionary<string, ColumnType>();
-                stringColumnTypePairs.Add("VARCHAR80", ColumnType.shortText);
+                stringColumnTypePairs.Add("VARCHAR80", ColumnType.ShortText);
                 stringColumnTypePairs.Add("VARCHAR2048", ColumnType.Description);
                 stringColumnTypePairs.Add("INT", ColumnType.Numeric);
                 stringColumnTypePairs.Add("DATATYPE", ColumnType.DataType);
@@ -70,7 +73,7 @@ namespace Inz_Prot.dbHelpers
             if (stringColumnTypePairs == null)
             {
                 rawStringColumnTypePairs = new Dictionary<string, ColumnType>();
-                rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.shortText);
+                rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.ShortText);
                 rawStringColumnTypePairs.Add("VARCHAR$2048", ColumnType.Description);
                 rawStringColumnTypePairs.Add("INT", ColumnType.Numeric);
                 rawStringColumnTypePairs.Add("DATETIME", ColumnType.DataType); // DATATYPE

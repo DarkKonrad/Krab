@@ -8,6 +8,17 @@ namespace Inz_Prot
 {
    public static class Utilities
     {
+        public static bool isStringNumber(string str)
+        {
+         
+            int result = 0;
+            if (!Int32.TryParse(str, out result))
+            {
+                return false;
+            }
+
+            return true;
+        }
         public static bool StringContainsSpecialChars(string str)
         {
             foreach (char c in str)

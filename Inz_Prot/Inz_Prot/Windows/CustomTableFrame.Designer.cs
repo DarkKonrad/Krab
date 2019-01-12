@@ -31,6 +31,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dgCustomTable = new System.Windows.Forms.DataGridView();
             this.btnAddCustomRow = new System.Windows.Forms.Button();
+            this.btnEditRow = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).BeginInit();
             this.SuspendLayout();
@@ -65,11 +66,22 @@
             this.btnAddCustomRow.UseVisualStyleBackColor = true;
             this.btnAddCustomRow.Click += new System.EventHandler(this.btnAddCustomRow_Click);
             // 
+            // btnEditRow
+            // 
+            this.btnEditRow.Location = new System.Drawing.Point(128, 434);
+            this.btnEditRow.Name = "btnEditRow";
+            this.btnEditRow.Size = new System.Drawing.Size(107, 43);
+            this.btnEditRow.TabIndex = 3;
+            this.btnEditRow.Text = "Edytuj Wiersz";
+            this.btnEditRow.UseVisualStyleBackColor = true;
+            this.btnEditRow.Click += new System.EventHandler(this.btnEditRow_Click);
+            // 
             // CustomTableFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 519);
+            this.Controls.Add(this.btnEditRow);
             this.Controls.Add(this.btnAddCustomRow);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "CustomTableFrame";
@@ -86,5 +98,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddCustomRow;
         private System.Windows.Forms.DataGridView dgCustomTable;
+        private System.Windows.Forms.Button btnEditRow;
     }
 }

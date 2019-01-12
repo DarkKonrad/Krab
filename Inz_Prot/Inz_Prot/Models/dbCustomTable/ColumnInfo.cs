@@ -18,7 +18,7 @@ namespace Inz_Prot.Models.dbCustomTable
     }
     public enum ColumnType
     {
-        shortText,
+        ShortText,
         Description,
         Numeric,
         DataType
@@ -48,7 +48,7 @@ namespace Inz_Prot.Models.dbCustomTable
                     this.typeCapacity = 2048;
                     break;
 
-                case ColumnType.shortText:
+                case ColumnType.ShortText:
                     this.type = "VARCHAR";
                     this.typeCapacity = 80;
                     break;

@@ -169,6 +169,7 @@
             this.Name = "AdminChangeCredentials";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Zmiana Danych Dostępowych";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminChangeCredentials_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

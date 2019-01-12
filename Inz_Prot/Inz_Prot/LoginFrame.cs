@@ -23,7 +23,7 @@ namespace Inz_Prot
         public void SetGeneratedLoginLabel(string text)
         {
             this.lblGeneratedLogin.Text = text;
-            lblGeneratedLogin.Visible = true;
+            lblGeneratedLogin.Visible = true; 
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -56,6 +56,11 @@ namespace Inz_Prot
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

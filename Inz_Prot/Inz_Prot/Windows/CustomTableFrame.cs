@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inz_Prot.Models.dbCustomTable;
 using Inz_Prot.dbHelpers.TableEditors;
+
 namespace Inz_Prot.Windows
 {
     public partial class CustomTableFrame : Form
@@ -22,6 +23,7 @@ namespace Inz_Prot.Windows
             InitializeComponent();
             // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
              userDefinedTable = CustomTableHelper.GetTableInfoAboutTables();
+            dgCustomTable.MultiSelect = false;
             InitDataGrid();
         }
         
@@ -32,7 +34,7 @@ namespace Inz_Prot.Windows
              
             //DODAWANIA CUSTOM TABLE   dgCustomTable.
             dgCustomTable.Columns.Add("OrdinalNumber", "L.P.");
-            foreach(ColumnInfo columnInfo in userDefinedTable.Columns)
+            foreach(ColumnInfo columnInfo in userDefinedTable.ColumnInfos_Row)
             {
                 dgCustomTable.Columns.Add(columnInfo.Name, columnInfo.Name);
             }
@@ -43,7 +45,7 @@ namespace Inz_Prot.Windows
             for (int i = 0 ;i<customRowCount  ;i++)
             {
                 // Columns
-               var currentRow = tableRows.Row[i];
+                var currentRow = tableRows.Row[i];
                 dgCustomTable.Rows.Add(1);
                 dgCustomTable.Rows[i].Cells[0].Value = i + 1;
                 // Columns of row
@@ -86,7 +88,7 @@ namespace Inz_Prot.Windows
 
         private void btnAddCustomRow_Click(object sender, EventArgs e)
         {
-            var customTableDialog = new DialogBoxes.AddNewRowCustomTableDialog(userDefinedTable);
+            var customTableDialog = new DialogBoxes.AddEditNewRowCustomTableDialog(userDefinedTable);
             var dialogResult = customTableDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 InitDataGrid();
@@ -97,6 +99,15 @@ namespace Inz_Prot.Windows
             Owner.Show();
             this.Hide();
             this.Dispose();
+        }
+
+        private void btnEditRow_Click(object sender, EventArgs e)
+        {
+            var customTableDialog = new DialogBoxes.AddEditNewRowCustomTableDialog(userDefinedTable);
+            var dialogResult = customTableDialog.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+                InitDataGrid();
+
         }
     }
 }

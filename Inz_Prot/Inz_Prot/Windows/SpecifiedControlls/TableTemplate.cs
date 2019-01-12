@@ -8,7 +8,7 @@ using System.Drawing;
 using Inz_Prot.Models.dbCustomTable;
 namespace Inz_Prot.Windows.SpecifiedControlls
 {
-   public class dbColumnTemplate //: Control
+   public class TableTemplate //: Control
     {
        private readonly static int space = 10;
        private readonly static int txtColumnWidth = 150;
@@ -29,7 +29,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
        private Control[] controls;
 
         //Constructor
-        public dbColumnTemplate(Panel MainPanel, EventHandler panelClicked)
+        public TableTemplate(Panel MainPanel, EventHandler panelClicked)
         {
             i++;
             index = i;
@@ -102,15 +102,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         {
             
             string buffor = txtColumnName.Text;
-            //StringBuilder sb = new StringBuilder();
-            //foreach (char c in buffor)
-            //{
-            //    if (( c >= '0' && c <= '9' ) || ( c >= 'A' && c <= 'Z' ) || ( c >= 'a' && c <= 'z' ) || c == '_')
-            //    {
-            //        sb.Append(c);
-            //    }
-            //}
-            //buffor = sb.ToString();
+         
             buffor.Trim();
 
             if (radioDescription.Checked == true)
@@ -119,7 +111,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             }
             else if (radioPlaneText.Checked == true)
             {
-                return new ColumnInfo(buffor, ColumnType.shortText);
+                return new ColumnInfo(buffor, ColumnType.ShortText);
             }
             else if (Numeric.Checked == true)
             {
@@ -221,16 +213,16 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
         #endregion
 
-        public static dbColumnTemplate Compare(dbColumnTemplate A, dbColumnTemplate B)
+        public static TableTemplate Compare(TableTemplate A, TableTemplate B)
         {
             return A.index > B.index ? A : B;
         }
 
-        public static void ReGenerateIndexes(List<dbColumnTemplate> list)
+        public static void ReGenerateIndexes(List<TableTemplate> list)
         {
             i = 0;
             list.Reverse();
-            foreach(dbColumnTemplate rowTemplate in list)
+            foreach(TableTemplate rowTemplate in list)
             {
                 i++;
                 rowTemplate.index = i;
@@ -238,7 +230,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             }
          //   list.Reverse();
 
-            foreach (dbColumnTemplate rowTemplate in list)
+            foreach (TableTemplate rowTemplate in list)
             {
                 rowTemplate.Refresh();
             }

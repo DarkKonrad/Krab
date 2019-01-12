@@ -85,5 +85,10 @@ namespace Inz_Prot.MainWindow
             userDefinedTableFrame.Show(this);
             this.Hide();
         }
+
+        private void Main_Window_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

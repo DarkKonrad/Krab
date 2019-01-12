@@ -37,5 +37,10 @@ namespace Inz_Prot.MainWindow
             }
 
         }
+
+        private void AdminChangeCredentials_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
