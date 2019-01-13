@@ -18,6 +18,8 @@ namespace Inz_Prot.dbHelpers
         public static readonly int MAKS_DESCRIPTION_LENGHT = 2048;
         public static readonly int MAKS_SHORTTEXT_LENGHT = 80;
 
+        public static readonly string UserCustomTables_TABLE = "usertableinfo";
+
         static Dictionary<string, ColumnType> stringColumnTypePairs;
         static Dictionary<string, ColumnType> rawStringColumnTypePairs;
     //    static Dictionary<ColumnType, string> columnTypeEnumToString;

@@ -54,16 +54,19 @@ namespace Inz_Prot.Windows.DialogBoxes
                 }
                 selectedRow = dataGrid.SelectedRows[0];
                 this.dataGrid = dataGrid;
-
-                for (int i = 0; i < selectedRow.Cells.Count; i++)
-                {
+                                                    // - 2 becouse of index[0] and we have one additional hidden cell for table's Row ID 
+                                                    // and our listOfControls cover only 'visible' cells 
+                for (int i = 0; i < selectedRow.Cells.Count -2 ; i++)
+                {   //out of range 
                     if (listOfControls[i].Type == TypeCode.DateTime)
                     {
-                        listOfControls[i].TimePicker.Value = (DateTime) selectedRow.Cells[i].Value;
+            
+                                                                                        // +1 becouse first cell (column) is Ordinal Number,and we don't need that 
+                        listOfControls[i].TimePicker.Value = (DateTime) selectedRow.Cells[i + 1].Value;
                     }
                     else
                     {
-                        listOfControls[i].TxtInputValue.Text = selectedRow.Cells[i].Value.ToString();
+                        listOfControls[i].TxtInputValue.Text = selectedRow.Cells[i+1].Value.ToString();
                     }
                 }
             }
@@ -143,11 +146,20 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void EditRowOkClick()
         {
-            
-            for(int i =0;i< listOfControls.Count;i++) // -1 ? 
+            int ID = (int)selectedRow.Cells[selectedRow.Cells.Count - 1].Value;
+
+            List<object> vals = new List<object>();
+            foreach (CustomTableDialogControls dialogControls in listOfControls)
             {
-               
+                // WSZYSTKO musi byc string
+                // kolejnosc parametrów taka jak kolejnosc kolumn w tabeli
+
+                vals.Add(dialogControls.ValueString);
+
             }
+            CustomTableHelper.EditCustomTableCells(ID, tableInfo, tableInfo.ColumnsNames_String().ToArray(), vals.ToArray());
+                    
+            
 
 
         }

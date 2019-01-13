@@ -22,7 +22,7 @@ namespace Inz_Prot.Windows
         {
             InitializeComponent();
             // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
-             userDefinedTable = CustomTableHelper.GetTableInfoAboutTables();
+             userDefinedTable = CustomTableHelper.GetTableInfoAboutTables_OneRowVersion();
             dgCustomTable.MultiSelect = false;
             InitDataGrid();
         }
@@ -31,14 +31,24 @@ namespace Inz_Prot.Windows
 
         private void InitDataGrid()
         {
-             
+            var t = CustomTableHelper.GetTableInfosAboutCustomTables();
             //DODAWANIA CUSTOM TABLE   dgCustomTable.
+            dgCustomTable.Rows.Clear();
+            dgCustomTable.Columns.Clear();
+
             dgCustomTable.Columns.Add("OrdinalNumber", "L.P.");
             foreach(ColumnInfo columnInfo in userDefinedTable.ColumnInfos_Row)
             {
                 dgCustomTable.Columns.Add(columnInfo.Name, columnInfo.Name);
-            }
 
+                if(columnInfo.ColumnType == ColumnType.DataType)
+                dgCustomTable.Columns[columnInfo.Name].ValueType = typeof(DateTime);
+            }
+            ////////////
+            dgCustomTable.Columns.Add("TableID", "TableID");
+            dgCustomTable.Columns["TableID"].Visible = false;
+            dgCustomTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ///////////
             int customRowCount = CustomTableHelper.GetRowCount(userDefinedTable.TableName);
             tableRows = CustomTableHelper.GetAllRowsFromCustomTable(userDefinedTable);
 
@@ -47,16 +57,16 @@ namespace Inz_Prot.Windows
                 // Columns
                 var currentRow = tableRows.Row[i];
                 dgCustomTable.Rows.Add(1);
-                dgCustomTable.Rows[i].Cells[0].Value = i + 1;
+                dgCustomTable.Rows[i].Cells[0].Value =(int) i + 1;
+
                 // Columns of row
                 for (int j=0;j<currentRow.Count ;j++)
-                {
-                   
-
+                {                 
                     switch (currentRow[j].GetType())
                     {
                         case TypeCode.DateTime:
-                          //  buf_DataTime = (DateTime) currentRow[i].Value;
+                            //  buf_DataTime = (DateTime) currentRow[i].Value;
+                            dgCustomTable.Rows[i].Cells[j + 1].ValueType = typeof(DateTime);
                             dgCustomTable.Rows[i].Cells[j + 1].Value = (DateTime) currentRow[j].Value;
                             break;
                         case TypeCode.String:
@@ -69,13 +79,16 @@ namespace Inz_Prot.Windows
                             break;
                         case TypeCode.Int32:
                             //   buf_Numeric = (int) currentRow[i].Value;
-                            dgCustomTable.Rows[i].Cells[j + 1].Value = (int) currentRow[j].Value;
+                            dgCustomTable.Rows[i].Cells[j + 1].ValueType = typeof(int);
+                             dgCustomTable.Rows[i].Cells[j + 1].Value = (int) currentRow[j].Value;
                             break;
                         default: throw new Exception("CustomTableFrame Type Code Error");
                     }
                     
                 }
-                
+                ////////
+                dgCustomTable.Rows[i].Cells[dgCustomTable.Rows[i].Cells.Count-1].Value = currentRow[currentRow.Count-1].ID;
+                ////////
             }
      
         }
@@ -103,7 +116,7 @@ namespace Inz_Prot.Windows
 
         private void btnEditRow_Click(object sender, EventArgs e)
         {
-            var customTableDialog = new DialogBoxes.AddEditNewRowCustomTableDialog(userDefinedTable);
+            var customTableDialog = new DialogBoxes.AddEditNewRowCustomTableDialog(userDefinedTable,dgCustomTable);
             var dialogResult = customTableDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
                 InitDataGrid();

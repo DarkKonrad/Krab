@@ -203,12 +203,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
         /// Returns TableInfo object with information about User Defined - Custom Table WITHOUT its rows
         /// </summary>
         /// <returns></returns>
-        public static TableInfo GetTableInfoAboutTables()
+        public static TableInfo GetTableInfoAboutTables_OneRowVersion()
         {
             // należy dorobić wersję,która udostępni wszystkie wiersze
             List<ColumnInfo> columns = new List<ColumnInfo>();
             TableInfo tableInfo = null;
-            string command = @"SELECT * FROM usertableinfo";
+            string command = @"SELECT * FROM " + dbTypes.UserCustomTables_TABLE;
             var query = new MySqlCommand(command, dbAgent.GetConnection());
 
             dbAgent.GetConnection().Open();
@@ -247,7 +247,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
                 Debug.WriteLine("Exception Source: " + ex.Source);
-                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRTS VERSION ");
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRST VERSION ");
                 Debug.WriteLine(ex.TargetSite);
             }
             catch (Exception ex)
@@ -255,7 +255,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
-                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRTS VERSION ");
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRST VERSION ");
                 Debug.WriteLine(ex.TargetSite);
             }
             finally
@@ -266,6 +266,77 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return tableInfo;
         }
 
+        public static List<TableInfo> GetTableInfosAboutCustomTables()
+        {
+          
+            List<TableInfo> listOfUserDefinedTables = new List<TableInfo>();
+
+            string command = @"SELECT * FROM " + dbTypes.UserCustomTables_TABLE;
+
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            dbAgent.GetConnection().Open();
+
+            try
+            {
+                int j = 0;
+                var reader = query.ExecuteReader();
+
+                int id = 0;
+                string rawColumns_SingleString = "", rawTableName = "";
+
+                while (reader.Read())
+                {
+                    id = (int) reader["ID"];
+                    rawTableName = reader["TableName"].ToString();
+                    rawColumns_SingleString = reader["ColumnsType"].ToString();
+                    listOfUserDefinedTables.Add(new TableInfo(rawTableName));
+
+
+
+                    var rawColumns = rawColumns_SingleString.Split('|');
+
+                    for (int i = 0; i < rawColumns.Length; i++)
+                    {
+                        var buff = rawColumns[i].Split('#');
+
+                        listOfUserDefinedTables[j].Add(new ColumnInfo(
+                            buff[0],
+                            dbTypes.RawStringColumnTypePairs[buff[1]]
+                            ));
+                    }
+
+                    j++;
+                }
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfosAboutCustomTables FIRST VERSION ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfosAboutCustomTables FIRST VERSION ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+   
+
+            return listOfUserDefinedTables;
+        }
         /// <summary>
         /// Count: Values -1 becous of ID field
         /// </summary>
@@ -326,7 +397,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         public static void EditCustomTableCell(int rowID,TableInfo tableInfo, string ColumnName, object Value)
         {
-            string command = @"UPDATE " + tableInfo.TableName + "SET " + ColumnName + " = " + @"value WHERE ID = @id";
+            string command = @"UPDATE " + tableInfo.TableName + "SET " + ColumnName + " = " + @"@value WHERE ID = @id";
             var query = new MySqlCommand(command, dbAgent.GetConnection());
 
             query.Parameters.AddWithValue("@id", rowID);
@@ -359,6 +430,64 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
 
         }
+
+        /// <summary>
+        /// It's recomended to pass whole array of values. Still it is possible to pass specific objects one by one but, you need to be sure there all columns are covered with therir object values.
+        /// </summary>
+        /// <param name="rowID"></param>
+        /// <param name="tableInfo"></param>
+        /// <param name="ColumnNames"></param>
+        /// <param name="Values"></param>
+        public static void EditCustomTableCells(int rowID, TableInfo tableInfo,  string[] ColumnNames, params object[] Values)
+        {
+            string command = @"UPDATE " + tableInfo.TableName + " SET ";
+            for (int i = 0; i < Values.Length; i++)
+            {
+                if(i == Values.Length -1)
+                    command += ColumnNames[i] + " = " + @"@val" + i.ToString() + " ";
+                else
+                    command += ColumnNames[i] + " = " + @"@val" + i.ToString() + ", ";
+            }
+            command += @"WHERE ID = @id";
+
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@id", rowID);
+
+            for (int i = 0; i < Values.Length; i++)
+            {
+                query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i]);
+            }
+
+               dbAgent.GetConnection().Open();
+
+            try
+            {
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: EditCustomTableCell");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: EditCustomTableCell");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+        }
+
         public static void AddRowToCustomTable(TableInfo tableInfo, params object[] Values )
         {
             string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
@@ -374,7 +503,6 @@ namespace Inz_Prot.dbHelpers.TableEditors
             query.Parameters.AddWithValue("@ID", null);
             for (int i = 0; i < tableInfo.Count ; i++)
             {
-
                 query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
             }
             dbAgent.GetConnection().Open();

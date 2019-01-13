@@ -63,6 +63,18 @@ namespace Inz_Prot.Models.dbCustomTable
 
         }
 
+        public List<string> ColumnsNames_String()
+        {
+            List<string> list = new List<string>();
+
+            foreach(ColumnInfo column in columns)
+            {
+                list.Add(column.Name);
+            }
+
+            return list;
+        }
+
         private TableInfo() { }
         public TableInfo(string name)
         {
