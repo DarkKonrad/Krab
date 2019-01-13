@@ -72,7 +72,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dbHelpers\dbTypes.cs" />
+    <Compile Include="dbHelpers\NamesTypes.cs" />
     <Compile Include="dbHelpers\TableEditors\CustomTableHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\QualificationHelper.cs" />
@@ -132,6 +132,12 @@
     <Compile Include="Windows\DialogBoxes\ChangePassDialog.Designer.cs">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\ChooseUDTDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\ChooseUDTDialog.Designer.cs">
+      <DependentUpon>ChooseUDTDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EmployeeFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChangePassDialog.resx">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\ChooseUDTDialog.resx">
+      <DependentUpon>ChooseUDTDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>

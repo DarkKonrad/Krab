@@ -81,7 +81,20 @@ namespace Inz_Prot.MainWindow
 
         private void btnViewStorage_Click(object sender, EventArgs e)
         {
-            var userDefinedTableFrame = new CustomTableFrame();
+            var chooseTable = new Windows.DialogBoxes.ChooseUDTDialog();
+            var chooseTableResult = chooseTable.ShowDialog(this);
+
+            if (chooseTableResult != DialogResult.OK)
+                return;
+            var chosenTable = chooseTable.GetChosenTable();
+            if(chosenTable == null)
+            {
+                MessageBox.Show("Nie udało się uzyskać dostępu do " + dbHelpers.NamesTypes.CommonCustomTableName_POLISH_ADJECTIVE);
+                return;
+            }
+            var userDefinedTableFrame = new CustomTableFrame(chosenTable);
+            if (userDefinedTableFrame.IsDisposed)
+                return;
             userDefinedTableFrame.Show(this);
             this.Hide();
         }

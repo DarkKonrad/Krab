@@ -42,15 +42,14 @@ namespace Inz_Prot.Windows
         {
             InitializeComponent();
             listOfColumnTemplates = new List<TableTemplate>();
-            tableNameHelp.SetHelpString(txtTableName, " Nazwij swój zbiór danych. " + Environment.NewLine +"Przykład: \"Magazyn\" lub \"Usługi\" ");
-            tableNameHelp.SetShowHelp(txtTableName, true);
+          //  tableNameHelp.SetHelpString(txtTableName, " Nazwij swój zbiór danych. " + Environment.NewLine +"Przykład: \"Magazyn\" lub \"Usługi\" ");
+         //   tableNameHelp.SetShowHelp(txtTableName, true);
         }
 
         private void containerPanel_Click(object sender, EventArgs e)
         {
             Control control = (Control) sender;
-            
-            
+      
             foreach(TableTemplate tmp in listOfColumnTemplates)
             {
                 if (tmp.ContainerPanel.Name != control.Name)

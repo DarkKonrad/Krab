@@ -64,7 +64,7 @@
             this.btnViewStorage.Name = "btnViewStorage";
             this.btnViewStorage.Size = new System.Drawing.Size(260, 42);
             this.btnViewStorage.TabIndex = 2;
-            this.btnViewStorage.Text = "Magazyn / Usługi";
+            this.btnViewStorage.Text = "Zbiory Danych";
             this.btnViewStorage.UseVisualStyleBackColor = true;
             this.btnViewStorage.Click += new System.EventHandler(this.btnViewStorage_Click);
             // 

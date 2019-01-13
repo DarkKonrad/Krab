@@ -22,16 +22,27 @@ namespace Inz_Prot.Windows
         {
             InitializeComponent();
             // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
-             userDefinedTable = CustomTableHelper.GetTableInfoAboutTables_OneRowVersion();
+            userDefinedTable = CustomTableHelper.GetTableInfoAboutTables_OneRowVersion();
             dgCustomTable.MultiSelect = false;
             InitDataGrid();
         }
         
- 
+        public CustomTableFrame(TableInfo table)
+        {
+            InitializeComponent();
+            userDefinedTable = table;
+            dgCustomTable.MultiSelect = false;
+            InitDataGrid();
+        }
 
         private void InitDataGrid()
         {
-            var t = CustomTableHelper.GetTableInfosAboutCustomTables();
+            if(userDefinedTable == null)
+            {
+                MessageBox.Show("Obecnie nie ma żadnych " + dbHelpers.NamesTypes.CommonCustomTableName_POLISH_ADJECTIVE,"Uwaga",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                this.Dispose();
+                return;
+            }
             //DODAWANIA CUSTOM TABLE   dgCustomTable.
             dgCustomTable.Rows.Clear();
             dgCustomTable.Columns.Clear();

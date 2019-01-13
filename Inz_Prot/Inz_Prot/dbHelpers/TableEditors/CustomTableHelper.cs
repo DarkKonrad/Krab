@@ -208,7 +208,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             // należy dorobić wersję,która udostępni wszystkie wiersze
             List<ColumnInfo> columns = new List<ColumnInfo>();
             TableInfo tableInfo = null;
-            string command = @"SELECT * FROM " + dbTypes.UserCustomTables_TABLE;
+            string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE;
             var query = new MySqlCommand(command, dbAgent.GetConnection());
 
             dbAgent.GetConnection().Open();
@@ -226,6 +226,10 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     rawTableName = reader["TableName"].ToString();
                     rawColumns_SingleString= reader["ColumnsType"].ToString();
                 }
+                if(rawTableName == "" || rawTableName == null)
+                {
+                    return null;
+                }
                 tableInfo = new TableInfo(rawTableName);
                 var rawColumns = rawColumns_SingleString.Split('|');
                 
@@ -235,7 +239,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                     tableInfo.Add(new ColumnInfo(
                         buff[0], 
-                        dbTypes.RawStringColumnTypePairs[buff[1]]
+                        NamesTypes.RawStringColumnTypePairs[buff[1]]
                         ));
                 }
             }
@@ -266,12 +270,82 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return tableInfo;
         }
 
-        public static List<TableInfo> GetTableInfosAboutCustomTables()
+
+        public static TableInfo GetTableInfoAboutTable(string tableName)
+        {
+            // należy dorobić wersję,która udostępni wszystkie wiersze
+            List<ColumnInfo> columns = new List<ColumnInfo>();
+            TableInfo tableInfo = null;
+            string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE +" " +@"WHERE TableName = @tablename";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@tablename", tableName);
+
+            dbAgent.GetConnection().Open();
+
+            try
+            {
+                var reader = query.ExecuteReader();
+
+                int id = 0;
+                string rawColumns_SingleString = "", rawTableName = "";
+
+                while (reader.Read())
+                {
+                    id = (int) reader["ID"];
+                    rawTableName = reader["TableName"].ToString();
+                    rawColumns_SingleString = reader["ColumnsType"].ToString();
+                }
+                if (rawTableName == "" || rawTableName == null)
+                {
+                    return null;
+                }
+                tableInfo = new TableInfo(rawTableName);
+                var rawColumns = rawColumns_SingleString.Split('|');
+
+                for (int i = 0; i < rawColumns.Length; i++)
+                {
+                    var buff = rawColumns[i].Split('#');
+
+                    tableInfo.Add(new ColumnInfo(
+                        buff[0],
+                        NamesTypes.RawStringColumnTypePairs[buff[1]]
+                        ));
+                }
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRST VERSION ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: GetTableInfoAboutTables FIRST VERSION ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+            return tableInfo;
+        }
+
+
+        public static List<TableInfo> GetTableInfosAboutCustomTables() // Initially - OK 
         {
           
             List<TableInfo> listOfUserDefinedTables = new List<TableInfo>();
 
-            string command = @"SELECT * FROM " + dbTypes.UserCustomTables_TABLE;
+            string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE;
 
             var query = new MySqlCommand(command, dbAgent.GetConnection());
 
@@ -302,7 +376,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                         listOfUserDefinedTables[j].Add(new ColumnInfo(
                             buff[0],
-                            dbTypes.RawStringColumnTypePairs[buff[1]]
+                            NamesTypes.RawStringColumnTypePairs[buff[1]]
                             ));
                     }
 

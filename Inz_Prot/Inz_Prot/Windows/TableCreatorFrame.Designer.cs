@@ -29,21 +29,20 @@
         private void InitializeComponent()
         {
             this.topPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.InfoNamePanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtTableName = new System.Windows.Forms.TextBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnAcceptAllRows = new System.Windows.Forms.Button();
             this.btnDeleteRow = new System.Windows.Forms.Button();
             this.btnAddField = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.InfoNamePanel = new System.Windows.Forms.Panel();
-            this.txtTableName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tableNameHelp = new System.Windows.Forms.HelpProvider();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.topPanel.SuspendLayout();
-            this.bottomPanel.SuspendLayout();
             this.InfoNamePanel.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +56,45 @@
             this.topPanel.Size = new System.Drawing.Size(765, 100);
             this.topPanel.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 30);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Nazwij swój zbiór danych.\r\nPrzykład: \"Magazyn\" lub \"Usługi\"";
+            // 
+            // InfoNamePanel
+            // 
+            this.InfoNamePanel.Controls.Add(this.label2);
+            this.InfoNamePanel.Controls.Add(this.txtTableName);
+            this.InfoNamePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.InfoNamePanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.InfoNamePanel.Location = new System.Drawing.Point(0, 54);
+            this.InfoNamePanel.Name = "InfoNamePanel";
+            this.InfoNamePanel.Size = new System.Drawing.Size(765, 46);
+            this.InfoNamePanel.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(52, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(146, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Nazwa Zbioru Danych";
+            // 
+            // txtTableName
+            // 
+            this.txtTableName.Location = new System.Drawing.Point(219, 9);
+            this.txtTableName.Name = "txtTableName";
+            this.txtTableName.Size = new System.Drawing.Size(227, 20);
+            this.txtTableName.TabIndex = 0;
+            this.txtTableName.MouseEnter += new System.EventHandler(this.txtTableName_MouseEnter);
+            // 
             // bottomPanel
             // 
             this.bottomPanel.Controls.Add(this.flowLayoutPanel1);
@@ -68,6 +106,29 @@
             this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(765, 78);
             this.bottomPanel.TabIndex = 1;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.lblInfo);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(238, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(336, 73);
+            this.flowLayoutPanel1.TabIndex = 4;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Red;
+            this.lblInfo.Location = new System.Drawing.Point(3, 0);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(47, 15);
+            this.lblInfo.TabIndex = 3;
+            this.lblInfo.Text = "label1";
+            this.lblInfo.Visible = false;
+            this.lblInfo.Click += new System.EventHandler(this.lblInfo_Click);
             // 
             // btnAcceptAllRows
             // 
@@ -85,6 +146,7 @@
             // 
             // btnDeleteRow
             // 
+            this.btnDeleteRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnDeleteRow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDeleteRow.Location = new System.Drawing.Point(121, 6);
             this.btnDeleteRow.Name = "btnDeleteRow";
@@ -97,6 +159,7 @@
             // 
             // btnAddField
             // 
+            this.btnAddField.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnAddField.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddField.Location = new System.Drawing.Point(4, 6);
             this.btnAddField.Name = "btnAddField";
@@ -113,73 +176,8 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 100);
             this.MainPanel.Name = "MainPanel";
-            this.tableNameHelp.SetShowHelp(this.MainPanel, false);
             this.MainPanel.Size = new System.Drawing.Size(765, 365);
             this.MainPanel.TabIndex = 2;
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblInfo.ForeColor = System.Drawing.Color.Red;
-            this.lblInfo.Location = new System.Drawing.Point(3, 0);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(47, 15);
-            this.lblInfo.TabIndex = 3;
-            this.lblInfo.Text = "label1";
-            this.lblInfo.Visible = false;
-            this.lblInfo.Click += new System.EventHandler(this.lblInfo_Click);
-            // 
-            // InfoNamePanel
-            // 
-            this.InfoNamePanel.Controls.Add(this.label2);
-            this.InfoNamePanel.Controls.Add(this.txtTableName);
-            this.InfoNamePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InfoNamePanel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.InfoNamePanel.Location = new System.Drawing.Point(0, 54);
-            this.InfoNamePanel.Name = "InfoNamePanel";
-            this.tableNameHelp.SetShowHelp(this.InfoNamePanel, true);
-            this.InfoNamePanel.Size = new System.Drawing.Size(765, 46);
-            this.InfoNamePanel.TabIndex = 0;
-            // 
-            // txtTableName
-            // 
-            this.txtTableName.Location = new System.Drawing.Point(219, 9);
-            this.txtTableName.Name = "txtTableName";
-            this.tableNameHelp.SetShowHelp(this.txtTableName, true);
-            this.txtTableName.Size = new System.Drawing.Size(194, 20);
-            this.txtTableName.TabIndex = 0;
-            this.txtTableName.MouseEnter += new System.EventHandler(this.txtTableName_MouseEnter);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 30);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Nazwij swój zbiór danych.\r\nPrzykład: \"Magazyn\" lub \"Usługi\"";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(52, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Nazwa Zbioru Danych";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.lblInfo);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(238, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(336, 73);
-            this.flowLayoutPanel1.TabIndex = 4;
             // 
             // TableCreatorFrame
             // 
@@ -195,9 +193,9 @@
             this.Text = "TableCreatorForm";
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
-            this.bottomPanel.ResumeLayout(false);
             this.InfoNamePanel.ResumeLayout(false);
             this.InfoNamePanel.PerformLayout();
+            this.bottomPanel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -217,7 +215,6 @@
         private System.Windows.Forms.Panel InfoNamePanel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTableName;
-        private System.Windows.Forms.HelpProvider tableNameHelp;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

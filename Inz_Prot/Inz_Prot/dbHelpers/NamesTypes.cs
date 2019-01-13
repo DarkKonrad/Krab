@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Inz_Prot.Models.dbCustomTable;
 namespace Inz_Prot.dbHelpers
 {
-   public static  class dbTypes
+   public static  class NamesTypes
     {
         public static readonly string VARCHAR = "VARCHAR";
         public static readonly string INT = "INT";
@@ -17,6 +17,9 @@ namespace Inz_Prot.dbHelpers
 
         public static readonly int MAKS_DESCRIPTION_LENGHT = 2048;
         public static readonly int MAKS_SHORTTEXT_LENGHT = 80;
+
+        public static readonly string CommonCustomTableName_POLISH = "Zbior Danych";
+        public static readonly string CommonCustomTableName_POLISH_ADJECTIVE = "Zbiorów Danych";
 
         public static readonly string UserCustomTables_TABLE = "usertableinfo";
 

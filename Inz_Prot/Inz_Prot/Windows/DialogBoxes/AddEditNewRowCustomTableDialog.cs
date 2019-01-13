@@ -106,7 +106,7 @@ namespace Inz_Prot.Windows.DialogBoxes
                         WriteErrorAndHighlightRow(dialogControls, "Znaki specjalne są niedozwolone");
                         return false;
                     }
-                    if(dialogControls.TxtInputValue.Text.Length > dbHelpers.dbTypes.MAKS_DESCRIPTION_LENGHT)
+                    if(dialogControls.TxtInputValue.Text.Length > dbHelpers.NamesTypes.MAKS_DESCRIPTION_LENGHT)
                     {
                         WriteErrorAndHighlightRow(dialogControls, " Tekst przekracza maksymalną długość." + Environment.NewLine + "Maksymalna długość to 2048 znaków");
                         return false;
@@ -120,7 +120,7 @@ namespace Inz_Prot.Windows.DialogBoxes
                         WriteErrorAndHighlightRow(dialogControls, "Znaki specjalne są niedozwolone");
                         return false;
                     }
-                    if (dialogControls.TxtInputValue.Text.Length > dbHelpers.dbTypes.MAKS_SHORTTEXT_LENGHT)
+                    if (dialogControls.TxtInputValue.Text.Length > dbHelpers.NamesTypes.MAKS_SHORTTEXT_LENGHT)
                     {
                         WriteErrorAndHighlightRow(dialogControls, " Tekst przekracza maksymalną długość." + Environment.NewLine + "Maksymalna długość to 80 znaków");
                         return false;
