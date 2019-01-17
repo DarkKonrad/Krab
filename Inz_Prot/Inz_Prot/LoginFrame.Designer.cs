@@ -35,11 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblLoginCredError = new System.Windows.Forms.Label();
             this.lblGeneratedLogin = new System.Windows.Forms.Label();
+            this.btnDBConfig = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnLogin.Location = new System.Drawing.Point(229, 234);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(145, 42);
@@ -90,7 +91,7 @@
             this.lblLoginCredError.AutoSize = true;
             this.lblLoginCredError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblLoginCredError.ForeColor = System.Drawing.Color.Red;
-            this.lblLoginCredError.Location = new System.Drawing.Point(206, 330);
+            this.lblLoginCredError.Location = new System.Drawing.Point(210, 310);
             this.lblLoginCredError.Name = "lblLoginCredError";
             this.lblLoginCredError.Size = new System.Drawing.Size(185, 20);
             this.lblLoginCredError.TabIndex = 5;
@@ -109,6 +110,17 @@
             this.lblGeneratedLogin.Text = "label3";
             this.lblGeneratedLogin.Visible = false;
             // 
+            // btnDBConfig
+            // 
+            this.btnDBConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnDBConfig.Location = new System.Drawing.Point(12, 337);
+            this.btnDBConfig.Name = "btnDBConfig";
+            this.btnDBConfig.Size = new System.Drawing.Size(145, 62);
+            this.btnDBConfig.TabIndex = 7;
+            this.btnDBConfig.Text = "Konfigurator Połączenia z Bazą Danych";
+            this.btnDBConfig.UseVisualStyleBackColor = true;
+            this.btnDBConfig.Click += new System.EventHandler(this.btnDBConfig_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +128,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PaleGreen;
             this.ClientSize = new System.Drawing.Size(581, 411);
+            this.Controls.Add(this.btnDBConfig);
             this.Controls.Add(this.lblGeneratedLogin);
             this.Controls.Add(this.lblLoginCredError);
             this.Controls.Add(this.label2);
@@ -126,7 +139,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ekran Logowania";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -142,6 +155,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblLoginCredError;
         private System.Windows.Forms.Label lblGeneratedLogin;
+        private System.Windows.Forms.Button btnDBConfig;
     }
 }
 

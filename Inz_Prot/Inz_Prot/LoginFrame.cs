@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Inz_Prot.Windows.DialogBoxes;
 using Inz_Prot.dbHelpers.TableEditors;
 namespace Inz_Prot
 {
@@ -28,6 +29,7 @@ namespace Inz_Prot
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
             lblLoginCredError.Visible = false;
             lblGeneratedLogin.Visible = false;
             if (string.Equals(txtbLogin.Text, "Admin01") && string.Equals(txtbPassword.Text, "AdminPassword"))
@@ -50,7 +52,6 @@ namespace Inz_Prot
             MainWindow.Main_Window MainWindow = new MainWindow.Main_Window(usr);
             this.Hide();
             MainWindow.Show();
-           // this.Dispose();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -58,9 +59,26 @@ namespace Inz_Prot
 
         }
 
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("Czy na pewno chcesz zakoczyć działanie programu ? ", "Zamykanie Programu", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                Environment.Exit(0);
+            else
+               e.Cancel = true;
+
+        }
+
+        private void btnDBConfig_Click(object sender, EventArgs e)
+        {
+            var dbConfigDialog = new ChangeDBCredentialsDialog();
+            var result = dbConfigDialog.ShowDialog(this);
+            
+            if(result == DialogResult.OK || result == DialogResult.Cancel)
+            {
+                dbConfigDialog.Hide();
+                dbConfigDialog.Dispose();
+            }
+
         }
     }
 }

@@ -124,7 +124,7 @@
             // btnChangePassword
             // 
             this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnChangePassword.Location = new System.Drawing.Point(12, 27);
+            this.btnChangePassword.Location = new System.Drawing.Point(11, 26);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(118, 61);
             this.btnChangePassword.TabIndex = 3;
@@ -136,7 +136,7 @@
             // 
             this.btnUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnUsers.Location = new System.Drawing.Point(988, 25);
+            this.btnUsers.Location = new System.Drawing.Point(982, 25);
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(142, 61);
             this.btnUsers.TabIndex = 2;
@@ -156,6 +156,7 @@
             this.Name = "Main_Window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Główne Okno";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_Window_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_Window_FormClosed);
             this.MainMenuPanel.ResumeLayout(false);
             this.PanelUser.ResumeLayout(false);

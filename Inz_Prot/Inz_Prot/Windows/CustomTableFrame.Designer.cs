@@ -32,6 +32,9 @@
             this.dgCustomTable = new System.Windows.Forms.DataGridView();
             this.btnAddCustomRow = new System.Windows.Forms.Button();
             this.btnEditRow = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnToCSV = new System.Windows.Forms.Button();
+            this.csvSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).BeginInit();
             this.SuspendLayout();
@@ -76,11 +79,33 @@
             this.btnEditRow.UseVisualStyleBackColor = true;
             this.btnEditRow.Click += new System.EventHandler(this.btnEditRow_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(241, 434);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(107, 43);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Usuń Wiersz";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnToCSV
+            // 
+            this.btnToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToCSV.Location = new System.Drawing.Point(852, 434);
+            this.btnToCSV.Name = "btnToCSV";
+            this.btnToCSV.Size = new System.Drawing.Size(120, 43);
+            this.btnToCSV.TabIndex = 5;
+            this.btnToCSV.Text = "Zapisz Do pliku CSV";
+            this.btnToCSV.UseVisualStyleBackColor = true;
+            this.btnToCSV.Click += new System.EventHandler(this.btnToCSV_Click);
+            // 
             // CustomTableFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 519);
+            this.Controls.Add(this.btnToCSV);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEditRow);
             this.Controls.Add(this.btnAddCustomRow);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -99,5 +124,8 @@
         private System.Windows.Forms.Button btnAddCustomRow;
         private System.Windows.Forms.DataGridView dgCustomTable;
         private System.Windows.Forms.Button btnEditRow;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnToCSV;
+        private System.Windows.Forms.SaveFileDialog csvSaveDialog;
     }
 }

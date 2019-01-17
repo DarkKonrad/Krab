@@ -46,6 +46,7 @@
             this.btnEditEmployee = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnToCSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEmployee)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -53,6 +54,7 @@
             // 
             // dataGridEmployee
             // 
+            this.dataGridEmployee.AllowUserToAddRows = false;
             this.dataGridEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridEmployee.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridEmployee.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -198,16 +200,18 @@
             // 
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(979, 23);
+            this.button1.Location = new System.Drawing.Point(979, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 59);
             this.button1.TabIndex = 2;
             this.button1.Text = "Wyjdź";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnToCSV);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -215,6 +219,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1144, 156);
             this.panel1.TabIndex = 3;
+            // 
+            // btnToCSV
+            // 
+            this.btnToCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToCSV.Location = new System.Drawing.Point(1021, 29);
+            this.btnToCSV.Name = "btnToCSV";
+            this.btnToCSV.Size = new System.Drawing.Size(120, 43);
+            this.btnToCSV.TabIndex = 6;
+            this.btnToCSV.Text = "Zapisz Do pliku CSV";
+            this.btnToCSV.UseVisualStyleBackColor = true;
+            this.btnToCSV.Click += new System.EventHandler(this.btnToCSV_Click);
             // 
             // EmployeeFrame
             // 
@@ -253,5 +268,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn emplHireDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn emplExpirationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn emplPosition;
+        private System.Windows.Forms.Button btnToCSV;
     }
 }

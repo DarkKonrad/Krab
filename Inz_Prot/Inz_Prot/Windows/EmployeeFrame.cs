@@ -117,5 +117,10 @@ namespace Inz_Prot.Windows
             this.Hide();
             this.Dispose();
         }
+
+        private void btnToCSV_Click(object sender, EventArgs e)
+        {
+            Utilities.SaveToCSV_SaveDialogVersion(dataGridEmployee);
+        }
     }
 }

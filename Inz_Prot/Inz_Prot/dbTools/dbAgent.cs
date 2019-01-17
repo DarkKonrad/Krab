@@ -8,15 +8,37 @@ using MySql.Data.Common;
 
 namespace Inz_Prot.dbTools
 {
-   public static class dbAgent
+    public static class dbAgent
     {
-        private static string Server = "localhost";
-        private static string DataBaseName = "service";
-        private static string User = "root";
-        private static string Password = "";
+        private static string server = "localhost";
+        private static string dataBaseName = "service";
+        private static string user = "root";
+        private static string password = "";
+        private static bool isUsingDefaults = true;
 
         private static MySqlConnection mySqlConnection;
 
+
+        public static bool IsUsingDefaultCredentials { get =>isUsingDefaults; }
+
+        public static void UseDefaultCredentials()
+        {
+            server = "localhost";
+            dataBaseName = "service";
+            user = "root";
+            password = "";
+            initConnection();
+            isUsingDefaults = true;
+        }
+         public static void UseCustomCredentials(string server,string databaseName,string user,string password)
+        {
+            dbAgent.server = server;
+            dbAgent.dataBaseName = databaseName;
+            dbAgent.user = user;
+            dbAgent.password = password;
+            initConnection();
+            isUsingDefaults = false;
+        }
         public static MySqlConnection GetConnection()
         {
             if (mySqlConnection == null)
@@ -33,13 +55,13 @@ namespace Inz_Prot.dbTools
             MySqlConnectionStringBuilder connectionStringBuilder = new MySqlConnectionStringBuilder();
 
           
-            connectionStringBuilder.Server = Server;
-            connectionStringBuilder.Database = DataBaseName;
-            connectionStringBuilder.UserID = User;
-            connectionStringBuilder.Password = Password;
+            connectionStringBuilder.Server = server;
+            connectionStringBuilder.Database = dataBaseName;
+            connectionStringBuilder.UserID = user;
+            connectionStringBuilder.Password = password;
             connectionStringBuilder.SslMode = MySqlSslMode.None;
 
-            // string connectionString = connectionStringBuilder.ToString() ;
+
             string connectionString = connectionStringBuilder.GetConnectionString(true);
             mySqlConnection = new MySqlConnection(connectionString);
         }

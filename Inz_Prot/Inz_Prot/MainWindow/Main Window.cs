@@ -39,7 +39,7 @@ namespace Inz_Prot.MainWindow
             labelUser.Text = user.Name + Environment.NewLine + user.Surname;
             CurrentUser = user;
             CenterButtons();
-
+           // Application.
             
         }
 
@@ -101,7 +101,31 @@ namespace Inz_Prot.MainWindow
 
         private void Main_Window_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+
+        }
+        private void Main_Window_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Czy na pewno chcesz zakoczyć działanie programu ? ", "Zamykanie Programu", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    Environment.Exit(0);
+                }
+
+                else
+                {
+                    e.Cancel = true;
+
+                    // return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Application.Exit();
+            } 
+        
+            
         }
     }
 }
