@@ -108,7 +108,7 @@
             // 
             this.btnDelete.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDelete.Location = new System.Drawing.Point(141, 31);
+            this.btnDelete.Location = new System.Drawing.Point(144, 31);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(76, 47);
             this.btnDelete.TabIndex = 2;

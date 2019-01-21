@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inz_Prot.Windows.SpecifiedControlls;
 using Inz_Prot.Models.dbCustomTable;
+using Inz_Prot.dbHelpers.TableEditors;
+
 namespace Inz_Prot.Windows
 {
     public partial class TableCreatorFrame : Form
@@ -133,6 +135,18 @@ namespace Inz_Prot.Windows
             if(AreRowsContainsSpecialChars())
             {
                 lblInfo.Text = "Zawartosc pola nazwy nie może być pusta ani zawierać znaków specjalnych";
+                lblInfo.Visible = true;
+                return;
+            }
+            if(CustomTableHelper.IsTableNameInUse(txtTableName.Text))
+            {
+                lblInfo.Text = "Nazwa zbioru danych jest już zajęta";
+                lblInfo.Visible = true;
+                return;
+            }
+            if(listOfColumnTemplates.Count== 0)
+            {
+                lblInfo.Text = "Zbiór danych musi posiadac co najmniej jedno pole";
                 lblInfo.Visible = true;
                 return;
             }

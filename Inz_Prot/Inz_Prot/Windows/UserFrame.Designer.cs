@@ -34,7 +34,6 @@
             this.dataGridLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridPrivilages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
@@ -92,18 +91,9 @@
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
-            // btnEditUser
-            // 
-            this.btnEditUser.Location = new System.Drawing.Point(131, 16);
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(129, 35);
-            this.btnEditUser.TabIndex = 2;
-            this.btnEditUser.Text = "Edytuj Użytkownika";
-            this.btnEditUser.UseVisualStyleBackColor = true;
-            // 
             // btnDeleteUser
             // 
-            this.btnDeleteUser.Location = new System.Drawing.Point(266, 16);
+            this.btnDeleteUser.Location = new System.Drawing.Point(131, 16);
             this.btnDeleteUser.Name = "btnDeleteUser";
             this.btnDeleteUser.Size = new System.Drawing.Size(129, 35);
             this.btnDeleteUser.TabIndex = 3;
@@ -114,7 +104,6 @@
             // 
             this.panel1.Controls.Add(this.btnAddUser);
             this.panel1.Controls.Add(this.btnDeleteUser);
-            this.panel1.Controls.Add(this.btnEditUser);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 350);
             this.panel1.Name = "panel1";
@@ -141,7 +130,6 @@
 
         private System.Windows.Forms.DataGridView dataGridUsers;
         private System.Windows.Forms.Button btnAddUser;
-        private System.Windows.Forms.Button btnEditUser;
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridName;

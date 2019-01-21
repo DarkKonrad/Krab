@@ -113,6 +113,57 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return RowsCount;
         }
 
+        public static bool IsTableNameInUse(string tablename)
+        {
+            bool isReserved = false;
+            string command = "SELECT ID from usertableinfo WHERE TableName = @tablename";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@tablename", tablename);
+            int ID = -1;
+            try
+            {
+                dbAgent.GetConnection().Open();
+
+                var reader = query.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    ID = (int) reader["ID"];
+                    if(ID > -1)
+                    {
+                        isReserved = true;
+                        return isReserved;
+                    }
+                }
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+            }
+            catch (Exception ex)
+            {
+
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine(" Custom Table Helper IsTableNameInUse");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+
+            return isReserved;
+        }
         /// <summary>
         /// Returns ROWS from User Defined Custom Table. Requires TableInfo with information about columns and it's type of data.
         /// Obtainable with GetInfoAboutTables.

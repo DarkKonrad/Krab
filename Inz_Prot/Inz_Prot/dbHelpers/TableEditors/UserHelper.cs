@@ -332,7 +332,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
         }
 
-
+        //public static DeleteUser(int ID)
 
 
         public static List<User> GetAllUsers()
