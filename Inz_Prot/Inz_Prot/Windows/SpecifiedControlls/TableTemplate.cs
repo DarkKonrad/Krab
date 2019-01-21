@@ -174,7 +174,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             radioTypeNumeric.Refresh();
 
             radioDataType.Location = new Point(
-                radioTypeNumeric.Location.X + radioTypeNumeric.Width - 15,
+                radioTypeNumeric.Location.X + radioTypeNumeric.Width - -10,
                 radioPlaneText.Location.Y);
             radioDataType.Refresh();
 

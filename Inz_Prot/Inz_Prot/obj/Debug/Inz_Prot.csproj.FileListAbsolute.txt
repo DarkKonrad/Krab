@@ -30,3 +30,4 @@ E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.csprojAssemblyRefer
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddEditNewRowCustomTableDialog.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.ChooseUDTDialog.resources
 E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.ChangeDBCredentialsDialog.resources
+E:\VS Repos\C#\Inz_Proj\Inz_Prot\Inz_Prot\obj\Debug\Inz_Prot.Windows.DialogBoxes.AddEditUserDialog.resources

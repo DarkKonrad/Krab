@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 namespace Inz_Prot.dbHelpers.TableEditors
 {
-  public static class CustomTableHelper
+    public static class CustomTableHelper
     {
         //private static List<ColumnInfo> listOfColumnInfosFromDb;
         public static void AddCustomTable(TableInfo tableInfo)
@@ -67,29 +67,29 @@ namespace Inz_Prot.dbHelpers.TableEditors
         }
         public static int GetRowCount(string tableName)
         {
-            string command = string.Format("SELECT COUNT(*) FROM {0}",tableName);
+            string command = string.Format("SELECT COUNT(*) FROM {0}", tableName);
             var query = new MySqlCommand(command, dbAgent.GetConnection());
-        
+
             int RowsCount = -1;
             dbAgent.GetConnection().Open();
             try
             {
                 var reader = query.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
                     //  RowsCount = (int) reader["COUNT(*)"]; // WARNING !
                     RowsCount = int.Parse(reader["COUNT(*)"].ToString());
                 }
 
-                
+
             }
 
             catch (MySqlException ex)
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                
+
 
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
@@ -98,7 +98,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
             catch (Exception ex)
             {
-               
+
 
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
@@ -122,7 +122,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         {
             List<CellContent> collection;
             CustomTableRows customTableRow = new CustomTableRows();
-          
+
             //TableInfo userDefinedTableContent = null;                                 TABLE CONTENTS ? 
             string command = @"SELECT * FROM " + customTableInfo.TableName;
 
@@ -133,18 +133,18 @@ namespace Inz_Prot.dbHelpers.TableEditors
             {
                 var reader = query.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    collection = new List<CellContent>(); 
+                    collection = new List<CellContent>();
                     // for every columns in row
-                    for (int i =0; i<customTableInfo.Count;i++)
+                    for (int i = 0; i < customTableInfo.Count; i++)
                     {
                         // To determine what action we need to do, we need to check for every column type.
                         switch (customTableInfo.ColumnInfos_Row[i].ColumnType)
                         {
                             case ColumnType.DataType:
                                 var DateTime = (DateTime) reader[customTableInfo.ColumnInfos_Row[i].Name];
-                                collection.Add(new CellContent(DateTime,(int)reader["ID"]));
+                                collection.Add(new CellContent(DateTime, (int) reader["ID"]));
                                 break;
                             case ColumnType.Description:
                                 var descr = reader[customTableInfo.ColumnInfos_Row[i].Name].ToString();
@@ -160,7 +160,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                                 break;
 
                             default: throw new Exception("Custom Table Helper GetAllRowsFromCustomTable method, switch Error ");
-                               
+
                         }
 
 
@@ -175,7 +175,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-               
+
 
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
@@ -183,7 +183,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
             catch (Exception ex)
             {
-               
+
 
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
@@ -218,32 +218,32 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 var reader = query.ExecuteReader();
 
                 int id = 0;
-                string rawColumns_SingleString="",rawTableName="";
+                string rawColumns_SingleString = "", rawTableName = "";
 
-                while(reader.Read())
+                while (reader.Read())
                 {
                     id = (int) reader["ID"];
                     rawTableName = reader["TableName"].ToString();
-                    rawColumns_SingleString= reader["ColumnsType"].ToString();
+                    rawColumns_SingleString = reader["ColumnsType"].ToString();
                 }
-                if(rawTableName == "" || rawTableName == null)
+                if (rawTableName == "" || rawTableName == null)
                 {
                     return null;
                 }
                 tableInfo = new TableInfo(rawTableName);
                 var rawColumns = rawColumns_SingleString.Split('|');
-                
+
                 for (int i = 0; i < rawColumns.Length; i++)
                 {
                     var buff = rawColumns[i].Split('#');
 
                     tableInfo.Add(new ColumnInfo(
-                        buff[0], 
+                        buff[0],
                         NamesTypes.RawStringColumnTypePairs[buff[1]]
                         ));
                 }
             }
-         
+
             catch (MySqlException ex)
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -265,7 +265,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             finally
             {
                 dbTools.dbAgent.GetConnection().Close();
-                
+
             }
             return tableInfo;
         }
@@ -276,7 +276,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             // należy dorobić wersję,która udostępni wszystkie wiersze
             List<ColumnInfo> columns = new List<ColumnInfo>();
             TableInfo tableInfo = null;
-            string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE +" " +@"WHERE TableName = @tablename";
+            string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE + " " + @"WHERE TableName = @tablename";
             var query = new MySqlCommand(command, dbAgent.GetConnection());
             query.Parameters.AddWithValue("@tablename", tableName);
 
@@ -339,6 +339,95 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return tableInfo;
         }
 
+        public static void DeleteTable(string tableName)
+        {
+            string str_com_DeleteFromUserTable = "DELETE FROM usertableinfo WHERE tablename = @tablename ";
+            string str_drop_UserTable = "DROP TABLE " + tableName;
+
+            var query_DeleteFromUserTable = new MySqlCommand(str_com_DeleteFromUserTable, dbAgent.GetConnection());
+            var query_DropUserTable = new MySqlCommand(str_drop_UserTable, dbAgent.GetConnection());
+
+            query_DeleteFromUserTable.Parameters.AddWithValue("@tablename", tableName);
+
+            dbAgent.GetConnection().Open();
+            var transaction = dbAgent.GetConnection().BeginTransaction();
+
+            try
+            {
+                query_DropUserTable.Transaction = transaction;
+                query_DeleteFromUserTable.Transaction = transaction;
+
+                query_DeleteFromUserTable.ExecuteNonQuery();
+                query_DropUserTable.ExecuteNonQuery();
+
+                transaction.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: CustomTableHelper -->DeleteTable<-- ");
+                Debug.WriteLine(ex.TargetSite);
+                transaction.Rollback();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: CustomTableHelper -->DeleteTable<-- ");
+                Debug.WriteLine(ex.TargetSite);
+                transaction.Rollback();
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+        }
+
+        public static void DeleteRow(int ID,string TableName)
+        {
+            string command = "DELETE FROM " + TableName + " " + "WHERE ID=@id";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@id", ID);
+
+            try
+            {
+                dbAgent.GetConnection().Open();
+
+                query.ExecuteNonQuery();
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: CustomTableHelper -->RemoveRow<--");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: CustomTableHelper -->RemoveRow<--");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+
+        }
 
         public static List<TableInfo> GetTableInfosAboutCustomTables() // Initially - OK 
         {

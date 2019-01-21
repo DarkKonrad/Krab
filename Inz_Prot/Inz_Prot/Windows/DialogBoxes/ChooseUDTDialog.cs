@@ -51,5 +51,20 @@ namespace Inz_Prot.Windows.DialogBoxes
            
 
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var DialogResult = MessageBox.Show("Czy na pewno chcesz BEZPOWROTNIE usunąć zbiór danych ? " + Environment.NewLine
+                + "Tej operacji nie mozna cofnąć", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            
+            if(DialogResult == DialogResult.OK)
+            {
+                chosenTable = CustomTableHelper.GetTableInfoAboutTable(listBoxCustomTable.SelectedItem.ToString());
+                CustomTableHelper.DeleteTable(chosenTable.TableName);
+
+                this.Refresh();
+                return;
+            }
+        }
     }
 }

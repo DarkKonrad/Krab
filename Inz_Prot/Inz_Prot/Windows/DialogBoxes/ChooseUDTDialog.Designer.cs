@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.btnOk = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
-            this.listBoxCustomTable = new System.Windows.Forms.ListBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.listBoxCustomTable = new System.Windows.Forms.ListBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.bottomPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // bottomPanel
             // 
+            this.bottomPanel.Controls.Add(this.btnDelete);
             this.bottomPanel.Controls.Add(this.btn_Cancel);
             this.bottomPanel.Controls.Add(this.btnOk);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -47,6 +49,30 @@
             this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(358, 100);
             this.bottomPanel.TabIndex = 0;
+            // 
+            // btn_Cancel
+            // 
+            this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btn_Cancel.Location = new System.Drawing.Point(270, 31);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(76, 47);
+            this.btn_Cancel.TabIndex = 1;
+            this.btn_Cancel.Text = "Anuluj";
+            this.btn_Cancel.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnOk.Location = new System.Drawing.Point(12, 31);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(76, 47);
+            this.btnOk.TabIndex = 0;
+            this.btnOk.Text = "Wybierz";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // mainPanel
             // 
@@ -57,38 +83,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(358, 251);
             this.mainPanel.TabIndex = 1;
-            // 
-            // btnOk
-            // 
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnOk.Location = new System.Drawing.Point(12, 31);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(114, 47);
-            this.btnOk.TabIndex = 0;
-            this.btnOk.Text = "Wybierz";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btn_Cancel
-            // 
-            this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btn_Cancel.Location = new System.Drawing.Point(232, 31);
-            this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(114, 47);
-            this.btn_Cancel.TabIndex = 1;
-            this.btn_Cancel.Text = "Anuluj";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
-            // 
-            // listBoxCustomTable
-            // 
-            this.listBoxCustomTable.FormattingEnabled = true;
-            this.listBoxCustomTable.Location = new System.Drawing.Point(57, 33);
-            this.listBoxCustomTable.Name = "listBoxCustomTable";
-            this.listBoxCustomTable.Size = new System.Drawing.Size(236, 212);
-            this.listBoxCustomTable.TabIndex = 0;
             // 
             // label1
             // 
@@ -101,6 +95,26 @@
             this.label1.Size = new System.Drawing.Size(170, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Wybierz zbior danych\r\n";
+            // 
+            // listBoxCustomTable
+            // 
+            this.listBoxCustomTable.FormattingEnabled = true;
+            this.listBoxCustomTable.Location = new System.Drawing.Point(57, 33);
+            this.listBoxCustomTable.Name = "listBoxCustomTable";
+            this.listBoxCustomTable.Size = new System.Drawing.Size(236, 212);
+            this.listBoxCustomTable.TabIndex = 0;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnDelete.Location = new System.Drawing.Point(141, 31);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(76, 47);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Usuń";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // ChooseUDTDialog
             // 
@@ -126,5 +140,6 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxCustomTable;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             this.dataGridUsers = new System.Windows.Forms.DataGridView();
-            this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
-            this.btnDeleteUser = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.dataGridName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridPrivilages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAddUser = new System.Windows.Forms.Button();
+            this.btnEditUser = new System.Windows.Forms.Button();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridUsers
             // 
+            this.dataGridUsers.AllowUserToAddRows = false;
+            this.dataGridUsers.AllowUserToDeleteRows = false;
             this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -56,6 +57,30 @@
             this.dataGridUsers.Name = "dataGridUsers";
             this.dataGridUsers.Size = new System.Drawing.Size(446, 457);
             this.dataGridUsers.TabIndex = 0;
+            // 
+            // dataGridName
+            // 
+            this.dataGridName.HeaderText = "Imię";
+            this.dataGridName.Name = "dataGridName";
+            this.dataGridName.ReadOnly = true;
+            // 
+            // dataGridSurname
+            // 
+            this.dataGridSurname.HeaderText = "Nazwisko";
+            this.dataGridSurname.Name = "dataGridSurname";
+            this.dataGridSurname.ReadOnly = true;
+            // 
+            // dataGridLogin
+            // 
+            this.dataGridLogin.HeaderText = "Login";
+            this.dataGridLogin.Name = "dataGridLogin";
+            this.dataGridLogin.ReadOnly = true;
+            // 
+            // dataGridPrivilages
+            // 
+            this.dataGridPrivilages.HeaderText = "Poziom Uprawnień";
+            this.dataGridPrivilages.Name = "dataGridPrivilages";
+            this.dataGridPrivilages.ReadOnly = true;
             // 
             // btnAddUser
             // 
@@ -87,7 +112,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnAddUser);
             this.panel1.Controls.Add(this.btnDeleteUser);
             this.panel1.Controls.Add(this.btnEditUser);
@@ -96,41 +120,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(446, 107);
             this.panel1.TabIndex = 4;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(368, 74);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Zamknij";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // dataGridName
-            // 
-            this.dataGridName.HeaderText = "Imię";
-            this.dataGridName.Name = "dataGridName";
-            this.dataGridName.ReadOnly = true;
-            // 
-            // dataGridSurname
-            // 
-            this.dataGridSurname.HeaderText = "Nazwisko";
-            this.dataGridSurname.Name = "dataGridSurname";
-            this.dataGridSurname.ReadOnly = true;
-            // 
-            // dataGridLogin
-            // 
-            this.dataGridLogin.HeaderText = "Login";
-            this.dataGridLogin.Name = "dataGridLogin";
-            this.dataGridLogin.ReadOnly = true;
-            // 
-            // dataGridPrivilages
-            // 
-            this.dataGridPrivilages.HeaderText = "Poziom Uprawnień";
-            this.dataGridPrivilages.Name = "dataGridPrivilages";
-            this.dataGridPrivilages.ReadOnly = true;
             // 
             // UserFrame
             // 
@@ -155,7 +144,6 @@
         private System.Windows.Forms.Button btnEditUser;
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridSurname;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridLogin;

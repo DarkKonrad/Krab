@@ -139,5 +139,32 @@ namespace Inz_Prot.Windows
             Utilities.SaveToCSV_SaveDialogVersion(dgCustomTable);
             
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var selectedRow = dgCustomTable.SelectedRows[0];
+            int id = -1;
+            if(selectedRow == null)
+            {
+                MessageBox.Show("Nalezy wybrac wiersz przeznaczony do usunięcia", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            foreach(DataGridViewCell cell in selectedRow.Cells)
+            {
+                if(cell.ColumnIndex == selectedRow.Cells.Count-1)
+                {
+                    id = (int) cell.Value;
+                }
+            }
+
+            var DialogResult = MessageBox.Show("Czy na pewno chcesz BEZPOWROTNIE usunąć wiersz z bazy danych ? " + Environment.NewLine
+                + "Tej operacji nie mozna cofnąć", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (DialogResult == DialogResult.OK)
+            {
+                CustomTableHelper.DeleteRow(id, userDefinedTable.TableName);
+            }
+            Refresh();
+            InitDataGrid();
+        }
     }
 }

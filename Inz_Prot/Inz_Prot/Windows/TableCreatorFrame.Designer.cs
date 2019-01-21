@@ -68,6 +68,7 @@
             // 
             // InfoNamePanel
             // 
+            this.InfoNamePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.InfoNamePanel.Controls.Add(this.label2);
             this.InfoNamePanel.Controls.Add(this.txtTableName);
             this.InfoNamePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -81,7 +82,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(52, 10);
+            this.label2.Location = new System.Drawing.Point(17, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(146, 15);
             this.label2.TabIndex = 2;
@@ -89,7 +90,7 @@
             // 
             // txtTableName
             // 
-            this.txtTableName.Location = new System.Drawing.Point(219, 9);
+            this.txtTableName.Location = new System.Drawing.Point(180, 4);
             this.txtTableName.Name = "txtTableName";
             this.txtTableName.Size = new System.Drawing.Size(227, 20);
             this.txtTableName.TabIndex = 0;

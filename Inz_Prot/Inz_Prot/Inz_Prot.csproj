@@ -126,6 +126,12 @@
     <Compile Include="Windows\DialogBoxes\AddEditNewRowCustomTableDialog.Designer.cs">
       <DependentUpon>AddEditNewRowCustomTableDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\AddEditUserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\AddEditUserDialog.Designer.cs">
+      <DependentUpon>AddEditUserDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DialogBoxes\ChangeDBCredentialsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\AddEditNewRowCustomTableDialog.resx">
       <DependentUpon>AddEditNewRowCustomTableDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\AddEditUserDialog.resx">
+      <DependentUpon>AddEditUserDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChangeDBCredentialsDialog.resx">
       <DependentUpon>ChangeDBCredentialsDialog.cs</DependentUpon>

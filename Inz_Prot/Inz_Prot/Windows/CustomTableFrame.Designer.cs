@@ -87,6 +87,7 @@
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Usuń Wiersz";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnToCSV
             // 
@@ -110,6 +111,7 @@
             this.Controls.Add(this.btnAddCustomRow);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "CustomTableFrame";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CustomTableFrame";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomTableFrame_FormClosed);
             this.Load += new System.EventHandler(this.CustomTableFrame_Load);

@@ -32,7 +32,7 @@ namespace Inz_Prot.Windows.DialogBoxes
                 MessageBox.Show("Podane hasła różnią się", "Nieprawidłowe hasło", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!UserHelper.VerifyPasswordRequirements(txtNewPass.Text))
+            if (!Utilities.VerifyPasswordRequirements(txtNewPass.Text))
             {
                 MessageBox.Show("Hasło musi zawierać co najmniej 6 znaków oraz jedną cyfrę", "Nieprawidłowe hasło", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

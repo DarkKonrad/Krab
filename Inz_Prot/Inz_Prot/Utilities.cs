@@ -161,5 +161,25 @@ namespace Inz_Prot
            return cleared = sb.ToString();
             
         }
+
+        public static string GenerateLogin(string name, string surname)
+        {
+            string login;
+            login = string.Concat(name.Substring(0, 1),
+            surname.Substring(0,
+            surname.Length > 6 ? 6 : surname.Length));
+            login.Trim(' ');
+
+            return login;
+
+
+        }
+
+        public static bool VerifyPasswordRequirements(string password)
+        {
+            if (password.Length > 6 && password.Any(c => char.IsDigit(c)))
+                return true;
+            return false;
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inz_Prot.dbHelpers.TableEditors;
 using Inz_Prot.Models;
+using Inz_Prot.Windows.DialogBoxes;
 namespace Inz_Prot.Windows
 {
     public partial class UserFrame : Form
@@ -52,7 +53,8 @@ namespace Inz_Prot.Windows
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-
+            var AddUserDialog = new AddEditUserDialog();
+           var DialogResult =  AddUserDialog.ShowDialog(this);
         }
 
         private void UserFrame_FormClosed(object sender, FormClosedEventArgs e)

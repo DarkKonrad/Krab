@@ -89,8 +89,8 @@ namespace Inz_Prot.MainWindow
             var chosenTable = chooseTable.GetChosenTable();
             if(chosenTable == null)
             {
-                MessageBox.Show("Nie udało się uzyskać dostępu do " + dbHelpers.NamesTypes.CommonCustomTableName_POLISH_ADJECTIVE);
-                return;
+                MessageBox.Show("Nie udało się uzyskać dostępu do " + dbHelpers.NamesTypes.CommonCustomTableName_POLISH_ADJECTIVE + " lub został usunięty");
+                    return;
             }
             var userDefinedTableFrame = new CustomTableFrame(chosenTable);
             if (userDefinedTableFrame.IsDisposed)

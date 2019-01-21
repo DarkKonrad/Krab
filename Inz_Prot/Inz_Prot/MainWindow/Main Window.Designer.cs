@@ -86,7 +86,7 @@
             this.btnAddTable.Name = "btnAddTable";
             this.btnAddTable.Size = new System.Drawing.Size(260, 42);
             this.btnAddTable.TabIndex = 1;
-            this.btnAddTable.Text = "Dodaj Magazyn / Usługi";
+            this.btnAddTable.Text = "Dodaj Zbiór Danych";
             this.btnAddTable.UseVisualStyleBackColor = true;
             this.btnAddTable.Click += new System.EventHandler(this.btnStrServ_Click);
             // 

@@ -15,7 +15,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         {
             string command = "INSERT INTO user (Login,Password,Name,Surname,Privileges) VALUES(@login,@password,@name,@surname,@lvl)";
             var Password_Hashed = dbTools.Password_Hasher.Hash(password);
-            string login = GenerateLogin(name, surname);
+            string login = Utilities.GenerateLogin(name, surname);
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
             // query.Parameters.AddWithValue("@ID", null);
@@ -25,26 +25,49 @@ namespace Inz_Prot.dbHelpers.TableEditors
             query.Parameters.AddWithValue("@lvl", User.Privileges.Admin);
             query.Parameters.AddWithValue("@surname", surname);
 
-            dbTools.dbAgent.GetConnection().Open();
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
 
-            Debug.WriteLine(
-                query.ExecuteNonQuery());
+                Debug.WriteLine(
+                    query.ExecuteNonQuery());
 
-            dbTools.dbAgent.GetConnection().Close();
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper CreateAdmin ");
+                Debug.WriteLine(ex.TargetSite);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper CreateAdmin ");
+                Debug.WriteLine(ex.TargetSite);
+                return null;
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+            
 
             return GetUser(login, password);
         }
-        public static bool VerifyPasswordRequirements(string password)
-        {
-            if (password.Length > 6 || password.Any(c => char.IsDigit(c)))
-                return true;
-            return false;
-        }
+    
         private static void _CreateAdmin(string name, string surname, string password)
         {
             string command = "INSERT INTO user (Login,Password,Name,Surname,Privileges) VALUES(@login,@password,@name,@surname,@lvl)";
             var Password_Hashed = dbTools.Password_Hasher.Hash(password);
-            string login = GenerateLogin(name, surname);
+            string login = Utilities.GenerateLogin(name, surname);
 
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
@@ -54,12 +77,37 @@ namespace Inz_Prot.dbHelpers.TableEditors
             query.Parameters.AddWithValue("login", login);
             query.Parameters.AddWithValue("@lvl", User.Privileges.Admin);
             query.Parameters.AddWithValue("@surname", surname);
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
 
-            dbTools.dbAgent.GetConnection().Open();
+                Debug.WriteLine(
+                    query.ExecuteNonQuery());
 
-            Debug.WriteLine(
-                query.ExecuteNonQuery());
+            }
 
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
             dbTools.dbAgent.GetConnection().Close();
 
 
@@ -210,45 +258,82 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             dbTools.dbAgent.GetConnection().Open();
 
-            Debug.WriteLine(
-                query.ExecuteNonQuery());
+            try
+            {
+                Debug.WriteLine(
+              query.ExecuteNonQuery());
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            dbTools.dbAgent.GetConnection().Close();
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+            
         }
         public static void AddUser(string Name, string Surname, string Password, User.Privileges level)
         {
-            string command = "INSERT INTO user VALUES(@login,@password,@name,@surname,@pesel,@lvl)";
-
+            string command = "INSERT INTO user VALUES(@id,@login,@password,@name,@surname,@lvl)";
             var query = new MySql.Data.MySqlClient.MySqlCommand(command, dbTools.dbAgent.GetConnection());
 
-            // query.Parameters.AddWithValue("@login", Login);
-            query.Parameters.AddWithValue("@password", Password);
+            query.Parameters.AddWithValue("@id", null);
+            query.Parameters.AddWithValue("@login", Utilities.GenerateLogin(Name, Surname));
+            query.Parameters.AddWithValue("@password", dbTools.Password_Hasher.Hash(Password));
             query.Parameters.AddWithValue("@Name", Name);
             query.Parameters.AddWithValue("@Surname", Surname);
             query.Parameters.AddWithValue("@lvl", level);
-            //  query.Parameters.AddWithValue("@pesel", PESEL);
-            dbTools.dbAgent.GetConnection().Open();
+           
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                Debug.WriteLine(
+                               query.ExecuteNonQuery());
+            }
+           
 
-            Debug.WriteLine(
-                query.ExecuteNonQuery());
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            dbTools.dbAgent.GetConnection().Close();
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
         }
 
 
 
-        public static string GenerateLogin(string name, string surname)
-        {
-            string login;
-            login = string.Concat(name.Substring(0, 1),
-            surname.Substring(0,
-            surname.Length > 6 ? 6 : surname.Length));
-            login.Trim(' ');
-
-            return login;
-
-
-        }
 
         public static List<User> GetAllUsers()
         {
