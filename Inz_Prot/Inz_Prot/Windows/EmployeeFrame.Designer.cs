@@ -55,6 +55,7 @@
             // dataGridEmployee
             // 
             this.dataGridEmployee.AllowUserToAddRows = false;
+            this.dataGridEmployee.AllowUserToDeleteRows = false;
             this.dataGridEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridEmployee.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridEmployee.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -89,6 +90,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridEmployee.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridEmployee.Size = new System.Drawing.Size(1144, 594);
             this.dataGridEmployee.TabIndex = 0;
             // 
