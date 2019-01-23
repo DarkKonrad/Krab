@@ -54,6 +54,8 @@ namespace Inz_Prot.Windows
 
                 if(columnInfo.ColumnType == ColumnType.DataType)
                 dgCustomTable.Columns[columnInfo.Name].ValueType = typeof(DateTime);
+                if (columnInfo.ColumnType == ColumnType.Float)
+                    dgCustomTable.Columns[columnInfo.Name].ValueType = typeof(float);
             }
             ////////////
             dgCustomTable.Columns.Add("TableID", "TableID");
@@ -92,6 +94,10 @@ namespace Inz_Prot.Windows
                             //   buf_Numeric = (int) currentRow[i].Value;
                             dgCustomTable.Rows[i].Cells[j + 1].ValueType = typeof(int);
                              dgCustomTable.Rows[i].Cells[j + 1].Value = (int) currentRow[j].Value;
+                            break;
+                        case TypeCode.Double:
+                            dgCustomTable.Rows[i].Cells[j + 1].ValueType = typeof(float);
+                            dgCustomTable.Rows[i].Cells[j + 1].Value = (float) currentRow[j].Value;
                             break;
                         default: throw new Exception("CustomTableFrame Type Code Error");
                     }

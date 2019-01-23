@@ -205,9 +205,13 @@ namespace Inz_Prot.dbHelpers.TableEditors
                                 var shrtText = reader[customTableInfo.ColumnInfos_Row[i].Name].ToString();
                                 collection.Add(new CellContent(shrtText, (int) reader["ID"]));
                                 break;
-                            case ColumnType.Numeric:
+                            case ColumnType.Integer:
                                 var num = (int) reader[customTableInfo.ColumnInfos_Row[i].Name];
                                 collection.Add(new CellContent(num, (int) reader["ID"]));
+                                break;
+                            case ColumnType.Float:
+                                var num_float = (float) reader[customTableInfo.ColumnInfos_Row[i].Name];
+                                collection.Add(new CellContent(num_float, (int) reader["ID"]));
                                 break;
 
                             default: throw new Exception("Custom Table Helper GetAllRowsFromCustomTable method, switch Error ");
@@ -561,10 +565,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             string command = @"INSERT INTO " + tableInfo.TableName + @"VALUES (@ID";
             dbAgent.GetConnection().Open();
 
-            //for(int i = tableInfo.Count-1;i>=0; i-- )
-            //{
-            //    command += @",@param" + i.ToString();
-            //}
+
             for (int i = 0; i < tableInfo.Count - 1; i++)
             {
                 command += @",@param" + i.ToString();
@@ -576,11 +577,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                
                 query.Parameters.AddWithValue("@ID", null);
-                //for (int i = tableInfo.Count - 1; i >= 0; i--)
-                //{
-                //    query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
-                //}
-                
+
                 for (int i = 0; i < tableInfo.Count -1;i++)
                 {
                     query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
@@ -654,6 +651,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         /// <param name="Values"></param>
         public static void EditCustomTableCells(int rowID, TableInfo tableInfo,  string[] ColumnNames, params object[] Values)
         {
+            float tmp;
             string command = @"UPDATE " + tableInfo.TableName + " SET ";
             for (int i = 0; i < Values.Length; i++)
             {
@@ -670,7 +668,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             for (int i = 0; i < Values.Length; i++)
             {
-                query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i]);
+                if (float.TryParse(Values[i].ToString(), out tmp))
+                {
+                    query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i].ToString().Replace(',','.'));
+                }
+                else
+                    query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i]);
             }
 
                dbAgent.GetConnection().Open();

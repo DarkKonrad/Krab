@@ -20,8 +20,9 @@ namespace Inz_Prot.Models.dbCustomTable
     {
         ShortText,
         Description,
-        Numeric,
-        DataType
+        Integer,
+        DataType,
+        Float
     }
     public  class ColumnInfo
     {
@@ -53,13 +54,18 @@ namespace Inz_Prot.Models.dbCustomTable
                     this.typeCapacity = 80;
                     break;
 
-                case ColumnType.Numeric:
+                case ColumnType.Integer:
                     this.type = "INT";
                     this.typeCapacity = null;
                     break;
 
                 case ColumnType.DataType:
                     this.type = "DATETIME";
+                    this.typeCapacity = null;
+                    break;
+
+                case ColumnType.Float:
+                    this.type = "FLOAT";
                     this.typeCapacity = null;
                     break;
 

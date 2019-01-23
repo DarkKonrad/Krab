@@ -40,6 +40,7 @@
             this.btnDeleteRow = new System.Windows.Forms.Button();
             this.btnAddField = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.topPanel.SuspendLayout();
             this.InfoNamePanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -48,6 +49,7 @@
             // 
             // topPanel
             // 
+            this.topPanel.Controls.Add(this.label3);
             this.topPanel.Controls.Add(this.label1);
             this.topPanel.Controls.Add(this.InfoNamePanel);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -180,6 +182,16 @@
             this.MainPanel.Size = new System.Drawing.Size(765, 365);
             this.MainPanel.TabIndex = 2;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(235, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 30);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Krótki tekst - do 80 znaków\r\nOpis - do 2048 znaków";
+            // 
             // TableCreatorFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -217,5 +229,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTableName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label3;
     }
 }

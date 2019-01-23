@@ -74,7 +74,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                     return TypeCode.Char;
 
                 }
-                else if (columnInfo.ColumnType == ColumnType.Numeric)
+                else if (columnInfo.ColumnType == ColumnType.Integer)
                 {
 
                     return TypeCode.Int32;
@@ -83,6 +83,10 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 else if (columnInfo.ColumnType == ColumnType.DataType)
                 {
                     return TypeCode.DateTime;
+                }
+                else if(columnInfo.ColumnType == ColumnType.Float)
+                {
+                    return TypeCode.Double;
                 }
                     
                     throw new Exception("Invalid ColumnType" + Environment.NewLine + "Error: CustomTableDialogControls");
@@ -105,7 +109,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                     return false;
                 }
             }
-            else if (columnInfo.ColumnType == ColumnType.Numeric )
+            else if (columnInfo.ColumnType == ColumnType.Integer )
             {
                 int result = 0;
                 if(!Int32.TryParse(txtInputValue.Text, out result))
@@ -113,6 +117,14 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                     return false;
                 }
                 
+            }
+            else if (columnInfo.ColumnType == ColumnType.Float)
+            {
+                float result = 0;
+                if(!float.TryParse(txtInputValue.Text,out result))
+                {
+                    return false;
+                }
             }
             return true;
         }

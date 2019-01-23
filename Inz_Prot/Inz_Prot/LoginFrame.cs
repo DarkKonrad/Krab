@@ -62,9 +62,9 @@ namespace Inz_Prot
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz zakoczyć działanie programu ? ", "Zamykanie Programu", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-                Environment.Exit(0);
+                Application.Exit();
             else
-               e.Cancel = true;
+                e.Cancel = true;
 
         }
 

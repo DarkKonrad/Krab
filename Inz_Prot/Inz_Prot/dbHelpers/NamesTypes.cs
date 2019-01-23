@@ -34,8 +34,9 @@ namespace Inz_Prot.dbHelpers
                     rawStringColumnTypePairs = new Dictionary<string, ColumnType>();
                     rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.ShortText);
                     rawStringColumnTypePairs.Add("VARCHAR$2048", ColumnType.Description);
-                    rawStringColumnTypePairs.Add("INT", ColumnType.Numeric);
+                    rawStringColumnTypePairs.Add("INT", ColumnType.Integer);
                     rawStringColumnTypePairs.Add("DATETIME", ColumnType.DataType); //DATATYPE
+                    rawStringColumnTypePairs.Add("FLOAT", ColumnType.Float);
 
                     return rawStringColumnTypePairs;
                 }
@@ -65,7 +66,7 @@ namespace Inz_Prot.dbHelpers
                 stringColumnTypePairs = new Dictionary<string, ColumnType>();
                 stringColumnTypePairs.Add("VARCHAR80", ColumnType.ShortText);
                 stringColumnTypePairs.Add("VARCHAR2048", ColumnType.Description);
-                stringColumnTypePairs.Add("INT", ColumnType.Numeric);
+                stringColumnTypePairs.Add("INT", ColumnType.Integer);
                 stringColumnTypePairs.Add("DATATYPE", ColumnType.DataType);
 
                 return stringColumnTypePairs;
@@ -80,7 +81,7 @@ namespace Inz_Prot.dbHelpers
                 rawStringColumnTypePairs = new Dictionary<string, ColumnType>();
                 rawStringColumnTypePairs.Add("VARCHAR$80", ColumnType.ShortText);
                 rawStringColumnTypePairs.Add("VARCHAR$2048", ColumnType.Description);
-                rawStringColumnTypePairs.Add("INT", ColumnType.Numeric);
+                rawStringColumnTypePairs.Add("INT", ColumnType.Integer);
                 rawStringColumnTypePairs.Add("DATETIME", ColumnType.DataType); // DATATYPE
 
                 return rawStringColumnTypePairs;

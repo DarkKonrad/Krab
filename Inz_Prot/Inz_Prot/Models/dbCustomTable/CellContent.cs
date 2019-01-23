@@ -10,7 +10,8 @@ namespace Inz_Prot.Models.dbCustomTable
     {
         DateTime? dateTime ;
         string shortText, description;
-        int? numeric;
+        int? _integer;
+        float? _float;
         int id;
         private  object obj;
         private  TypeCode code;
@@ -30,6 +31,11 @@ namespace Inz_Prot.Models.dbCustomTable
             id = rowID;
         }
         
+        public CellContent(float num_float,int rowID)
+        {
+            _float = num_float;
+            id = rowID;
+        }
        
 
         public CellContent(string text,int rowID)
@@ -47,7 +53,7 @@ namespace Inz_Prot.Models.dbCustomTable
 
         public CellContent(int num,int rowID)
         {
-            numeric = num;
+            _integer = num;
             id = rowID;
         }
 
@@ -65,9 +71,13 @@ namespace Inz_Prot.Models.dbCustomTable
                 {
                     return description;
                 }
-                else if (numeric != null)
+                else if (_integer != null)
                 {
-                    return numeric;
+                    return _integer;
+                }
+                else if(_float !=null)
+                {
+                    return _float;
                 }
                 throw new Exception("ColumnContent Exception. Type of Data Error. See Value Getter");
             }
@@ -91,11 +101,14 @@ namespace Inz_Prot.Models.dbCustomTable
             {
                 return TypeCode.String;
             }
-            else if (numeric != null)
+            else if (_integer != null)
             {
                 return TypeCode.Int32;
             }
-
+            else if(_float != null)
+            {
+                return TypeCode.Double;
+            }
             throw new Exception("ColumnContent Exception. Type of Data Error");
         }
     }

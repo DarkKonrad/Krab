@@ -109,7 +109,7 @@ namespace Inz_Prot.MainWindow
             {
                 if (MessageBox.Show("Czy na pewno chcesz zakoczyć działanie programu ? ", "Zamykanie Programu", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                 {
-                    Environment.Exit(0);
+                    Application.Exit();
                 }
 
                 else

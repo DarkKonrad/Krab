@@ -21,7 +21,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
        private bool isControlPanelClicked = false;
  
        private TextBox txtColumnName;
-       private RadioButton radioTypeNumeric, radioDescription, radioPlaneText,radioDataType;
+       private RadioButton radioTypeInteger,radioTypeFloat, radioDescription, radioPlaneText,radioDataType;
        private Label labelOrderNumber, labelGeneralDescr,typeLabel;
        private Panel ownerPanel, containerPanel;
    
@@ -48,17 +48,18 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             labelGeneralDescr = new Label();
             typeLabel = new Label();
 
-            radioTypeNumeric = new RadioButton();
+            radioTypeInteger = new RadioButton();
             radioDescription = new RadioButton();
             radioPlaneText = new RadioButton();
             radioDataType = new RadioButton();
-         
+            radioTypeFloat = new RadioButton();
             #endregion
 
-            radioTypeNumeric.Text = "Typ liczbowy";
+            radioTypeInteger.Text = "Liczba całkowita ";
             radioDescription.Text = "Opis";
-            radioPlaneText.Text="Krótki tekst";
-            radioDataType.Text = "Pole daty";
+            radioPlaneText.Text="Krótki tekst ";
+            radioDataType.Text = "Data";
+            radioTypeFloat.Text = "Liczba zmiennoprzecinkowa";
 
             labelGeneralDescr.Text = "Nazwa pola";
             typeLabel.Text = "Określ typ pola";
@@ -68,7 +69,8 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
             
             containerPanel.Controls.Add(txtColumnName);
-            containerPanel.Controls.Add(radioTypeNumeric);
+            containerPanel.Controls.Add(radioTypeInteger);
+            containerPanel.Controls.Add(radioTypeFloat);
             containerPanel.Controls.Add(radioDescription);
             containerPanel.Controls.Add(radioPlaneText);
             containerPanel.Controls.Add(labelOrderNumber);
@@ -76,7 +78,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             containerPanel.Controls.Add(typeLabel);
             containerPanel.Controls.Add(radioDataType);
 
-            controls = new Control[] { txtColumnName, radioTypeNumeric,radioDescription,radioPlaneText,radioDataType,labelOrderNumber,labelGeneralDescr,typeLabel,containerPanel };
+            controls = new Control[] { txtColumnName, radioTypeInteger,radioTypeFloat,radioDescription,radioPlaneText,radioDataType,labelOrderNumber,labelGeneralDescr,typeLabel,containerPanel };
             // We need to add ONLY container Panel NOT ANY OTHER CONTROL to main Panel
             containerPanel.Click += panelClicked;
             
@@ -115,11 +117,16 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             }
             else if (Numeric.Checked == true)
             {
-                return new ColumnInfo(buffor, ColumnType.Numeric);
+                return new ColumnInfo(buffor, ColumnType.Integer);
             }
             else if(radioDataType.Checked == true)
+            {
                 return new ColumnInfo(buffor, ColumnType.DataType);
-
+            }               
+            else if (radioTypeFloat.Checked == true)
+            {
+                return new ColumnInfo(buffor, ColumnType.Float);
+            }
             throw new Exception("GetColumnInfoProblem");
             
 
@@ -145,7 +152,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             txtColumnName.Location = new Point(
             (int) (containerPanel.Width / 4),
             (int) (containerPanel.Height / 3 -5));
-            txtColumnName.Width = txtColumnWidth + radioTypeNumeric.Width;
+            txtColumnName.Width = txtColumnWidth + radioTypeInteger.Width;
             txtColumnName.Refresh();
             txtColumnName.Show();
 
@@ -156,25 +163,37 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 containerPanel.Location.X + 5,
                txtColumnName.Location.Y-10);
             labelOrderNumber.Refresh();
-            
+
+            radioPlaneText.AutoSize = true;
             radioPlaneText.Location = new Point(
                 txtColumnName.Location.X,
                 txtColumnName.Height + txtColumnName.Location.Y + 5);
             radioPlaneText.Checked = true;
             radioPlaneText.Refresh();
 
+            radioDescription.AutoSize = true;         
             radioDescription.Location = new Point(
-                radioPlaneText.Location.X + radioPlaneText.Width - 20,
+                radioPlaneText.Location.X + radioPlaneText.Width +5 ,
                 radioPlaneText.Location.Y);
             radioDescription.Refresh();
 
-            radioTypeNumeric.Location = new Point(
-                radioDescription.Location.X + radioDescription.Width -40,
+            radioTypeInteger.AutoSize = true;
+          //  radioTypeInteger.Width = 125;
+            radioTypeInteger.Location = new Point(
+                radioDescription.Location.X + radioDescription.Width + 5,
                 radioPlaneText.Location.Y);
-            radioTypeNumeric.Refresh();
+            radioTypeInteger.Refresh();
 
+            radioTypeFloat.AutoSize = true;
+           // radioTypeFloat.Width = 170;
+            radioTypeFloat.Location = new Point(
+                radioTypeInteger.Location.X + radioTypeInteger.Width +5,
+                radioPlaneText.Location.Y);       
+            radioTypeFloat.Refresh();
+
+            radioDataType.AutoSize = true;
             radioDataType.Location = new Point(
-                radioTypeNumeric.Location.X + radioTypeNumeric.Width - -10,
+                radioTypeFloat.Location.X + radioTypeFloat.Width + 5 ,
                 radioPlaneText.Location.Y);
             radioDataType.Refresh();
 
@@ -199,7 +218,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         }
         #region Getters And Setters
         public TextBox TxtColumnName { get => txtColumnName; set => txtColumnName = value; }
-        public RadioButton Numeric { get => radioTypeNumeric; set => radioTypeNumeric = value; }
+        public RadioButton Numeric { get => radioTypeInteger; set => radioTypeInteger = value; }
         public RadioButton Description { get => radioDescription; set => radioDescription = value; }
         public RadioButton PlaneText { get => radioPlaneText; set => radioPlaneText = value; }
         public Label OrderNumber { get => labelOrderNumber; set => labelOrderNumber = value; }
