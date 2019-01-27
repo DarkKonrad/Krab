@@ -150,6 +150,12 @@
     <Compile Include="Windows\DialogBoxes\ChooseUDTDialog.Designer.cs">
       <DependentUpon>ChooseUDTDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\EditColumnsUDT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\EditColumnsUDT.Designer.cs">
+      <DependentUpon>EditColumnsUDT.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EmployeeFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChooseUDTDialog.resx">
       <DependentUpon>ChooseUDTDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\EditColumnsUDT.resx">
+      <DependentUpon>EditColumnsUDT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>

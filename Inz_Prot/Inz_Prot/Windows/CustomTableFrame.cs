@@ -172,5 +172,16 @@ namespace Inz_Prot.Windows
             Refresh();
             InitDataGrid();
         }
+
+        private void btnChangeTypeOfColumn_Click(object sender, EventArgs e)
+        {
+            var dialog = new DialogBoxes.EditColumnsUDT(userDefinedTable);
+            var dialogResult = dialog.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+            {
+                Refresh();
+               // InitDataGrid();
+            }
+        }
     }
 }

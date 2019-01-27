@@ -75,8 +75,49 @@ namespace Inz_Prot.Models.dbCustomTable
             }
             
         }
+        /// <summary>
+        /// Version: 1 May contain bugs 
+        /// </summary>
+        /// <param name="newColumnType"></param>
+        public void ChangeType(ColumnType newColumnType)
+        {
+           
+          
+           this.columnT = newColumnType;
+            switch (newColumnType)
+            {
+                case ColumnType.Description:
+                    this.type = "VARCHAR";
+                    this.typeCapacity = 2048;
+                    break;
 
-        public string GetColumnString()
+                case ColumnType.ShortText:
+                    this.type = "VARCHAR";
+                    this.typeCapacity = 80;
+                    break;
+
+                case ColumnType.Integer:
+                    this.type = "INT";
+                    this.typeCapacity = null;
+                    break;
+
+                case ColumnType.DataType:
+                    this.type = "DATETIME";
+                    this.typeCapacity = null;
+                    break;
+
+                case ColumnType.Float:
+                    this.type = "FLOAT";
+                    this.typeCapacity = null;
+                    break;
+
+                default:
+                    throw new InvalidColumnTypeException();
+
+
+            }
+        }
+        public string GetCommandString()
         {
             string command;
 
@@ -90,6 +131,19 @@ namespace Inz_Prot.Models.dbCustomTable
             }
 
             return command;
+        }
+
+        public string TypeAndOptionalCapacity_UTI
+        {
+            get
+            {
+                if (typeCapacity.HasValue)
+                {
+                    return type + "$" + typeCapacity.Value;
+                }
+                else
+                    return type;
+            }
         }
 
         public string GetColumnTypeString()

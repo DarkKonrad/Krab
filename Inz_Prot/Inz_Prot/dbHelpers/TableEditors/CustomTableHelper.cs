@@ -75,21 +75,16 @@ namespace Inz_Prot.dbHelpers.TableEditors
             try
             {
                 var reader = query.ExecuteReader();
-
                 while (reader.Read())
                 {
                     //  RowsCount = (int) reader["COUNT(*)"]; // WARNING !
                     RowsCount = int.Parse(reader["COUNT(*)"].ToString());
                 }
-
-
             }
 
             catch (MySqlException ex)
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
 
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
@@ -564,7 +559,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         {
             string command = @"INSERT INTO " + tableInfo.TableName + @"VALUES (@ID";
             dbAgent.GetConnection().Open();
-
+            float tmp;
 
             for (int i = 0; i < tableInfo.Count - 1; i++)
             {
@@ -580,7 +575,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
                 for (int i = 0; i < tableInfo.Count -1;i++)
                 {
-                    query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
+                    if (float.TryParse(Values[i].ToString(), out tmp))
+                    {
+                        query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i].ToString().Replace(',', '.'));
+                    }
+                    else
+                        query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i]);
                 }
                 query.ExecuteNonQuery();
             }
@@ -639,6 +639,173 @@ namespace Inz_Prot.dbHelpers.TableEditors
             {
                 dbTools.dbAgent.GetConnection().Close();
             }
+
+        }
+
+        public static void AlterColumnDataType(string tableName,ColumnInfo newColumnType)
+        {
+            string command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2}", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            string columnsStringToInsert = "";
+            string command_usertableinfo = @"SELECT ColumnsType  FROM usertableinfo where TableName = @tableName";
+            var query_usertableinfo = new MySqlCommand(command_usertableinfo, dbAgent.GetConnection());
+
+            query_usertableinfo.Parameters.AddWithValue("@tableName", tableName);
+            string usertableInfo_RowToModify = "";
+            try
+            {
+                dbAgent.GetConnection().Open();
+                var reader = query_usertableinfo.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    usertableInfo_RowToModify = reader["ColumnsType"].ToString();
+                }
+
+                var columns = usertableInfo_RowToModify.Split('|');
+                string modified = "";
+                int T = 0;
+                foreach(var col in columns)
+                {
+                    
+                    if(col.StartsWith(newColumnType.Name))
+                    {
+                        var index = col.IndexOf('#');
+                        var cleared = col.Remove(index +1); // becouse of #
+                        cleared = cleared.Insert(index+1, newColumnType.TypeAndOptionalCapacity_UTI);
+                        modified = cleared;
+                        break;
+                    }
+                    T++;
+                }
+
+                //for(int i =0; i< columns.Length; i++) // Lenght
+                //{
+                //    if (i != T)
+                //        columnsStringToInsert += columns[i];
+                //    else
+                //        columnsStringToInsert += modified;
+                //}
+
+                //for(int i = columns.Length -1;i>=0;i--)
+                //{
+                //    if(i!=T)
+                //    {
+                //        if(i != 0)
+                //        {
+                //            columnsStringToInsert += columns[i] + "|";
+                //        }
+                //        else
+                //        {
+                //            columnsStringToInsert += columns[i];
+                //        }
+                //    }
+                //    else
+                //    {
+                //        if(i!=0)
+                //        {
+                //            columnsStringToInsert += modified + "|";
+                //        }
+                //        else
+                //        {
+                //            columnsStringToInsert += modified;
+                //        }
+                //    }
+
+                //}
+                for (int i = 0; i< columns.Length ; i++)
+                {
+                    if (i != T)
+                    {
+                        if (i != columns.Length-1)
+                        {
+                            columnsStringToInsert += columns[i] + "|";
+                        }
+                        else
+                        {
+                            columnsStringToInsert += columns[i];
+                        }
+                    }
+                    else
+                    {
+                        if (i != columns.Length - 1)
+                        {
+                            columnsStringToInsert += modified + "|";
+                        }
+                        else
+                        {
+                            columnsStringToInsert += modified;
+                        }
+                    }
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: AlterColumnDataType");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: AlterColumnDataType");
+            }
+            finally
+            {
+                dbAgent.GetConnection().Close();
+            }
+
+            string command_Insert = string.Format(@"UPDATE usertableinfo SET ColumnsType = @columnsString WHERE TableName = @table");//, columnsStringToInsert, tableName); // /'
+            var query_insert = new MySqlCommand(command_Insert, dbAgent.GetConnection());
+
+            query_insert.Parameters.AddWithValue("@columnsString", columnsStringToInsert);
+            query_insert.Parameters.AddWithValue("@table", tableName);
+            dbAgent.GetConnection().Open();
+            var transaction = dbAgent.GetConnection().BeginTransaction();
+            // Working
+            try
+            {
+
+                query.Transaction = transaction;
+                query_insert.Transaction = transaction;
+
+                query_insert.ExecuteNonQuery();
+                query.ExecuteNonQuery();
+
+                transaction.Commit();
+
+            }
+            catch (MySqlException ex)
+            {
+                transaction.Rollback();
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: AlterColumnDataType");
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: AlterColumnDataType");
+            }
+            finally
+            {
+                transaction.Dispose();
+                dbAgent.GetConnection().Close();
+            }
+
+
 
         }
 

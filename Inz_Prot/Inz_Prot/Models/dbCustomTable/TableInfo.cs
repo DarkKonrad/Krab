@@ -31,11 +31,11 @@ namespace Inz_Prot.Models.dbCustomTable
             {
                 if(i != 0)
                 {
-                    command += columns[i].GetColumnString() + ",";
+                    command += columns[i].GetCommandString() + ",";
                 }
               else
                 {
-                    command += columns[i].GetColumnString();
+                    command += columns[i].GetCommandString();
                 }
             }
 
