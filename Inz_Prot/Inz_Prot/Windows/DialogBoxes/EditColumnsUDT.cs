@@ -13,17 +13,19 @@ namespace Inz_Prot.Windows.DialogBoxes
 {
     public partial class EditColumnsUDT : Form
     {
+        bool isDataGridEmpty;
         TableInfo tableInfo;
         private EditColumnsUDT()
         {
             InitializeComponent();
         }
 
-        public EditColumnsUDT(TableInfo tableInfo)
+        public EditColumnsUDT(TableInfo tableInfo,bool isDataGridEmpty)
         {
             InitializeComponent();
             this.tableInfo = tableInfo;
             comboColumnName.Items.AddRange(tableInfo.ColumnsNames_String().ToArray());
+            this.isDataGridEmpty = isDataGridEmpty;
         }
 
      private ColumnType GetRadioButtonResult()
@@ -71,6 +73,14 @@ namespace Inz_Prot.Windows.DialogBoxes
                     break;
                 }
             }
+            if (!isDataGridEmpty)
+            {
+                var messageBoxDialogResult = MessageBox.Show("Zmiana typu danych kolumny może skutkować utratą lub uszkodzeniam wcześniej wprowadzonych danych ", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (messageBoxDialogResult == DialogResult.Cancel)
+                    return;
+            }
+               
             columnModified.ChangeType(newType);
             CustomTableHelper.AlterColumnDataType(tableInfo.TableName, columnModified);
         }

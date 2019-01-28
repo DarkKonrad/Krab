@@ -189,8 +189,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
                         switch (customTableInfo.ColumnInfos_Row[i].ColumnType)
                         {
                             case ColumnType.DataType:
-                                var DateTime = (DateTime) reader[customTableInfo.ColumnInfos_Row[i].Name];
-                                collection.Add(new CellContent(DateTime, (int) reader["ID"]));
+                                DateTime date; // TU SKONCZYLEM
+                                if (reader[customTableInfo.ColumnInfos_Row[i].Name].ToString().Contains("00.00.0000") || reader.IsDBNull(i))
+                                    date = DateTime.Now;
+                                else
+                                    date= Convert.ToDateTime(reader[customTableInfo.ColumnInfos_Row[i].Name]); //date = (DateTime) reader[customTableInfo.ColumnInfos_Row[i].Name];
+                                collection.Add(new CellContent(date, (int) reader["ID"]));
                                 break;
                             case ColumnType.Description:
                                 var descr = reader[customTableInfo.ColumnInfos_Row[i].Name].ToString();
@@ -644,7 +648,20 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         public static void AlterColumnDataType(string tableName,ColumnInfo newColumnType)
         {
-            string command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2}", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+            string command = "";
+            // if (newColumnType.ColumnType == ColumnType.DataType)
+            // {
+            //     command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2} DEFAULT 1111-11-11", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+            // }
+            //else
+            //     command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2}", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+            if (newColumnType.ColumnType == ColumnType.DataType)
+            {
+                command = string.Format(@"UPDATE {0} SET {1}=2019;ALTER TABLE {0} MODIFY COLUMN {1} {2} ", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+            }
+            else
+                command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2}", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+
             var query = new MySqlCommand(command, dbAgent.GetConnection());
             string columnsStringToInsert = "";
             string command_usertableinfo = @"SELECT ColumnsType  FROM usertableinfo where TableName = @tableName";

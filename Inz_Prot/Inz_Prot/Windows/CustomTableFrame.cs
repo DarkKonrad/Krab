@@ -50,7 +50,7 @@ namespace Inz_Prot.Windows
             dgCustomTable.Columns.Add("OrdinalNumber", "L.P.");
             foreach(ColumnInfo columnInfo in userDefinedTable.ColumnInfos_Row)
             {
-                dgCustomTable.Columns.Add(columnInfo.Name, columnInfo.Name);
+                dgCustomTable.Columns.Add(columnInfo.Name, columnInfo.Name+" - " +columnInfo.ConvertedTypeToUser_PL);
 
                 if(columnInfo.ColumnType == ColumnType.DataType)
                 dgCustomTable.Columns[columnInfo.Name].ValueType = typeof(DateTime);
@@ -175,13 +175,21 @@ namespace Inz_Prot.Windows
 
         private void btnChangeTypeOfColumn_Click(object sender, EventArgs e)
         {
-            var dialog = new DialogBoxes.EditColumnsUDT(userDefinedTable);
+            bool isDataGridEmpty = false;
+            if (dgCustomTable.Rows.Count <= 0)
+                isDataGridEmpty = true;
+            var dialog = new DialogBoxes.EditColumnsUDT(userDefinedTable,isDataGridEmpty);
             var dialogResult = dialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
                 Refresh();
-               // InitDataGrid();
+                InitDataGrid();
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

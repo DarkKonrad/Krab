@@ -60,7 +60,7 @@ namespace Inz_Prot.dbTools
             connectionStringBuilder.UserID = user;
             connectionStringBuilder.Password = password;
             connectionStringBuilder.SslMode = MySqlSslMode.None;
-
+            connectionStringBuilder.AllowZeroDateTime = true;
 
             string connectionString = connectionStringBuilder.GetConnectionString(true);
             mySqlConnection = new MySqlConnection(connectionString);

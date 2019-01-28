@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dgCustomTable = new System.Windows.Forms.DataGridView();
             this.btnAddCustomRow = new System.Windows.Forms.Button();
             this.btnEditRow = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -37,33 +35,17 @@
             this.csvSaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.btnChangeTypeOfColumn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).BeginInit();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgCustomTable = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.dgCustomTable);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(960, 405);
-            this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // dgCustomTable
-            // 
-            this.dgCustomTable.AllowUserToAddRows = false;
-            this.dgCustomTable.AllowUserToDeleteRows = false;
-            this.dgCustomTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgCustomTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
-            this.dgCustomTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgCustomTable.Location = new System.Drawing.Point(3, 3);
-            this.dgCustomTable.Name = "dgCustomTable";
-            this.dgCustomTable.Size = new System.Drawing.Size(957, 402);
-            this.dgCustomTable.TabIndex = 0;
             // 
             // btnAddCustomRow
             // 
@@ -123,22 +105,12 @@
             this.groupBox1.Controls.Add(this.btnEditRow);
             this.groupBox1.Controls.Add(this.btnToCSV);
             this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Location = new System.Drawing.Point(15, 423);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(475, 84);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Narzędzia edycyjne wierszy";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnChangeTypeOfColumn);
-            this.groupBox2.Location = new System.Drawing.Point(645, 423);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(327, 84);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Narzędzia edycyjne tabeli";
             // 
             // button4
             // 
@@ -150,31 +122,72 @@
             this.button4.Text = "Zapisz Wszystko Do pliku CSV";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnChangeTypeOfColumn);
+            this.groupBox2.Location = new System.Drawing.Point(642, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(327, 84);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Narzędzia edycyjne tabeli";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 419);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(984, 100);
+            this.panel1.TabIndex = 9;
+            // 
+            // dgCustomTable
+            // 
+            this.dgCustomTable.AllowUserToAddRows = false;
+            this.dgCustomTable.AllowUserToDeleteRows = false;
+            this.dgCustomTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgCustomTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dgCustomTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgCustomTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCustomTable.Location = new System.Drawing.Point(0, 0);
+            this.dgCustomTable.Name = "dgCustomTable";
+            this.dgCustomTable.Size = new System.Drawing.Size(984, 419);
+            this.dgCustomTable.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgCustomTable);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(984, 419);
+            this.panel2.TabIndex = 10;
+            // 
             // CustomTableFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 519);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Name = "CustomTableFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CustomTableFrame";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomTableFrame_FormClosed);
             this.Load += new System.EventHandler(this.CustomTableFrame_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomTable)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddCustomRow;
-        private System.Windows.Forms.DataGridView dgCustomTable;
         private System.Windows.Forms.Button btnEditRow;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnToCSV;
@@ -183,5 +196,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgCustomTable;
+        private System.Windows.Forms.Panel panel2;
     }
 }

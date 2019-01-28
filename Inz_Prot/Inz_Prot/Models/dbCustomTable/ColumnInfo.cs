@@ -133,6 +133,33 @@ namespace Inz_Prot.Models.dbCustomTable
             return command;
         }
 
+        public string ConvertedTypeToUser_PL
+        {
+            get
+            {
+                switch (this.columnT)
+                {
+                    case ColumnType.Description:
+                        return "Opis(maks.2048 znaków)";
+
+                    case ColumnType.ShortText:
+                        return "Krótki Tekst(maks.80 znaków)";
+
+                    case ColumnType.Integer:
+                        return "L.Całkowita";
+
+
+                    case ColumnType.DataType:
+                        return "Data";
+
+                    case ColumnType.Float:
+                        return "L.Zmiennoprzecinkowa";
+                    default:
+                        return "";
+                }
+            }
+        }
+
         public string TypeAndOptionalCapacity_UTI
         {
             get
