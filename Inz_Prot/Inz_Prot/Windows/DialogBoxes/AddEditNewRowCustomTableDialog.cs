@@ -100,12 +100,7 @@ namespace Inz_Prot.Windows.DialogBoxes
                 }
 
                 if(dialogControls.Type == TypeCode.String)
-                {
-                    if(Utilities.StringContainsSpecialChars(dialogControls.TxtInputValue.Text) || dialogControls.TxtInputValue.Text == "")
-                    {
-                        WriteErrorAndHighlightRow(dialogControls, "Znaki specjalne są niedozwolone");
-                        return false;
-                    }
+                {                 
                     if(dialogControls.TxtInputValue.Text.Length > dbHelpers.NamesTypes.MAKS_DESCRIPTION_LENGHT)
                     {
                         WriteErrorAndHighlightRow(dialogControls, " Tekst przekracza maksymalną długość." + Environment.NewLine + "Maksymalna długość to 2048 znaków");

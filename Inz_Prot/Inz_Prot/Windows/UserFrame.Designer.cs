@@ -44,6 +44,7 @@
             // 
             this.dataGridUsers.AllowUserToAddRows = false;
             this.dataGridUsers.AllowUserToDeleteRows = false;
+            this.dataGridUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridUsers.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -62,24 +63,28 @@
             this.dataGridName.HeaderText = "Imię";
             this.dataGridName.Name = "dataGridName";
             this.dataGridName.ReadOnly = true;
+            this.dataGridName.Width = 51;
             // 
             // dataGridSurname
             // 
             this.dataGridSurname.HeaderText = "Nazwisko";
             this.dataGridSurname.Name = "dataGridSurname";
             this.dataGridSurname.ReadOnly = true;
+            this.dataGridSurname.Width = 78;
             // 
             // dataGridLogin
             // 
             this.dataGridLogin.HeaderText = "Login";
             this.dataGridLogin.Name = "dataGridLogin";
             this.dataGridLogin.ReadOnly = true;
+            this.dataGridLogin.Width = 58;
             // 
             // dataGridPrivilages
             // 
             this.dataGridPrivilages.HeaderText = "Poziom Uprawnień";
             this.dataGridPrivilages.Name = "dataGridPrivilages";
             this.dataGridPrivilages.ReadOnly = true;
+            this.dataGridPrivilages.Width = 110;
             // 
             // btnAddUser
             // 
@@ -99,6 +104,7 @@
             this.btnDeleteUser.TabIndex = 3;
             this.btnDeleteUser.Text = "Usuń Użytkownika";
             this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
             // 
             // panel1
             // 

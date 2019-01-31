@@ -114,15 +114,15 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     ID = (int) reader["ID"];
                     name = reader["Name"].ToString();
                     surname = reader["Surname"].ToString();
-                    birthDay = (DateTime) reader["BirthdayDate"];
+                    birthDay = Convert.ToDateTime(reader["BirthdayDate"]);
                     pesel = reader["PESEL"].ToString();
                     address = reader["Address"].ToString();
-                    hireFrom = (DateTime) reader["HireDate"];
+                    hireFrom = Convert.ToDateTime(reader["HireDate"]);
 
                     var tmp = reader.GetOrdinal("HireExpirationDate");
                     if (!reader.IsDBNull(tmp))
                     {
-                        expDate = (DateTime?) reader["HireExpirationDate"];
+                        expDate = Convert.ToDateTime(reader["HireExpirationDate"]);
                     }
 
                     position = reader["Position"].ToString();

@@ -41,11 +41,18 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if(listBoxCustomTable.SelectedItem == null)
+            {
+                MessageBox.Show("Wybierz pozycje z listy", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               this.DialogResult = DialogResult.None;
+                return;
+            }
             chosenTable = CustomTableHelper.GetTableInfoAboutTable(listBoxCustomTable.SelectedItem.ToString());
            
             if(chosenTable !=null)
             {
                 isTableChosen = true;
+                this.DialogResult = DialogResult.OK;
                 this.Hide();
             }
            

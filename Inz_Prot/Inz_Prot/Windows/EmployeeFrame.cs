@@ -23,6 +23,10 @@ namespace Inz_Prot.Windows
         {
             dataGridEmployee.Rows.Clear();
             dataGridEmployee.MultiSelect = false;
+            dataGridEmployee.AllowUserToDeleteRows = false;
+            dataGridEmployee.AllowUserToAddRows = false;
+            dataGridEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             listOfEmployees = EmployeeHelper.GetAllEmployees();
             int i = 0;
 

@@ -148,7 +148,6 @@ namespace Inz_Prot.Models.dbCustomTable
                     case ColumnType.Integer:
                         return "L.Całkowita";
 
-
                     case ColumnType.DataType:
                         return "Data";
 

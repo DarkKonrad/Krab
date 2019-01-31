@@ -21,7 +21,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         private TextBox txtInputValue;
         DateTimePicker timePicker;
 
-        Label labelColumnName;
+        Label labelColumnName,labelDataType_PL;
         Panel mainPanel;
         Panel containerPanel;
         ColumnInfo columnInfo;
@@ -64,21 +64,15 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             {
                 if (columnInfo.ColumnType == ColumnType.Description)
                 {
-
                     return TypeCode.String;
-
                 }
                 else if (columnInfo.ColumnType == ColumnType.ShortText)
                 {
-
                     return TypeCode.Char;
-
                 }
                 else if (columnInfo.ColumnType == ColumnType.Integer)
                 {
-
                     return TypeCode.Int32;
-
                 }
                 else if (columnInfo.ColumnType == ColumnType.DataType)
                 {
@@ -132,23 +126,28 @@ namespace Inz_Prot.Windows.SpecifiedControlls
         {
             LabelColumnName = new Label();           
             ContainerPanel = new Panel();
+            labelDataType_PL = new Label();
 
             this.MainPanel = mainPanel;
             this.ColumnInfo = columnInfo;
 
             ContainerPanel.Name = "containerPanel" + unique_Num++.ToString();
             LabelColumnName.Text = columnInfo.Name;
+            labelDataType_PL.Font = new Font("Arial", 8, FontStyle.Regular);
+            labelDataType_PL.Text = "(" + columnInfo.ConvertedTypeToUser_PL + ")";
+            labelDataType_PL.AutoSize = true;
+            labelColumnName.AutoSize = true;
             if (columnInfo.ColumnType == ColumnType.DataType)
             {
                 TimePicker = new DateTimePicker();
                 
             //    btnChooseFromDataTimePicker = new Button();
-                controls = new Control[] { /*txtInputValue, */TimePicker, /* btnChooseFromDataTimePicker,*/ LabelColumnName };
+                controls = new Control[] { /*txtInputValue, */TimePicker, /* btnChooseFromDataTimePicker,*/ LabelColumnName, labelDataType_PL };
             }
             else
             {
                 TxtInputValue = new TextBox();
-                controls = new Control[] { TxtInputValue, LabelColumnName };
+                controls = new Control[] { TxtInputValue, LabelColumnName,labelDataType_PL };
             }
 
             ContainerPanel.Controls.AddRange(controls);
@@ -182,9 +181,11 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 0,
                 ContainerPanel.Height / 3);
 
+            labelDataType_PL.Location = new Point(
+                0,
+              ContainerPanel.Height / 2 );
            
-
-            if(ColumnInfo.ColumnType == ColumnType.DataType)
+            if (ColumnInfo.ColumnType == ColumnType.DataType)
             {
                 TimePicker.Location = new Point(
                ContainerPanel.Width / 4,

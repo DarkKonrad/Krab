@@ -19,6 +19,10 @@ namespace Inz_Prot.Windows
         public UserFrame()
         {
             InitializeComponent();
+            dataGridUsers.MultiSelect = false;
+            dataGridUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridUsers.AllowUserToAddRows = false;
+            dataGridUsers.AllowUserToDeleteRows = false;           
             RefreshTable();
         }
 
@@ -63,5 +67,30 @@ namespace Inz_Prot.Windows
             this.Hide();
             this.Dispose();
         }
+
+        private void btnDeleteUser_Click(object sender, EventArgs e)
+        {
+            if(dataGridUsers.SelectedRows.Count >1)
+            {
+                MessageBox.Show("Wystapil błąd. Nie należy zaznaczać więcej niż jeden wiersz.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var selectedRow = dataGridUsers.SelectedRows[0];
+
+            foreach (User user in listOfUsers)
+            {
+                if (user.Login ==  (string)selectedRow.Cells[2].Value)
+                {
+                    var dialogResult = MessageBox.Show("Czy na pewno chcesz usunac tego uzytkownika z systemu ?", "Uwaga", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        UserHelper.DeleteUser(user);
+                        RefreshTable();
+                        break;
+                    }
+                    else
+                        return;
+                }
+        }   }
     }
 }

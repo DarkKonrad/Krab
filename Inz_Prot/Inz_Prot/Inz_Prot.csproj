@@ -75,6 +75,7 @@
     <Compile Include="dbHelpers\NamesTypes.cs" />
     <Compile Include="dbHelpers\TableEditors\CustomTableHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
+    <Compile Include="dbHelpers\TableEditors\JuxtapositionHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\QualificationHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\UserHelper.cs" />
     <Compile Include="dbTools\dbAgent.cs" />

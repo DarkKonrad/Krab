@@ -7,6 +7,7 @@ using Inz_Prot.Models;
 using System.Diagnostics;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Inz_Prot.dbTools;
 namespace Inz_Prot.dbHelpers.TableEditors
 {
    public static class UserHelper
@@ -332,8 +333,133 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
         }
 
-        //public static DeleteUser(int ID)
+        public static bool isLoginInUse(string login)
+        {
+            string command = @"SELECT COUNT(Login) FROM user WHERE Login = @login";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@login", login);
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                var reader = query.ExecuteReader();
+                int count = -1;
+                while(reader.Read())
+                {
+                    count = (int) reader["Count(Login)"];
+                }
+                if (count > 0)
+                    return true;
+            }
 
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+            return false;
+        }
+
+        public static void DeleteUser (User userToDelete)
+        {
+            string command = @"DELETE FROM user WHERE id = @id";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@id", userToDelete.ID);
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                Debug.WriteLine(
+                               query.ExecuteNonQuery());
+            }
+
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+        }
+        //public static DeleteUser(int ID)
+       public static void EditUser(User editedUser,string name ,string surname , User.Privileges privileges )
+        {
+            string command = @"UPDATE user SET Login = @login, Name =@name, Surname=@surname, Privileges = @lvl WHERE ID=@id ";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            query.Parameters.AddWithValue("@id", editedUser.ID);
+            query.Parameters.AddWithValue("@login", Utilities.GenerateLogin(name, surname));         
+            query.Parameters.AddWithValue("@name", name);
+            query.Parameters.AddWithValue("@surname", surname);         
+            query.Parameters.AddWithValue("@lvl", privileges);
+
+            try
+            {
+                dbTools.dbAgent.GetConnection().Open();
+                Debug.WriteLine(
+                               query.ExecuteNonQuery());
+            }
+
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się. Skontaktuj sie z producentem.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("ERROR: UserHelper AddUser ");
+                Debug.WriteLine(ex.TargetSite);
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
+
+        }
 
         public static List<User> GetAllUsers()
         {

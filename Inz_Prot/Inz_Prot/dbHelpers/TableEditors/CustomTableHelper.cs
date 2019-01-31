@@ -189,7 +189,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                         switch (customTableInfo.ColumnInfos_Row[i].ColumnType)
                         {
                             case ColumnType.DataType:
-                                DateTime date; // TU SKONCZYLEM
+                                DateTime date; 
                                 if (reader[customTableInfo.ColumnInfos_Row[i].Name].ToString().Contains("00.00.0000") || reader.IsDBNull(i))
                                     date = DateTime.Now;
                                 else
