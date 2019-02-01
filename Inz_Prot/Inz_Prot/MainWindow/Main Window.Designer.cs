@@ -37,6 +37,7 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
+            this.btnJux = new System.Windows.Forms.Button();
             this.MainMenuPanel.SuspendLayout();
             this.PanelUser.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -47,6 +48,7 @@
             this.MainMenuPanel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainMenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MainMenuPanel.Controls.Add(this.btnJux);
             this.MainMenuPanel.Controls.Add(this.btnViewStorage);
             this.MainMenuPanel.Controls.Add(this.btnEmployees);
             this.MainMenuPanel.Controls.Add(this.btnAddTable);
@@ -144,6 +146,17 @@
             this.btnUsers.UseVisualStyleBackColor = true;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
+            // btnJux
+            // 
+            this.btnJux.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnJux.Location = new System.Drawing.Point(443, 299);
+            this.btnJux.Name = "btnJux";
+            this.btnJux.Size = new System.Drawing.Size(260, 42);
+            this.btnJux.TabIndex = 3;
+            this.btnJux.Text = "Zestawienia";
+            this.btnJux.UseVisualStyleBackColor = true;
+            this.btnJux.Click += new System.EventHandler(this.btnJux_Click);
+            // 
             // Main_Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,5 +190,6 @@
         private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.Button btnAddTable;
         private System.Windows.Forms.Button btnViewStorage;
+        private System.Windows.Forms.Button btnJux;
     }
 }

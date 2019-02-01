@@ -391,8 +391,6 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 Debug.WriteLine(
                                query.ExecuteNonQuery());
             }
-
-
             catch (MySqlException ex)
             {
                 MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);

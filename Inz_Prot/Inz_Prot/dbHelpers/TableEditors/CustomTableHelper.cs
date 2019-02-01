@@ -483,6 +483,8 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         }
 
+       
+
         public static List<TableInfo> GetTableInfosAboutCustomTables() // Initially - OK 
         {
           
@@ -649,12 +651,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
         public static void AlterColumnDataType(string tableName,ColumnInfo newColumnType)
         {
             string command = "";
-            // if (newColumnType.ColumnType == ColumnType.DataType)
-            // {
-            //     command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2} DEFAULT 1111-11-11", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
-            // }
-            //else
-            //     command = string.Format(@"ALTER TABLE {0} MODIFY COLUMN {1} {2}", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());
+
             if (newColumnType.ColumnType == ColumnType.DataType)
             {
                 command = string.Format(@"UPDATE {0} SET {1}=2019;ALTER TABLE {0} MODIFY COLUMN {1} {2} ", tableName, newColumnType.Name, newColumnType.GetColumnTypeString());

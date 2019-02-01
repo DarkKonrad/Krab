@@ -89,6 +89,9 @@
     <Compile Include="Models\dbCustomTable\CellContent.cs" />
     <Compile Include="Models\dbCustomTable\ColumnInfo.cs" />
     <Compile Include="Models\dbCustomTable\CustomTableRows.cs" />
+    <Compile Include="Models\dbCustomTable\Juxaposition\Juxaposition.cs" />
+    <Compile Include="Models\dbCustomTable\Juxaposition\JuxapositionColumn.cs" />
+    <Compile Include="Models\dbCustomTable\Juxaposition\JuxapositionColumnInfo.cs" />
     <Compile Include="Models\dbCustomTable\RowInfo.cs" />
     <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -114,6 +117,12 @@
     </Compile>
     <Compile Include="Windows\CustomTableFrame.Designer.cs">
       <DependentUpon>CustomTableFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\AddEditJuxtaposition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\AddEditJuxtaposition.Designer.cs">
+      <DependentUpon>AddEditJuxtaposition.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\DialogBoxes\AddNewEmployeeDialog.cs">
       <SubType>Form</SubType>
@@ -145,6 +154,12 @@
     <Compile Include="Windows\DialogBoxes\ChangePassDialog.Designer.cs">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\ChooseJuxapositionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\ChooseJuxapositionDialog.Designer.cs">
+      <DependentUpon>ChooseJuxapositionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DialogBoxes\ChooseUDTDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,7 +178,14 @@
     <Compile Include="Windows\EmployeeFrame.Designer.cs">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\JuxapositionFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\JuxapositionFrame.Designer.cs">
+      <DependentUpon>JuxapositionFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SpecifiedControlls\CustomTableDialogControls.cs" />
+    <Compile Include="Windows\SpecifiedControlls\JuxtapositionControls.cs" />
     <Compile Include="Windows\SpecifiedControlls\TableTemplate.cs" />
     <Compile Include="Windows\TableCreatorFrame.cs">
       <SubType>Form</SubType>
@@ -198,6 +220,9 @@
     <EmbeddedResource Include="Windows\CustomTableFrame.resx">
       <DependentUpon>CustomTableFrame.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\AddEditJuxtaposition.resx">
+      <DependentUpon>AddEditJuxtaposition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\AddNewEmployeeDialog.resx">
       <DependentUpon>AddNewEmployeeDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +238,9 @@
     <EmbeddedResource Include="Windows\DialogBoxes\ChangePassDialog.resx">
       <DependentUpon>ChangePassDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\ChooseJuxapositionDialog.resx">
+      <DependentUpon>ChooseJuxapositionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\ChooseUDTDialog.resx">
       <DependentUpon>ChooseUDTDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\JuxapositionFrame.resx">
+      <DependentUpon>JuxapositionFrame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\TableCreatorFrame.resx">
       <DependentUpon>TableCreatorFrame.cs</DependentUpon>

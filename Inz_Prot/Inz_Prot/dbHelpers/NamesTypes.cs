@@ -22,6 +22,7 @@ namespace Inz_Prot.dbHelpers
         public static readonly string CommonCustomTableName_POLISH_ADJECTIVE = "Zbiorów Danych";
 
         public static readonly string UserCustomTables_TABLE = "usertableinfo";
+        public static readonly string Juxtapositions_TABLE_NAME = "juxtapositions";
 
         static Dictionary<string, ColumnType> stringColumnTypePairs;
         static Dictionary<string, ColumnType> rawStringColumnTypePairs;

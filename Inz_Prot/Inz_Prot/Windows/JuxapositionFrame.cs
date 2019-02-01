@@ -15,6 +15,27 @@ namespace Inz_Prot.Windows
         public JuxapositionFrame()
         {
             InitializeComponent();
+            
+        }
+
+        private void JuxapositionFrame_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChooseJuxA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChooseJuxA_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,22 +6,19 @@ using System.Threading.Tasks;
 
 namespace Inz_Prot.Models.dbCustomTable.Juxaposition
 {
-    public class JuxapositionColumn
+   public class JuxapositionColumnInfo
     {
         ColumnInfo columnInfo;
         List<CellContent> columnContent;
-        string parentTableName; 
-        public JuxapositionColumn(string parentTableName,ColumnInfo columnInfo,List<CellContent> cellContents)
+        string parentTableName;
+        public JuxapositionColumnInfo(string parentTableName, ColumnInfo columnInfo)
         {
             this.columnInfo = columnInfo;
             this.parentTableName = parentTableName;
-            this.columnContent = cellContents;
         }
 
         public ColumnInfo ColumnInfo { get => columnInfo; }
-        public List<CellContent> ColumnContent { get => columnContent; }
         public string ParentTableName { get => parentTableName; }
 
-        //    public static JuxapositionColumn GetJuxapositionColumn()
     }
 }
