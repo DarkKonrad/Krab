@@ -59,7 +59,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             Juxaposition juxaposition = null;
             string command = @"SELECT * FROM "+ NamesTypes.Juxtapositions_TABLE_NAME+" WHERE JuxName = @juxName";
             var query = new MySqlCommand(command, dbAgent.GetConnection());
-
+            query.Parameters.AddWithValue("@juxName", juxName);
             try
             {
                 dbAgent.GetConnection().Open();
@@ -72,7 +72,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 {
                     id = (int) reader["ID"];
                     rawTableName = reader["JuxName"].ToString();
-                    rawColumns_SingleString = reader["ColumnsType"].ToString();
+                    rawColumns_SingleString = reader["Components"].ToString();
                 }
                 if (rawTableName == "" || rawTableName == null)
                 {
@@ -104,7 +104,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
                 Debug.WriteLine("Exception Source: " + ex.Source);
-                Debug.WriteLine("Juxaposition: AddJuxaposition");
+                Debug.WriteLine("Juxaposition: GetJuxaposition_InfoOnly");
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("Exception Message: " + ex.Message);
                 Debug.WriteLine("Exception Source: " + ex.Source);
-                Debug.WriteLine("Juxaposition: AddJuxaposition");
+                Debug.WriteLine("Juxaposition: GetJuxaposition_InfoOnly");
             }
             finally
             {
@@ -130,6 +130,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             try
             {
+                dbAgent.GetConnection().Open();
                 var reader = query.ExecuteReader();
                 int k = 0;
                 int id = 0;
@@ -139,7 +140,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                  
                     id = (int) reader["ID"];
                     rawTableName = reader["JuxName"].ToString();
-                    rawColumns_SingleString = reader["ColumnsType"].ToString();
+                    rawColumns_SingleString = reader["Components"].ToString();
                     
                     if (rawTableName == "" || rawTableName == null|| rawColumns_SingleString== null || rawColumns_SingleString =="")
                     {

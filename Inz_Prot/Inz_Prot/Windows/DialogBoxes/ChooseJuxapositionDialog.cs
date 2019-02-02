@@ -44,7 +44,7 @@ namespace Inz_Prot.Windows.DialogBoxes
                 return null;
         }
 
-        private void btnChoose_Click(object sender, EventArgs e)
+        void  btnChoose_Click(object sender, EventArgs e)
         {
             if(listBoxJux.SelectedItem == null)
             {
@@ -60,8 +60,10 @@ namespace Inz_Prot.Windows.DialogBoxes
                 isElementChosen = true;
                 this.DialogResult = DialogResult.OK;
                 this.Hide();
+                
             //    this.Dispose();
             }
+            
         }
     }
 }

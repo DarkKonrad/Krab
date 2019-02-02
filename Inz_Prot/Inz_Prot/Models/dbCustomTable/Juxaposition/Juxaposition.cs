@@ -17,7 +17,17 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
             juxapositionColumns = new List<JuxapositionColumn>();
             juxapositionColumnInfos = new List<JuxapositionColumnInfo>();
         }
-
+        public int LenghtOfLongestColumn { get
+            {
+                int tmp = -1;
+                foreach(JuxapositionColumn Juxapositioncolumn in juxapositionColumns)
+                {
+                    if (Juxapositioncolumn.Length > tmp)
+                        tmp = Juxapositioncolumn.Length;
+                }
+                return tmp;
+            }
+        }
         public bool HasValues { get
             {
                 if (juxapositionColumns.Count == 0)
@@ -48,7 +58,31 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
             juxapositionColumnInfos.Add(columnInfo);
         }
 
-        public string GetInfoJuxapositionString ()
+       public string GetInfoJuxapositionString()
+        {
+            if (juxapositionColumns.Count == 0)
+                return GetInfoJuxapositionString_ColumnInfo();
+            else
+                return GetInfoJuxapositionString_Columns();
+        }
+
+        public void GetFillJuxtapositionColumns()
+        {
+            if (juxapositionColumnInfos.Count != 0)
+            {
+                for (int i = 0; i < juxapositionColumnInfos.Count; i++)
+                {
+                    juxapositionColumns.Add(
+                        dbHelpers.TableEditors.JuxtapositionHelper.GetColumnFromUDT(
+                            juxapositionColumnInfos[i].ParentTableName,
+                            juxapositionColumnInfos[i].ColumnInfo));
+                }
+            }
+            else
+                throw new Exception("Juxtaposition columnInfos are empty! ");
+        }
+
+        private string GetInfoJuxapositionString_Columns ()
         {
             string juxInfoString = "";
 
@@ -63,6 +97,19 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
             return juxInfoString;
         }
 
+        private string GetInfoJuxapositionString_ColumnInfo()
+        {
+            string juxInfoString = "";
 
+            for (int i = juxapositionColumnInfos.Count - 1; i >= 0; i--)
+            {
+                if (i != 0)
+                    juxInfoString += juxapositionColumnInfos[i].ParentTableName + "%" + juxapositionColumnInfos[i].ColumnInfo.Name + "#" + juxapositionColumnInfos[i].ColumnInfo.Type_String + ( juxapositionColumnInfos[i].ColumnInfo.TypeCapacity.HasValue ? "$" + juxapositionColumnInfos[i].ColumnInfo.TypeCapacity.Value.ToString() : "" ) + "|";
+                else
+                    juxInfoString += juxapositionColumnInfos[i].ParentTableName + "%" + juxapositionColumnInfos[i].ColumnInfo.Name + "#" + juxapositionColumnInfos[i].ColumnInfo.Type_String + ( juxapositionColumnInfos[i].ColumnInfo.TypeCapacity.HasValue ? "$" + juxapositionColumnInfos[i].ColumnInfo.TypeCapacity.Value.ToString() : "" );
+            }
+
+            return juxInfoString;
+        }
     }
 }

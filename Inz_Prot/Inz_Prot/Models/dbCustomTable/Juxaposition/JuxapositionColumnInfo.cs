@@ -9,7 +9,7 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
    public class JuxapositionColumnInfo
     {
         ColumnInfo columnInfo;
-        List<CellContent> columnContent;
+        //List<CellContent> columnContent;
         string parentTableName;
         public JuxapositionColumnInfo(string parentTableName, ColumnInfo columnInfo)
         {

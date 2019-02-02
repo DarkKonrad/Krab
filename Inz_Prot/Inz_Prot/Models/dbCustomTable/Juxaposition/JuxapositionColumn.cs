@@ -18,6 +18,7 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
             this.columnContent = cellContents;
         }
 
+        public int Length { get => columnContent.Count; }
         public ColumnInfo ColumnInfo { get => columnInfo; }
         public List<CellContent> ColumnContent { get => columnContent; }
         public string ParentTableName { get => parentTableName; }

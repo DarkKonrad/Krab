@@ -115,7 +115,8 @@
             this.btnAddJux.Size = new System.Drawing.Size(106, 32);
             this.btnAddJux.TabIndex = 0;
             this.btnAddJux.Text = "Dodaj zestawienie";
-            this.btnAddJux.UseVisualStyleBackColor = false;
+            this.btnAddJux.UseVisualStyleBackColor = true;
+            this.btnAddJux.Click += new System.EventHandler(this.btnAddJux_Click);
             // 
             // groupBox1
             // 

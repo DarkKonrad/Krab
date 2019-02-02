@@ -134,7 +134,9 @@ namespace Inz_Prot.MainWindow
 
         private void btnJux_Click(object sender, EventArgs e)
         {
-
+            var JuxAForm = new JuxapositionFrame();
+            JuxAForm.Show(this);
+            this.Hide();
         }
     }
 }
