@@ -13,29 +13,46 @@ using Inz_Prot.Windows.SpecifiedControlls;
 using Inz_Prot.Windows.DialogBoxes;
 using Inz_Prot.Models.dbCustomTable.Juxaposition;
 using Inz_Prot.Models.dbCustomTable;
+using System.Diagnostics;
+
 namespace Inz_Prot.Windows
 {
+    class ColumnID_ParentT_NameC
+    {
+        string tableName, columnName;
+
+        public ColumnID_ParentT_NameC(string tableName, string columnName)
+        {
+            this.tableName = tableName;
+            this.columnName = columnName;
+        }
+
+        public string TableName { get => tableName; set => tableName = value; }
+        public string ColumnName { get => columnName; set => columnName = value; }
+    }
     public partial class JuxapositionFrame : Form
     {
         //  List<JuxtapositionControls> listOfJuxtapositionControls;
+        List<string> columnIDNames;
         Juxaposition juxaposition;
         public JuxapositionFrame()
         {
             InitializeComponent();
-           
+            columnIDNames = new List<string>();
         }
 
         void InitDadtaGrid()
         {
             if (juxaposition == null)
             {
-                MessageBox.Show("Obecnie nie ma żadnych " + dbHelpers.NamesTypes.CommonCustomTableName_POLISH_ADJECTIVE, "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Obecnie nie ma żadnych zestawien " , "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //this.Dispose();
                 return;
             }
             //DODAWANIA CUSTOM TABLE   dgCustomTable.
             dgJuxaposition.Rows.Clear();
             dgJuxaposition.Columns.Clear();
+            columnIDNames.Clear();
 
             dgJuxaposition.Columns.Add("OrdinalNumber", "L.P.");
             foreach (JuxapositionColumnInfo JuxColumnInfo in juxaposition.JuxapositionColumnInfos)
@@ -57,14 +74,35 @@ namespace Inz_Prot.Windows
             dgJuxaposition.Rows.Add(juxaposition.LenghtOfLongestColumn);
 
             // IDS!
+            for(int i = 0; i< juxaposition.JuxapositionColumnInfos.Count-1;i++)
+            {
+                dgJuxaposition.Columns.Add(juxaposition.JuxapositionColumnInfos[i].ParentTableName + '_' + juxaposition.JuxapositionColumnInfos[i].ColumnInfo.Name + '_' + "ID",
+                   juxaposition.JuxapositionColumnInfos[i].ParentTableName + '_' + juxaposition.JuxapositionColumnInfos[i].ColumnInfo.Name + '_' + "ID");
 
-            for(int i =0;i<juxaposition.LenghtOfLongestColumn;i++)
+                columnIDNames.Add(juxaposition.JuxapositionColumnInfos[i].ParentTableName + '_' + juxaposition.JuxapositionColumnInfos[i].ColumnInfo.Name + '_' + "ID");
+
+                #region Filling ID Columns
+
+                dgJuxaposition.Columns[columnIDNames[i]].Visible = false;
+                dgJuxaposition.Columns[columnIDNames[i]].Tag = new ColumnID_ParentT_NameC(juxaposition.JuxapositionColumnInfos[i].ParentTableName,
+                    juxaposition.JuxapositionColumnInfos[i].ColumnInfo.Name); // duplicates ?
+             
+                for (int j = 0;j<juxaposition.JuxapositionColumns[i].ColumnContent.Count-1;j++)
+                {
+                    dgJuxaposition.Rows[j].Cells[j].Value = juxaposition.JuxapositionColumns[i].ColumnContent[j].ID;
+                    Debug.WriteLine(string.Format("ID Columns: Row: {0} CellVal: {1} ", j, juxaposition.JuxapositionColumns[i].ColumnContent[j].ID));
+                }
+                
+                #endregion
+            }
+
+            for (int i =0;i<juxaposition.LenghtOfLongestColumn;i++)
             {
                 dgJuxaposition.Rows[i].Cells[0].Value = (int) i + 1;
             }
 
 
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns.Count-1; i++)
             {
                 // Columns
                 var currentColumn = columns[i];
@@ -102,7 +140,7 @@ namespace Inz_Prot.Windows
 
                 }
                 ////////
-                dgCustomTable.Rows[i].Cells[dgCustomTable.Rows[i].Cells.Count - 1].Value = currentRow[currentRow.Count - 1].ID;
+               // dgCustomTable.Rows[i].Cells[dgCustomTable.Rows[i].Cells.Count - 1].Value = currentRow[currentRow.Count - 1].ID;
                 ////////
             }
 
@@ -134,6 +172,7 @@ namespace Inz_Prot.Windows
                 juxaposition = dialog.GetChosen();
                 dialog.Hide();
                 dialog.Dispose();
+                InitDadtaGrid();
             }
         }
 

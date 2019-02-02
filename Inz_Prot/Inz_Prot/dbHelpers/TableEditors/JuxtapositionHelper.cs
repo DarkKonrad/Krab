@@ -198,12 +198,13 @@ namespace Inz_Prot.dbHelpers.TableEditors
             List<CellContent> collection = new List<CellContent>();
             int rowInColumnCount = CustomTableHelper.GetRowCount(tableName);
 
-            string command = @"SELECT @columnName FROM @tableName"; // Possible need to change to string.format style
+            string command = string.Format(@"SELECT ID,{0} FROM {1}",columnInfo.Name, tableName); // Possible need to change to string.format style
             var query = new MySqlCommand(command, dbAgent.GetConnection());
 
             // Possible need to change to string.Format type
-            query.Parameters.AddWithValue("@columnName", columnInfo.Name);
-            query.Parameters.AddWithValue("@tableName", tableName);
+
+            //query.Parameters.AddWithValue("@columnName", columnInfo.Name);
+            //query.Parameters.AddWithValue("@tableName", tableName);
 
 
             dbAgent.GetConnection().Open();

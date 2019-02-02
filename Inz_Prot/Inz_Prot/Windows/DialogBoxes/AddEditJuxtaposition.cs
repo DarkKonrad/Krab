@@ -82,7 +82,7 @@ namespace Inz_Prot.Windows.DialogBoxes
         {
             AddNewJuxtaposition();
             this.Hide();
-            Parent.Show();
+           // Parent.Show();
             this.Dispose();
         }
     }

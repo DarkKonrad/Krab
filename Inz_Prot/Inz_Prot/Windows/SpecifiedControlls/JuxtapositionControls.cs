@@ -112,6 +112,8 @@ namespace Inz_Prot.Windows.SpecifiedControlls
 
         void ReactForComboTableIChange(object sender, EventArgs e)
         {
+            comboChosenColumn.Text = "";
+            comboChosenColumn.Items.Clear();
             FillComboBoxColumns();
         }
 
