@@ -50,6 +50,7 @@
             // 
             this.dgJuxaposition.AllowUserToAddRows = false;
             this.dgJuxaposition.AllowUserToDeleteRows = false;
+            this.dgJuxaposition.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgJuxaposition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgJuxaposition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgJuxaposition.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -79,6 +80,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnChooseJuxA);
             this.groupBox2.Controls.Add(this.btnEditJux);
             this.groupBox2.Controls.Add(this.btnAddJux);
@@ -163,7 +165,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.mainPanel);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "JuxapositionFrame";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "JuxapositionFrame";
             ((System.ComponentModel.ISupportInitialize)(this.dgJuxaposition)).EndInit();
             this.mainPanel.ResumeLayout(false);
