@@ -147,6 +147,11 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             else
             {
                 TxtInputValue = new TextBox();
+                if (columnInfo.ColumnType == ColumnType.ShortText || columnInfo.ColumnType == ColumnType.Description)
+                {
+                    txtInputValue.Multiline = true;
+                    txtInputValue.ScrollBars = ScrollBars.Both;                   
+                }
                 controls = new Control[] { TxtInputValue, LabelColumnName,labelDataType_PL };
             }
 

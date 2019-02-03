@@ -191,5 +191,10 @@ namespace Inz_Prot.Windows
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Utilities.SaveToCSV_SaveDialogVersion(dgCustomTable);
+        }
     }
 }

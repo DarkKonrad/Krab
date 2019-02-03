@@ -14,6 +14,48 @@ namespace Inz_Prot.dbHelpers.TableEditors
 {
    public static class JuxtapositionHelper
     {
+        public static bool IsNameInUse(string name)
+        {
+            string command = @"SELECT JuxName FROM juxtaposition";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+            try
+            {
+                dbAgent.GetConnection().Open();
+                var reader = query.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    var nameFormDb = reader["JuxName"].ToString();
+                    if (nameFormDb == name)
+                        return true;
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: IsNameInUse");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: IsNameInUse");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+            return false;
+        }
         public static void AddJuxaposition(Juxaposition juxaposition)
         {
             string command = @"INSERT INTO " + NamesTypes.Juxtapositions_TABLE_NAME + " VALUES (@null,@juxName,@juxContent)";
@@ -54,6 +96,74 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         }
 
+        public static void EditCell(string tableName,string columnName,int cellID ,object value)
+        {
+            string command = @"UPDATE " + tableName + " SET " + columnName + "= @val WHERE ID=@id"; //where
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@val", value);
+            query.Parameters.AddWithValue("@id", cellID);
+            try
+            {
+                dbAgent.GetConnection().Open();
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: EditCell_String");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: EditCell_String");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+        }
+
+        public static void EditCell (JuxapositionColumnInfo juxapositionColumn,object value)
+        {
+            string command = @"UPDATE " + juxapositionColumn.ParentTableName + "SET " + juxapositionColumn.ColumnInfo.Name + " = @val"; //where
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@val", value);
+            try
+            {
+                dbAgent.GetConnection().Open();
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: EditCell");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: EditCell");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+
+            }
+        }
         public static Juxaposition GetJuxaposition_InfoOnly(string juxName)
         {
             Juxaposition juxaposition = null;

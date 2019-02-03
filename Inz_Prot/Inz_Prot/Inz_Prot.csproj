@@ -172,6 +172,12 @@
     <Compile Include="Windows\DialogBoxes\EditColumnsUDT.Designer.cs">
       <DependentUpon>EditColumnsUDT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DialogBoxes\JuxEditCell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DialogBoxes\JuxEditCell.Designer.cs">
+      <DependentUpon>JuxEditCell.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EmployeeFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DialogBoxes\EditColumnsUDT.resx">
       <DependentUpon>EditColumnsUDT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DialogBoxes\JuxEditCell.resx">
+      <DependentUpon>JuxEditCell.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\EmployeeFrame.resx">
       <DependentUpon>EmployeeFrame.cs</DependentUpon>

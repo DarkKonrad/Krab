@@ -111,8 +111,16 @@ namespace Inz_Prot
                     if (cell.ColumnIndex != cellIndexToIgnore) // ! Warning 
                         if (cell.Value == null || cell.Value.ToString() =="")
                             rowToSave.Add("-");
-                    else
-                            rowToSave.Add(cell.Value.ToString());
+                        else
+                        {
+                            if(cell.ValueType == typeof(float))
+                            {
+                                var tmp = cell.Value.ToString().Replace(",", ".");
+                                rowToSave.Add(tmp);
+                            }
+                            else rowToSave.Add(cell.Value.ToString());
+                        }
+                           
                 }
                 csvWriter.WriteRow(rowToSave);
             }

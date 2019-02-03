@@ -21,12 +21,12 @@ namespace Inz_Prot.Windows
     public partial class JuxapositionFrame : Form
     {
         //  List<JuxtapositionControls> listOfJuxtapositionControls;
-        List<string> columnIDNames;
         Juxaposition juxaposition;
         public JuxapositionFrame()
         {
             InitializeComponent();
-           columnIDNames = new List<string>();
+
+            dgJuxaposition.MultiSelect = false;
         }
 
         void InitDadtaGrid()
@@ -38,6 +38,7 @@ namespace Inz_Prot.Windows
                 return;
             }
             //DODAWANIA CUSTOM TABLE   dgCustomTable.
+            
             dgJuxaposition.Rows.Clear();
             dgJuxaposition.Columns.Clear();
            // columnIDNames.Clear();
@@ -105,28 +106,28 @@ namespace Inz_Prot.Windows
                             //  buf_DataTime = (DateTime) currentRow[i].Value;
                             dgJuxaposition.Rows[j].Cells[i + 1].ValueType = typeof(DateTime);
                             dgJuxaposition.Rows[j].Cells[i + 1].Value = Convert.ToDateTime(currentColumn.ColumnContent[j].Value);//(DateTime) currentColumn.ColumnContent[j].Value;
-                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new CellTag(currentColumn.ColumnContent[j], currentColumn.ParentTableName, currentColumn.ColumnInfo.Name);
+                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new JuxCellTag(currentColumn.ParentTableName, currentColumn.ColumnContent[j], currentColumn.ColumnInfo);
                             break;
                         case TypeCode.String:
                             //   buf_descr = (string) currentRow[i].Value;
                             dgJuxaposition.Rows[j].Cells[i + 1].Value = (string) currentColumn.ColumnContent[j].Value;
-                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new CellTag(currentColumn.ColumnContent[j], currentColumn.ParentTableName, currentColumn.ColumnInfo.Name);
+                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new JuxCellTag(currentColumn.ParentTableName, currentColumn.ColumnContent[j], currentColumn.ColumnInfo);
                             break;
                         case TypeCode.Char:
                             //    buf_shortText = (string) currentRow[i].Value;
                             dgJuxaposition.Rows[j].Cells[i + 1].Value = (string) currentColumn.ColumnContent[j].Value;
-                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new CellTag(currentColumn.ColumnContent[j], currentColumn.ParentTableName, currentColumn.ColumnInfo.Name);
+                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new JuxCellTag(currentColumn.ParentTableName, currentColumn.ColumnContent[j], currentColumn.ColumnInfo);
                             break;
                         case TypeCode.Int32:
                             //   buf_Numeric = (int) currentRow[i].Value;
                             dgJuxaposition.Rows[j].Cells[i + 1].ValueType = typeof(int);
                             dgJuxaposition.Rows[j].Cells[i + 1].Value = (int) currentColumn.ColumnContent[j].Value;
-                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new CellTag(currentColumn.ColumnContent[j], currentColumn.ParentTableName, currentColumn.ColumnInfo.Name);
+                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new JuxCellTag(currentColumn.ParentTableName, currentColumn.ColumnContent[j], currentColumn.ColumnInfo);
                             break;
                         case TypeCode.Double:
                             dgJuxaposition.Rows[j].Cells[i + 1].ValueType = typeof(float);
                             dgJuxaposition.Rows[j].Cells[i + 1].Value = (float) currentColumn.ColumnContent[j].Value;
-                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new CellTag(currentColumn.ColumnContent[j], currentColumn.ParentTableName, currentColumn.ColumnInfo.Name);
+                            dgJuxaposition.Rows[j].Cells[i + 1].Tag = new JuxCellTag(currentColumn.ParentTableName, currentColumn.ColumnContent[j], currentColumn.ColumnInfo);
                             break;
                         default:
                             throw new Exception("CustomTableFrame Type Code Error");
@@ -176,21 +177,43 @@ namespace Inz_Prot.Windows
             dialog.Show(this);
             //this.Hide();
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var selectedCellTag = (JuxCellTag)dgJuxaposition.SelectedCells[0].Tag;
+            if(selectedCellTag == null)
+            {
+                MessageBox.Show("Edytowanie pustych komórek, bądź komórek z kolumny L.P. jest niedowzwolone", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var cellEditDialog = new JuxEditCell(selectedCellTag.ColumnInfo);
+            var dialogResult = cellEditDialog.ShowDialog(this);
+            if(dialogResult == DialogResult.OK)
+            {
+                var valueString = cellEditDialog.GetValue();
+                JuxtapositionHelper.EditCell(selectedCellTag.TableName, selectedCellTag.ColumnInfo.Name,selectedCellTag.CellContent.ID, valueString);
+                InitDadtaGrid();
+            }
+            
+        }
     }
 
-    class CellTag
+    class JuxCellTag
     {
-        string tableName, columnName;
+        string tableName;
         CellContent cellContent;
-        public CellTag(CellContent cellContent,string tableName, string columnName)
+        ColumnInfo columnInfo;
+
+        public JuxCellTag(string tableName, CellContent cellContent, ColumnInfo columnInfo)
         {
             this.tableName = tableName;
-            this.columnName = columnName;
             this.cellContent = cellContent;
+            this.columnInfo = columnInfo;
         }
 
         public string TableName { get => tableName; set => tableName = value; }
-        public string ColumnName { get => columnName; set => columnName = value; }
         public CellContent CellContent { get => cellContent; set => cellContent = value; }
+        public ColumnInfo ColumnInfo { get => columnInfo; set => columnInfo = value; }
     }
 }

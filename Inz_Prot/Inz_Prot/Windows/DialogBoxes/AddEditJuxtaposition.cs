@@ -22,6 +22,8 @@ namespace Inz_Prot.Windows.DialogBoxes
         {
             InitializeComponent();
             listOfJuxtapositionControls = new List<JuxtapositionControls>();
+            lblError.Visible = false;
+            lblError.Text = "";
         }
 
         private void containerPanel_Click(object sender, EventArgs e)
@@ -62,9 +64,22 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void AddNewJuxtaposition()
         {
-            if (listOfJuxtapositionControls.Count <= 0|| txtJuxName.Text == "")
+            if (listOfJuxtapositionControls.Count <= 0 || txtJuxName.Text == "")
+            {
+                txtJuxName.BackColor = Color.Red;
+                lblError.Text = "Nazwa zestawienia nie może być pusta." + Environment.NewLine + "W zestawieniu musi byc obecna conajmniej jedna tabela";
+                lblError.Visible = true;
                 return;
+            }
+            txtJuxName.Text.Trim();
 
+            if (Utilities.StringContainsSpecialChars(txtJuxName.Text))
+            {
+                txtJuxName.BackColor = Color.Red;
+                lblError.Text = "Nazwa zestawienia nie może zawierać znaków specjalnych";
+                lblError.Visible = true;
+                return;
+            }
             Juxaposition juxaposition = new Juxaposition(txtJuxName.Text);
            // ColumnInfo columnInfo;
             foreach(JuxtapositionControls controls  in listOfJuxtapositionControls)
@@ -79,11 +94,14 @@ namespace Inz_Prot.Windows.DialogBoxes
         }
 
         private void btnOk_Click(object sender, EventArgs e)
-        {
+        {         
             AddNewJuxtaposition();
             this.Hide();
-           // Parent.Show();
+            // Parent.Show();
+            lblError.Visible = false;
+            lblError.Text = "";
             this.Dispose();
+           
         }
     }
 }
