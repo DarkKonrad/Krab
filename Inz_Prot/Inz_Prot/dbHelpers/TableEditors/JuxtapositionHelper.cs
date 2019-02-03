@@ -210,14 +210,14 @@ namespace Inz_Prot.dbHelpers.TableEditors
             dbAgent.GetConnection().Open();
             try
             {
+                int i = 0;
                 var reader = query.ExecuteReader();
-
+                collection = new List<CellContent>();
                 while (reader.Read())
                 {
-                    collection = new List<CellContent>();
+                  //  collection = new List<CellContent>();
                     // for every columns in row
-                    for (int i = 0; i < rowInColumnCount; i++)
-                    {
+                  
                         // To determine what action we need to do, we need to check for every column type.
                         switch (columnInfo.ColumnType)
                         {
@@ -250,11 +250,12 @@ namespace Inz_Prot.dbHelpers.TableEditors
                                 throw new Exception("Custom Table Helper GetAllRowsFromCustomTable method, switch Error ");
 
                         }
-
-                    }
-                    return new JuxapositionColumn(tableName,columnInfo, collection);
+                    i++;
+                    
+                   
 
                 }
+                return new JuxapositionColumn(tableName, columnInfo, collection);
             }
             catch (MySqlException ex)
             {
