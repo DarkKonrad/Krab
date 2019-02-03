@@ -61,6 +61,13 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (listBoxCustomTable.SelectedItem == null)
+            {
+                MessageBox.Show("Wybierz pozycje z listy", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //this.DialogResult = DialogResult.None;
+                return;
+            }
+
             var DialogResult = MessageBox.Show("Czy na pewno chcesz BEZPOWROTNIE usunąć zbiór danych ? " + Environment.NewLine
                 + "Tej operacji nie mozna cofnąć", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             

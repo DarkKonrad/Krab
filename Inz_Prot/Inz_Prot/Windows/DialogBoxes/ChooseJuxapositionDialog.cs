@@ -65,5 +65,27 @@ namespace Inz_Prot.Windows.DialogBoxes
             }
             
         }
+
+        private void btnDeleteJuxA_Click(object sender, EventArgs e)
+        {
+            if (listBoxJux.SelectedItem == null)
+            {
+                MessageBox.Show("Wybierz pozycje z listy", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.DialogResult = DialogResult.None;
+                return;
+            }
+            var dr = MessageBox.Show("Czy na pewno chcesz BEZPOWROTNIE usunąć zbiór danych ? " + Environment.NewLine
+             + "Tej operacji nie mozna cofnąć", "Ostrzeżenie", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.OK)
+            {
+              var  chosenJux = listBoxJux.SelectedItem.ToString();
+                JuxtapositionHelper.DeleteJuxtaposition(chosenJux);
+
+                this.RefreshListBox();
+                return;
+            }
+
+        }
     }
 }

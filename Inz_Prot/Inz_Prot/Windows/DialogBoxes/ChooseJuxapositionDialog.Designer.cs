@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
             this.listBoxJux = new System.Windows.Forms.ListBox();
-            this.btnChoose = new System.Windows.Forms.Button();
-            this.btnAddJuxA = new System.Windows.Forms.Button();
+            this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnDeleteJuxA = new System.Windows.Forms.Button();
+            this.btnAddJuxA = new System.Windows.Forms.Button();
+            this.btnChoose = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +47,14 @@
             this.MainPanel.Size = new System.Drawing.Size(382, 355);
             this.MainPanel.TabIndex = 0;
             // 
+            // listBoxJux
+            // 
+            this.listBoxJux.FormattingEnabled = true;
+            this.listBoxJux.Location = new System.Drawing.Point(37, 24);
+            this.listBoxJux.Name = "listBoxJux";
+            this.listBoxJux.Size = new System.Drawing.Size(316, 225);
+            this.listBoxJux.TabIndex = 0;
+            // 
             // bottomPanel
             // 
             this.bottomPanel.Controls.Add(this.btnDeleteJuxA);
@@ -58,24 +66,16 @@
             this.bottomPanel.Size = new System.Drawing.Size(382, 100);
             this.bottomPanel.TabIndex = 1;
             // 
-            // listBoxJux
+            // btnDeleteJuxA
             // 
-            this.listBoxJux.FormattingEnabled = true;
-            this.listBoxJux.Location = new System.Drawing.Point(37, 24);
-            this.listBoxJux.Name = "listBoxJux";
-            this.listBoxJux.Size = new System.Drawing.Size(316, 225);
-            this.listBoxJux.TabIndex = 0;
-            // 
-            // btnChoose
-            // 
-            this.btnChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnChoose.Location = new System.Drawing.Point(37, 29);
-            this.btnChoose.Name = "btnChoose";
-            this.btnChoose.Size = new System.Drawing.Size(101, 42);
-            this.btnChoose.TabIndex = 0;
-            this.btnChoose.Text = "Wybierz";
-            this.btnChoose.UseVisualStyleBackColor = true;
-            this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
+            this.btnDeleteJuxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnDeleteJuxA.Location = new System.Drawing.Point(251, 29);
+            this.btnDeleteJuxA.Name = "btnDeleteJuxA";
+            this.btnDeleteJuxA.Size = new System.Drawing.Size(102, 42);
+            this.btnDeleteJuxA.TabIndex = 2;
+            this.btnDeleteJuxA.Text = "Usuń";
+            this.btnDeleteJuxA.UseVisualStyleBackColor = true;
+            this.btnDeleteJuxA.Click += new System.EventHandler(this.btnDeleteJuxA_Click);
             // 
             // btnAddJuxA
             // 
@@ -87,15 +87,16 @@
             this.btnAddJuxA.Text = "Dodaj";
             this.btnAddJuxA.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteJuxA
+            // btnChoose
             // 
-            this.btnDeleteJuxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDeleteJuxA.Location = new System.Drawing.Point(251, 29);
-            this.btnDeleteJuxA.Name = "btnDeleteJuxA";
-            this.btnDeleteJuxA.Size = new System.Drawing.Size(102, 42);
-            this.btnDeleteJuxA.TabIndex = 2;
-            this.btnDeleteJuxA.Text = "Usuń";
-            this.btnDeleteJuxA.UseVisualStyleBackColor = true;
+            this.btnChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnChoose.Location = new System.Drawing.Point(37, 29);
+            this.btnChoose.Name = "btnChoose";
+            this.btnChoose.Size = new System.Drawing.Size(101, 42);
+            this.btnChoose.TabIndex = 0;
+            this.btnChoose.Text = "Wybierz";
+            this.btnChoose.UseVisualStyleBackColor = true;
+            this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
             // ChooseJuxapositionDialog
             // 

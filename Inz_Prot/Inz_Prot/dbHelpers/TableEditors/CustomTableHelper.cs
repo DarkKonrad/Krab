@@ -693,40 +693,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                     T++;
                 }
 
-                //for(int i =0; i< columns.Length; i++) // Lenght
-                //{
-                //    if (i != T)
-                //        columnsStringToInsert += columns[i];
-                //    else
-                //        columnsStringToInsert += modified;
-                //}
 
-                //for(int i = columns.Length -1;i>=0;i--)
-                //{
-                //    if(i!=T)
-                //    {
-                //        if(i != 0)
-                //        {
-                //            columnsStringToInsert += columns[i] + "|";
-                //        }
-                //        else
-                //        {
-                //            columnsStringToInsert += columns[i];
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if(i!=0)
-                //        {
-                //            columnsStringToInsert += modified + "|";
-                //        }
-                //        else
-                //        {
-                //            columnsStringToInsert += modified;
-                //        }
-                //    }
-
-                //}
                 for (int i = 0; i< columns.Length ; i++)
                 {
                     if (i != T)
@@ -819,6 +786,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                 dbAgent.GetConnection().Close();
             }
 
+            JuxtapositionHelper.RefreshJuxtposition(tableName, newColumnType);
 
 
         }

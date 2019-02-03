@@ -197,6 +197,20 @@ namespace Inz_Prot.Windows
             }
             
         }
+
+        private void JuxapositionFrame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+            this.Dispose();
+        }
+
+
+
+        private void btnSaveToCSV_Click(object sender, EventArgs e)
+        {
+            Utilities.SaveToCSV_SaveDialogVersion(dgJuxaposition);
+        }
     }
 
     class JuxCellTag

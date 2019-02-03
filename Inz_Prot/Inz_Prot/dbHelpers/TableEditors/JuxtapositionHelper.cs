@@ -232,6 +232,26 @@ namespace Inz_Prot.dbHelpers.TableEditors
             return juxaposition;
         }
 
+        public static void RefreshJuxtposition(string tableName,ColumnInfo editedColumnInfo)
+        {
+            var listOfJuxtapositions = GetAllJuxapositions_InfoOnly();
+
+            foreach(Juxaposition jux in listOfJuxtapositions)
+            {
+                foreach(JuxapositionColumnInfo juxColInfo in jux.JuxapositionColumnInfos)
+                {
+                    if(juxColInfo.ParentTableName == tableName)
+                    {
+                        if(juxColInfo.ColumnInfo.Name == editedColumnInfo.Name)
+                        {
+                            juxColInfo.ColumnInfo.ChangeType(editedColumnInfo.ColumnType);
+                            DeleteJuxtaposition(jux.Name);
+                            AddJuxaposition(jux);
+                        }
+                    }
+                }
+            }
+        }
         public static  List<Juxaposition> GetAllJuxapositions_InfoOnly()
         {       
             List<Juxaposition> listOfJuxapositions = new List<Juxaposition>();
@@ -391,6 +411,39 @@ namespace Inz_Prot.dbHelpers.TableEditors
             }
 
             return null;
+        }
+
+        public static void DeleteJuxtaposition (string JuxName)
+        {
+            string command = @"DELETE FROM juxtapositions WHERE JuxName = @juxname";
+            var query = new MySqlCommand(command, dbAgent.GetConnection());
+            query.Parameters.AddWithValue("@juxname", JuxName);
+            try
+            {
+                dbAgent.GetConnection().Open();
+                query.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: GetAllJuxapositions_InfoOnly");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Exception Message: " + ex.Message);
+                Debug.WriteLine("Exception Source: " + ex.Source);
+                Debug.WriteLine("Juxaposition: GetAllJuxapositions_InfoOnly");
+            }
+            finally
+            {
+                dbTools.dbAgent.GetConnection().Close();
+            }
         }
     }
 }

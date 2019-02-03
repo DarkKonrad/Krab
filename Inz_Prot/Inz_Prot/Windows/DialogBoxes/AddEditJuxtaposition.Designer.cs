@@ -32,12 +32,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtJuxName = new System.Windows.Forms.TextBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblError = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.lblError = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -82,6 +82,29 @@
             this.bottomPanel.Size = new System.Drawing.Size(517, 58);
             this.bottomPanel.TabIndex = 1;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.lblError);
+            this.panel1.Location = new System.Drawing.Point(220, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(181, 52);
+            this.panel1.TabIndex = 4;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(0, 0);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(41, 15);
+            this.lblError.TabIndex = 3;
+            this.lblError.Text = "label2";
+            this.lblError.Visible = false;
+            // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -120,29 +143,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(517, 304);
             this.mainPanel.TabIndex = 2;
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(0, 0);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(41, 15);
-            this.lblError.TabIndex = 3;
-            this.lblError.Text = "label2";
-            this.lblError.Visible = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.lblError);
-            this.panel1.Location = new System.Drawing.Point(220, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(181, 52);
-            this.panel1.TabIndex = 4;
             // 
             // AddEditJuxtaposition
             // 

@@ -32,8 +32,8 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSaveToCSV = new System.Windows.Forms.Button();
             this.btnChooseJuxA = new System.Windows.Forms.Button();
-            this.btnEditJux = new System.Windows.Forms.Button();
             this.btnAddJux = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -81,34 +81,35 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnSaveToCSV);
             this.groupBox2.Controls.Add(this.btnChooseJuxA);
-            this.groupBox2.Controls.Add(this.btnEditJux);
             this.groupBox2.Controls.Add(this.btnAddJux);
-            this.groupBox2.Location = new System.Drawing.Point(455, 22);
+            this.groupBox2.Location = new System.Drawing.Point(447, 22);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(342, 57);
+            this.groupBox2.Size = new System.Drawing.Size(341, 57);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Narzędzia edycji zestawień";
+            this.groupBox2.Text = "Zestawienia";
+            // 
+            // btnSaveToCSV
+            // 
+            this.btnSaveToCSV.Location = new System.Drawing.Point(230, 19);
+            this.btnSaveToCSV.Name = "btnSaveToCSV";
+            this.btnSaveToCSV.Size = new System.Drawing.Size(106, 32);
+            this.btnSaveToCSV.TabIndex = 3;
+            this.btnSaveToCSV.Text = "Zapisz Do CSV";
+            this.btnSaveToCSV.UseVisualStyleBackColor = true;
+            this.btnSaveToCSV.Click += new System.EventHandler(this.btnSaveToCSV_Click);
             // 
             // btnChooseJuxA
             // 
-            this.btnChooseJuxA.Location = new System.Drawing.Point(230, 19);
+            this.btnChooseJuxA.Location = new System.Drawing.Point(118, 19);
             this.btnChooseJuxA.Name = "btnChooseJuxA";
             this.btnChooseJuxA.Size = new System.Drawing.Size(106, 32);
             this.btnChooseJuxA.TabIndex = 2;
-            this.btnChooseJuxA.Text = "Wybierz ";
+            this.btnChooseJuxA.Text = "Wybierz lub usuń";
             this.btnChooseJuxA.UseVisualStyleBackColor = true;
             this.btnChooseJuxA.Click += new System.EventHandler(this.btnChooseJuxA_Click_1);
-            // 
-            // btnEditJux
-            // 
-            this.btnEditJux.Location = new System.Drawing.Point(118, 19);
-            this.btnEditJux.Name = "btnEditJux";
-            this.btnEditJux.Size = new System.Drawing.Size(106, 32);
-            this.btnEditJux.TabIndex = 1;
-            this.btnEditJux.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditJux.UseVisualStyleBackColor = true;
             // 
             // btnAddJux
             // 
@@ -170,6 +171,7 @@
             this.Name = "JuxapositionFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "JuxapositionFrame";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JuxapositionFrame_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgJuxaposition)).EndInit();
             this.mainPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
@@ -186,11 +188,11 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnChooseJuxA;
-        private System.Windows.Forms.Button btnEditJux;
         private System.Windows.Forms.Button btnAddJux;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnSaveToCSV;
     }
 }
