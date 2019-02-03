@@ -36,8 +36,6 @@
             this.btnChooseJuxA = new System.Windows.Forms.Button();
             this.btnAddJux = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgJuxaposition)).BeginInit();
             this.mainPanel.SuspendLayout();
@@ -123,32 +121,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Location = new System.Drawing.Point(12, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 57);
+            this.groupBox1.Size = new System.Drawing.Size(145, 57);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Narzędzia edycji komórek ";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(230, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 32);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(118, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 32);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
@@ -190,8 +169,6 @@
         private System.Windows.Forms.Button btnChooseJuxA;
         private System.Windows.Forms.Button btnAddJux;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSaveToCSV;
     }
