@@ -150,6 +150,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 if (columnInfo.ColumnType == ColumnType.ShortText || columnInfo.ColumnType == ColumnType.Description)
                 {
                     txtInputValue.Multiline = true;
+                    txtInputValue.AcceptsReturn = true;
                     txtInputValue.ScrollBars = ScrollBars.Both;                   
                 }
                 controls = new Control[] { TxtInputValue, LabelColumnName,labelDataType_PL };
@@ -186,10 +187,14 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 0,
                 ContainerPanel.Height / 3);
 
+            LabelColumnName.Width = 50;
+
             labelDataType_PL.Location = new Point(
                 0,
               ContainerPanel.Height / 2 );
-           
+
+            labelDataType_PL.Width = 50;
+
             if (ColumnInfo.ColumnType == ColumnType.DataType)
             {
                 TimePicker.Location = new Point(
@@ -202,11 +207,20 @@ namespace Inz_Prot.Windows.SpecifiedControlls
                 //btnChooseFromDataTimePicker.Text = "Kalendarz";
                 //btnChooseFromDataTimePicker.Click += buttonShowDataTimePicker_Click;
             }
+            else if(columnInfo.ColumnType == ColumnType.Description || columnInfo.ColumnType == ColumnType.ShortText)
+            {
+                TxtInputValue.Location = new Point(
+               ContainerPanel.Width / 4 + 5,
+                                    0);
+                txtInputValue.Width = 400;
+                txtInputValue.Height = containerPanel.Height;
+                txtInputValue.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            }
             else
             {
                 TxtInputValue.Location = new Point(
-               ContainerPanel.Width / 4,
-               ContainerPanel.Height / 3);
+             ContainerPanel.Width / 4,
+             ContainerPanel.Height / 3);
             }
 
         }

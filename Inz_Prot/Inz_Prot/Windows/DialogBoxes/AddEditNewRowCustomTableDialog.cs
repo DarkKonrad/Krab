@@ -110,7 +110,7 @@ namespace Inz_Prot.Windows.DialogBoxes
 
                 if (dialogControls.Type == TypeCode.Char)
                 {
-                    if (Utilities.StringContainsSpecialChars(dialogControls.TxtInputValue.Text) || dialogControls.TxtInputValue.Text =="")
+                    if (!Utilities.isStringNumber(dialogControls.TxtInputValue.Text) || dialogControls.TxtInputValue.Text == "")
                     {
                         WriteErrorAndHighlightRow(dialogControls, "Znaki specjalne są niedozwolone");
                         return false;

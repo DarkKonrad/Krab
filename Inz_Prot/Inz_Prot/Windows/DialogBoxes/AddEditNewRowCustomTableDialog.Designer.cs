@@ -31,8 +31,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.mainPanel = new System.Windows.Forms.Panel();
             this.lblError = new System.Windows.Forms.Label();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +51,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(401, 25);
+            this.btnCancel.Location = new System.Drawing.Point(445, 25);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 39);
             this.btnCancel.TabIndex = 2;
@@ -67,16 +67,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 377);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(518, 76);
+            this.panel1.Size = new System.Drawing.Size(562, 76);
             this.panel1.TabIndex = 3;
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(518, 377);
-            this.mainPanel.TabIndex = 4;
             // 
             // lblError
             // 
@@ -90,14 +82,23 @@
             this.lblError.Text = "label1";
             this.lblError.Visible = false;
             // 
-            // AddNewRowCustomTableDialog
+            // mainPanel
+            // 
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(562, 377);
+            this.mainPanel.TabIndex = 4;
+            // 
+            // AddEditNewRowCustomTableDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 453);
+            this.ClientSize = new System.Drawing.Size(562, 453);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.panel1);
-            this.Name = "AddNewRowCustomTableDialog";
+            this.MinimumSize = new System.Drawing.Size(578, 492);
+            this.Name = "AddEditNewRowCustomTableDialog";
             this.Text = "AddNewRowCustomTableDialog";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
