@@ -20,6 +20,27 @@ namespace Inz_Prot.MainWindow
             InitializeComponent();
             
         }
+
+        private void AdujstComponentsToAccessRights()
+        {
+            var accRights = CurrentUser.Privilege;
+            if (accRights == User.Privileges.Admin)
+            {
+                return;
+            }
+            else if (accRights == User.Privileges.Zwykły)
+            {
+                btnAddTable.Enabled = false;
+                btnViewStorage.Enabled = false;
+                btnUsers.Enabled = false;
+            }
+           else if (accRights == User.Privileges.Uprzywilejowany)
+            {
+                btnUsers.Enabled = false;
+                
+            }
+        }
+
         private void CenterButtons()
         {
             var controls = this.MainMenuPanel.Controls;
@@ -39,8 +60,9 @@ namespace Inz_Prot.MainWindow
             labelUser.Text = user.Name + Environment.NewLine + user.Surname;
             CurrentUser = user;
             CenterButtons();
-           // Application.
-            
+            AdujstComponentsToAccessRights();
+            // Application.
+
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)

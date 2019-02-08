@@ -10,11 +10,11 @@ namespace Inz_Prot.Models
     {
         public enum Privileges
         {
-            Normal = 1,
+            Zwykły = 1,
             Admin = 2,
-            Security = 3,
-            HR = 4,
-            Salesman =5,
+            Uprzywilejowany = 3,
+            //HR = 4,
+            //Salesman =5,
 
 
         }

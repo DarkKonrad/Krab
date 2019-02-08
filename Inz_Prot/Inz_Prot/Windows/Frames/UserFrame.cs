@@ -59,6 +59,11 @@ namespace Inz_Prot.Windows
         {
             var AddUserDialog = new AddEditUserDialog();
            var DialogResult =  AddUserDialog.ShowDialog(this);
+            if(DialogResult != DialogResult.OK || DialogResult != DialogResult.Cancel)
+            {
+                AddUserDialog.Hide();
+                AddUserDialog.Dispose();
+            }
         }
 
         private void UserFrame_FormClosed(object sender, FormClosedEventArgs e)

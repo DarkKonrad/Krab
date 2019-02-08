@@ -56,8 +56,12 @@ namespace Inz_Prot.Windows.DialogBoxes
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!AreInputsCorrect())
+            if (AreInputsCorrect()==false)
+            {
+                DialogResult = DialogResult.Abort;
                 return;
+            }
+                
             UserHelper.AddUser(txtName.Text,txtSurname.Text,txtPassword.Text,(User.Privileges) comboPriv.SelectedItem);
 
             this.Hide();
