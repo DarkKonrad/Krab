@@ -134,11 +134,19 @@ namespace Inz_Prot.Windows
                     }
 
                 }
+               
                 ////////
                // dgCustomTable.Rows[i].Cells[dgCustomTable.Rows[i].Cells.Count - 1].Value = currentRow[currentRow.Count - 1].ID;
                 ////////
             }
-
+            for (int i = 0; i < dgJuxaposition.Rows.Count ; i++)
+                foreach (DataGridViewCell cell in dgJuxaposition.Rows[i].Cells)
+                {
+                    if(cell.Value == null)
+                    {
+                        cell.Style.BackColor = Color.AntiqueWhite;
+                    }
+                }
         }
     
 
@@ -180,6 +188,11 @@ namespace Inz_Prot.Windows
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if(dgJuxaposition.SelectedCells.Count ==0)
+            {
+                MessageBox.Show("Nie wybrano zestawienia !", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var selectedCellTag = (JuxCellTag)dgJuxaposition.SelectedCells[0].Tag;
             if(selectedCellTag == null)
             {

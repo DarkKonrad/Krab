@@ -18,14 +18,14 @@ namespace Inz_Prot.Windows
         CustomTableRows tableRows;
       
      
-        public CustomTableFrame()
-        {
-            InitializeComponent();
-            // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
-            userDefinedTable = CustomTableHelper.GetTableInfoAboutTables_OneRowVersion();
-            dgCustomTable.MultiSelect = false;
-            InitDataGrid();
-        }
+        //public CustomTableFrame()
+        //{
+        //    InitializeComponent();
+        //    // TOD O: CHECK FOR UDT  CHECK DATETIME OBJECT PUSHING TO DB 
+        //    userDefinedTable = CustomTableHelper.GetTableInfoAboutTables_OneRowVersion();
+        //    dgCustomTable.MultiSelect = false;
+        //    InitDataGrid();
+        //}
         
         public CustomTableFrame(TableInfo table)
         {

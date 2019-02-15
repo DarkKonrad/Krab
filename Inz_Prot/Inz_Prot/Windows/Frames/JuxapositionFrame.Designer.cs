@@ -82,20 +82,20 @@
             this.groupBox2.Controls.Add(this.btnSaveToCSV);
             this.groupBox2.Controls.Add(this.btnChooseJuxA);
             this.groupBox2.Controls.Add(this.btnAddJux);
-            this.groupBox2.Location = new System.Drawing.Point(447, 22);
+            this.groupBox2.Location = new System.Drawing.Point(322, 22);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(341, 57);
+            this.groupBox2.Size = new System.Drawing.Size(466, 60);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Zestawienia";
             // 
             // btnSaveToCSV
             // 
-            this.btnSaveToCSV.Location = new System.Drawing.Point(230, 19);
+            this.btnSaveToCSV.Location = new System.Drawing.Point(294, 19);
             this.btnSaveToCSV.Name = "btnSaveToCSV";
-            this.btnSaveToCSV.Size = new System.Drawing.Size(106, 32);
+            this.btnSaveToCSV.Size = new System.Drawing.Size(164, 32);
             this.btnSaveToCSV.TabIndex = 3;
-            this.btnSaveToCSV.Text = "Zapisz Do CSV";
+            this.btnSaveToCSV.Text = "Zapisz Wszystko Do pliku CSV";
             this.btnSaveToCSV.UseVisualStyleBackColor = true;
             this.btnSaveToCSV.Click += new System.EventHandler(this.btnSaveToCSV_Click);
             // 
@@ -103,9 +103,9 @@
             // 
             this.btnChooseJuxA.Location = new System.Drawing.Point(118, 19);
             this.btnChooseJuxA.Name = "btnChooseJuxA";
-            this.btnChooseJuxA.Size = new System.Drawing.Size(106, 32);
+            this.btnChooseJuxA.Size = new System.Drawing.Size(170, 32);
             this.btnChooseJuxA.TabIndex = 2;
-            this.btnChooseJuxA.Text = "Wybierz lub usuń";
+            this.btnChooseJuxA.Text = "Wybierz Lub Usun Zestawienie";
             this.btnChooseJuxA.UseVisualStyleBackColor = true;
             this.btnChooseJuxA.Click += new System.EventHandler(this.btnChooseJuxA_Click_1);
             // 
@@ -115,7 +115,7 @@
             this.btnAddJux.Name = "btnAddJux";
             this.btnAddJux.Size = new System.Drawing.Size(106, 32);
             this.btnAddJux.TabIndex = 0;
-            this.btnAddJux.Text = "Dodaj zestawienie";
+            this.btnAddJux.Text = "Dodaj Zestawienie";
             this.btnAddJux.UseVisualStyleBackColor = true;
             this.btnAddJux.Click += new System.EventHandler(this.btnAddJux_Click);
             // 
@@ -131,7 +131,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(6, 19);
+            this.btnEdit.Location = new System.Drawing.Point(16, 19);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(106, 32);
             this.btnEdit.TabIndex = 0;
@@ -149,7 +149,7 @@
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "JuxapositionFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "JuxapositionFrame";
+            this.Text = "Zestawienia";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JuxapositionFrame_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgJuxaposition)).EndInit();
             this.mainPanel.ResumeLayout(false);

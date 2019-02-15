@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.topPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.InfoNamePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.btnDeleteRow = new System.Windows.Forms.Button();
             this.btnAddField = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.topPanel.SuspendLayout();
             this.InfoNamePanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -57,6 +57,16 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(765, 100);
             this.topPanel.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(235, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 30);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Krótki tekst - do 80 znaków\r\nOpis - do 2048 znaków";
             // 
             // label1
             // 
@@ -182,16 +192,6 @@
             this.MainPanel.Size = new System.Drawing.Size(765, 365);
             this.MainPanel.TabIndex = 2;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(235, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 30);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Krótki tekst - do 80 znaków\r\nOpis - do 2048 znaków";
-            // 
             // TableCreatorFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,7 +203,7 @@
             this.HelpButton = true;
             this.Name = "TableCreatorFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TableCreatorForm";
+            this.Text = "Stwórz nowy zbiór danych";
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
             this.InfoNamePanel.ResumeLayout(false);

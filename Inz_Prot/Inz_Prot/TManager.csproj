@@ -76,7 +76,6 @@
     <Compile Include="dbHelpers\TableEditors\CustomTableHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\EmployeeHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\JuxtapositionHelper.cs" />
-    <Compile Include="dbHelpers\TableEditors\QualificationHelper.cs" />
     <Compile Include="dbHelpers\TableEditors\UserHelper.cs" />
     <Compile Include="dbHelpers\dbAgent.cs" />
     <Compile Include="Tools\Password_Hasher.cs" />
@@ -94,7 +93,6 @@
     <Compile Include="Models\dbCustomTable\Juxaposition\JuxapositionColumnInfo.cs" />
     <Compile Include="Models\dbCustomTable\TableInfo.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Qualification.cs" />
     <Compile Include="Windows\DialogBoxes\AdminChangeCredentials.cs">
       <SubType>Form</SubType>
     </Compile>

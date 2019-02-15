@@ -140,7 +140,7 @@
             this.Controls.Add(this.txtNewPass);
             this.Controls.Add(this.txtCurrentPassword);
             this.Name = "ChangePassDialog";
-            this.Text = "ChangePassDialog";
+            this.Text = "Zmień hasło";
             this.ResumeLayout(false);
             this.PerformLayout();
 

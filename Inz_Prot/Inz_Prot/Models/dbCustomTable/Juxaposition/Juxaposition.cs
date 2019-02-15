@@ -71,7 +71,7 @@ namespace Inz_Prot.Models.dbCustomTable.Juxaposition
             if (juxapositionColumnInfos.Count != 0)
             {
                 juxapositionColumns.Clear();
-                for (int i = 0; i < juxapositionColumnInfos.Count; i++)
+                for (int i = 0; i < juxapositionColumnInfos.Count -1 ; i++)
                 {
                     juxapositionColumns.Add(
                         dbHelpers.TableEditors.JuxtapositionHelper.GetColumnFromUDT(

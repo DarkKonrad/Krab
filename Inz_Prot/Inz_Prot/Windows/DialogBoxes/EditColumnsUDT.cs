@@ -57,7 +57,8 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void comboColumnName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtColName.Text = comboColumnName.SelectedItem.ToString();;
+            if(comboColumnName.SelectedItem != null)
+            txtColName.Text = comboColumnName.SelectedItem.ToString();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

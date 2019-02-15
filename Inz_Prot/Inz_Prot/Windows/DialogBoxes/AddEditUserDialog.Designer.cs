@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.lblError = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtPasswordV = new System.Windows.Forms.TextBox();
@@ -42,7 +43,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.lblError = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +65,18 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(355, 329);
             this.mainPanel.TabIndex = 0;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(12, 216);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(34, 13);
+            this.lblError.TabIndex = 10;
+            this.lblError.Text = "Error";
+            this.lblError.Visible = false;
             // 
             // label5
             // 
@@ -193,18 +205,6 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(12, 216);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(34, 13);
-            this.lblError.TabIndex = 10;
-            this.lblError.Text = "Error";
-            this.lblError.Visible = false;
-            // 
             // AddEditUserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,7 +213,8 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.mainPanel);
             this.Name = "AddEditUserDialog";
-            this.Text = "AddUserDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Dodaj nowego użytkownika";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddEditUserDialog_FormClosing);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();

@@ -99,7 +99,7 @@
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(578, 492);
             this.Name = "AddEditNewRowCustomTableDialog";
-            this.Text = "AddNewRowCustomTableDialog";
+            this.Text = "Dodaj nowy wiersz";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

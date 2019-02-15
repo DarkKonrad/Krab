@@ -255,7 +255,7 @@
             this.addEmployee.Name = "addEmployee";
             this.addEmployee.Size = new System.Drawing.Size(162, 49);
             this.addEmployee.TabIndex = 0;
-            this.addEmployee.Text = "Dodaj Pracownika";
+            this.addEmployee.Text = "Zatwierdź";
             this.addEmployee.UseVisualStyleBackColor = true;
             // 
             // AddEditEmployeeDialog
@@ -269,7 +269,7 @@
             this.MinimumSize = new System.Drawing.Size(491, 487);
             this.Name = "AddEditEmployeeDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AddNewEmployeeDialog";
+            this.Text = "Dodaj nowego pracownika";
             this.Load += new System.EventHandler(this.AddNewEmployeeDialog_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

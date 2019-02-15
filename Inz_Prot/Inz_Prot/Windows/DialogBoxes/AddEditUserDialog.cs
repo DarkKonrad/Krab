@@ -70,7 +70,7 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void AddEditUserDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Owner.Show();
+            
             this.Hide();
             this.Dispose();
         }

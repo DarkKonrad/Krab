@@ -21,7 +21,7 @@ namespace Inz_Prot.Models.dbCustomTable
             this.code = code;
         }
         
-        private object Obj { get => obj; set => obj = value; }
+
 
         private CellContent() { }
      
@@ -63,11 +63,11 @@ namespace Inz_Prot.Models.dbCustomTable
                 {
                     return dateTime;
                 }
-                else if (shortText != null && shortText != "")
+                else if (shortText != null )
                 {
                     return shortText;
                 }
-                else if (description != null && description != "")
+                else if (description != null )
                 {
                     return description;
                 }
@@ -93,11 +93,11 @@ namespace Inz_Prot.Models.dbCustomTable
             {
                 return TypeCode.DateTime;
             }
-            else if (shortText != null && shortText != "")
+            else if (shortText != null )
             {   //necessary to make difference between shortText and description
                 return TypeCode.Char;
             }
-            else if (description != null && description != "")
+            else if (description != null )
             {
                 return TypeCode.String;
             }

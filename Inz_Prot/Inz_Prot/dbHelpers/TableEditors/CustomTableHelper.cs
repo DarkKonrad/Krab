@@ -24,7 +24,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
             insertTableQuery.Parameters.AddWithValue("@null", null);
             insertTableQuery.Parameters.AddWithValue("@name", tableInfo.TableName.ToLower());
-            insertTableQuery.Parameters.AddWithValue("@types", tableInfo.GetColumnsTypeAndNameString());
+            insertTableQuery.Parameters.AddWithValue("@types",tableInfo.GetColumnsTypeAndNameString());
 
             dbAgent.GetConnection().Open();
             var transaction = dbAgent.GetConnection().BeginTransaction();
@@ -169,7 +169,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
             List<CellContent> collection;
             CustomTableRows customTableRow = new CustomTableRows();
 
-            //TableInfo userDefinedTableContent = null;                                 TABLE CONTENTS ? 
+            //TableInfo userDefinedTableContent = null;                                
             string command = @"SELECT * FROM " + customTableInfo.TableName;
 
             var query = new MySqlCommand(command, dbAgent.GetConnection());
@@ -193,7 +193,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
                                 if (reader[customTableInfo.ColumnInfos_Row[i].Name].ToString().Contains("00.00.0000") || reader.IsDBNull(i))
                                     date = DateTime.Now;
                                 else
-                                    date= Convert.ToDateTime(reader[customTableInfo.ColumnInfos_Row[i].Name]); //date = (DateTime) reader[customTableInfo.ColumnInfos_Row[i].Name];
+                                    date= Convert.ToDateTime(reader[customTableInfo.ColumnInfos_Row[i].Name]);  
                                 collection.Add(new CellContent(date, (int) reader["ID"]));
                                 break;
                             case ColumnType.Description:
@@ -327,7 +327,7 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         public static TableInfo GetTableInfoAboutTable(string tableName)
         {
-            // należy dorobić wersję,która udostępni wszystkie wiersze
+            
             List<ColumnInfo> columns = new List<ColumnInfo>();
             TableInfo tableInfo = null;
             string command = @"SELECT * FROM " + NamesTypes.UserCustomTables_TABLE + " " + @"WHERE TableName = @tablename";
@@ -563,11 +563,11 @@ namespace Inz_Prot.dbHelpers.TableEditors
         /// <param name="Values"></param>
         public static void AddRowToCustomTable(TableInfo tableInfo, params string[] Values)
         {
-            string command = @"INSERT INTO " + tableInfo.TableName + @"VALUES (@ID";
+            string command = @"INSERT INTO " + tableInfo.TableName + @" VALUES (@ID";
             dbAgent.GetConnection().Open();
             float tmp;
 
-            for (int i = 0; i < tableInfo.Count - 1; i++)
+            for (int i = 0; i < tableInfo.Count ; i++)
             {
                 command += @",@param" + i.ToString();
             }
@@ -579,15 +579,16 @@ namespace Inz_Prot.dbHelpers.TableEditors
                
                 query.Parameters.AddWithValue("@ID", null);
 
-                for (int i = 0; i < tableInfo.Count -1;i++)
+                for (int i = 0; i < tableInfo.Count ;i++)
                 {
                     if (float.TryParse(Values[i].ToString(), out tmp))
                     {
-                        query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i].ToString().Replace(',', '.'));
+                        query.Parameters.AddWithValue(@"@param" + i.ToString(), Values[i].ToString().Replace(',', '.'));
                     }
                     else
-                        query.Parameters.AddWithValue(@"@val" + i.ToString(), Values[i]);
+                        query.Parameters.AddWithValue(@"@param" + i.ToString(), Values[i]);
                 }
+                
                 query.ExecuteNonQuery();
             }
 
@@ -854,47 +855,49 @@ namespace Inz_Prot.dbHelpers.TableEditors
 
         }
 
-        public static void AddRowToCustomTable(TableInfo tableInfo, params object[] Values )
-        {
-            string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
 
-            for (int i = 0; i < tableInfo.Count ; i++)
-            {
-                command += ",@param" + i.ToString();
-            }
-            command += ")";
 
-            var query = new MySqlCommand(command, dbAgent.GetConnection());
+        //public static void AddRowToCustomTable(TableInfo tableInfo, params object[] Values )
+        //{
+        //    string command = @"INSERT INTO " + tableInfo.TableName + " VALUES (@ID";
 
-            query.Parameters.AddWithValue("@ID", null);
-            for (int i = 0; i < tableInfo.Count ; i++)
-            {
-                query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
-            }
-            dbAgent.GetConnection().Open();
-            try
-            {
-                query.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    for (int i = 0; i < tableInfo.Count ; i++)
+        //    {
+        //        command += ",@param" + i.ToString();
+        //    }
+        //    command += ")";
 
-                Debug.WriteLine("Exception Message: " + ex.Message);
-                Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
-                Debug.WriteLine("Exception Source: " + ex.Source);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Debug.WriteLine("Exception Message: " + ex.Message);
-                Debug.WriteLine("Exception Source: " + ex.Source);
-            }
-            finally
-            {
-                dbTools.dbAgent.GetConnection().Close();
-            }
-        }
+        //    var query = new MySqlCommand(command, dbAgent.GetConnection());
+
+        //    query.Parameters.AddWithValue("@ID", null);
+        //    for (int i = 0; i < tableInfo.Count ; i++)
+        //    {
+        //        query.Parameters.AddWithValue("@param" + i.ToString(), Values[i]);
+        //    }
+        //    dbAgent.GetConnection().Open();
+        //    try
+        //    {
+        //        query.ExecuteNonQuery();
+        //    }
+        //    catch (MySqlException ex)
+        //    {
+        //        MessageBox.Show("Nastąpił błąd połączenia z bazą danych. Jeśli problem będzie się powtrzał skontaktuj się z zarządcą bazy danych", "Błąd połączenia z bazą danych" + Environment.NewLine + ex.ErrorCode, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        //        Debug.WriteLine("Exception Message: " + ex.Message);
+        //        Debug.WriteLine("Exception Error Code: " + ex.ErrorCode);
+        //        Debug.WriteLine("Exception Source: " + ex.Source);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Wystąpił  błąd " + Environment.NewLine + ex.Message + "Operacja nie powiodła się", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        Debug.WriteLine("Exception Message: " + ex.Message);
+        //        Debug.WriteLine("Exception Source: " + ex.Source);
+        //    }
+        //    finally
+        //    {
+        //        dbTools.dbAgent.GetConnection().Close();
+        //    }
+        //}
 
 
         public static void AddRowToCustomTable(TableInfo tableInfo,List<CellContent> tableRow)

@@ -52,9 +52,13 @@ namespace Inz_Prot.Models.dbCustomTable
             for(int i = columns.Count-1; i>=0; i--)
             {
                 if (i != 0)
-                    placeholder += string.Format("{0} {1}, ",columns[i].Name, columns[i].GetColumnTypeString());
+                    placeholder += string.Format("{0} {1}, ",
+                        columns[i].Name, 
+                        columns[i].GetColumnTypeString());
                 else
-                    placeholder += string.Format("{0} {1}, PRIMARY KEY (ID) )", columns[i].Name, columns[i].GetColumnTypeString());
+                    placeholder += string.Format("{0} {1}, PRIMARY KEY (ID) )",
+                        columns[i].Name, 
+                        columns[i].GetColumnTypeString());
                
             }
             var query = new MySql.Data.MySqlClient.MySqlCommand(placeholder);

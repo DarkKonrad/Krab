@@ -53,7 +53,7 @@
             this.btnAddCustomRow.Name = "btnAddCustomRow";
             this.btnAddCustomRow.Size = new System.Drawing.Size(107, 43);
             this.btnAddCustomRow.TabIndex = 2;
-            this.btnAddCustomRow.Text = "Dodaj wiersz";
+            this.btnAddCustomRow.Text = "Dodaj Wiersz";
             this.btnAddCustomRow.UseVisualStyleBackColor = true;
             this.btnAddCustomRow.Click += new System.EventHandler(this.btnAddCustomRow_Click);
             // 
@@ -175,7 +175,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "CustomTableFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CustomTableFrame";
+            this.Text = "Zbiory Danych";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomTableFrame_FormClosed);
             this.Load += new System.EventHandler(this.CustomTableFrame_Load);
             this.groupBox1.ResumeLayout(false);

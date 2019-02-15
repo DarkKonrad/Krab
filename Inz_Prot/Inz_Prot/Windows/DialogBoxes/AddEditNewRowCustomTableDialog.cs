@@ -98,8 +98,17 @@ namespace Inz_Prot.Windows.DialogBoxes
                         return false;
                     }
                 }
+                if (dialogControls.Type == TypeCode.Double)
+                {
+                    if (!Utilities.isStringNumber(dialogControls.TxtInputValue.Text) || dialogControls.TxtInputValue.Text == "")
+                    {
+                        WriteErrorAndHighlightRow(dialogControls, "W polu liczbowym niedozwolone są znaki alfabetu");
 
-                if(dialogControls.Type == TypeCode.String)
+                        return false;
+                    }
+                }
+
+                if (dialogControls.Type == TypeCode.String)
                 {                 
                     if(dialogControls.TxtInputValue.Text.Length > dbHelpers.NamesTypes.MAKS_DESCRIPTION_LENGHT)
                     {
@@ -110,11 +119,7 @@ namespace Inz_Prot.Windows.DialogBoxes
 
                 if (dialogControls.Type == TypeCode.Char)
                 {
-                    if (!Utilities.isStringNumber(dialogControls.TxtInputValue.Text) || dialogControls.TxtInputValue.Text == "")
-                    {
-                        WriteErrorAndHighlightRow(dialogControls, "Znaki specjalne są niedozwolone");
-                        return false;
-                    }
+                    
                     if (dialogControls.TxtInputValue.Text.Length > dbHelpers.NamesTypes.MAKS_SHORTTEXT_LENGHT)
                     {
                         WriteErrorAndHighlightRow(dialogControls, " Tekst przekracza maksymalną długość." + Environment.NewLine + "Maksymalna długość to 80 znaków");
@@ -127,7 +132,7 @@ namespace Inz_Prot.Windows.DialogBoxes
 
         private void AddRowOkClick()
         {
-            List<object> vals = new List<object>();
+            List<string> vals = new List<string>();
             foreach (CustomTableDialogControls dialogControls in listOfControls)
             {
                 // WSZYSTKO musi byc string
@@ -148,7 +153,7 @@ namespace Inz_Prot.Windows.DialogBoxes
             {
                 // WSZYSTKO musi byc string
                 // kolejnosc parametrów taka jak kolejnosc kolumn w tabeli
-
+                
                 vals.Add(dialogControls.ValueString);
 
             }

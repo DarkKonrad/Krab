@@ -29,15 +29,7 @@ namespace Inz_Prot.Models.dbCustomTable
         string name, type;
         int? typeCapacity;
         ColumnType columnT;
-   
 
-
-        private ColumnInfo() { }
-        private ColumnInfo(string name, string type)
-        {
-            this.name = name;
-            this.type = type;
-        }
         public ColumnInfo(string name,ColumnType type)
         {
             this.name = name;
@@ -174,13 +166,10 @@ namespace Inz_Prot.Models.dbCustomTable
 
         public string GetColumnTypeString()
         {
-          
             if(typeCapacity.HasValue)
             {
               return this.type + "(" + typeCapacity.ToString() + ")";
             }
-            
-
             return type;
         }
         public string Name { get => name; set => name = value; }
@@ -190,5 +179,7 @@ namespace Inz_Prot.Models.dbCustomTable
         public string Type_String { get => type; set => type = value; }
         public ColumnType ColumnType { get => columnT; set => columnT = value; }
         public int? TypeCapacity { get => typeCapacity; set => typeCapacity = value; }
+        private ColumnInfo() { }
+     
     }
 }

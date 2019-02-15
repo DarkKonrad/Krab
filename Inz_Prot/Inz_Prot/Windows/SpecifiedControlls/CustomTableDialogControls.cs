@@ -210,7 +210,7 @@ namespace Inz_Prot.Windows.SpecifiedControlls
             else if(columnInfo.ColumnType == ColumnType.Description || columnInfo.ColumnType == ColumnType.ShortText)
             {
                 TxtInputValue.Location = new Point(
-               ContainerPanel.Width / 4 + 5,
+               ContainerPanel.Width / 4 + 20,
                                     0);
                 txtInputValue.Width = 400;
                 txtInputValue.Height = containerPanel.Height;

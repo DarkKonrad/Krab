@@ -155,7 +155,7 @@
             this.MaximumSize = new System.Drawing.Size(533, 454);
             this.MinimumSize = new System.Drawing.Size(533, 454);
             this.Name = "AddEditJuxtaposition";
-            this.Text = "AddEditJuxtaposition";
+            this.Text = "Dodaj nowe zestawienie";
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
             this.bottomPanel.ResumeLayout(false);

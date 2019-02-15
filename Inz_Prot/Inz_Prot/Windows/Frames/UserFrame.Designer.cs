@@ -55,7 +55,7 @@
             this.dataGridUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridUsers.Location = new System.Drawing.Point(0, 0);
             this.dataGridUsers.Name = "dataGridUsers";
-            this.dataGridUsers.Size = new System.Drawing.Size(446, 457);
+            this.dataGridUsers.Size = new System.Drawing.Size(343, 323);
             this.dataGridUsers.TabIndex = 0;
             // 
             // dataGridName
@@ -111,20 +111,22 @@
             this.panel1.Controls.Add(this.btnAddUser);
             this.panel1.Controls.Add(this.btnDeleteUser);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 350);
+            this.panel1.Location = new System.Drawing.Point(0, 216);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(446, 107);
+            this.panel1.Size = new System.Drawing.Size(343, 107);
             this.panel1.TabIndex = 4;
             // 
             // UserFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 457);
+            this.ClientSize = new System.Drawing.Size(343, 323);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridUsers);
+            this.MaximumSize = new System.Drawing.Size(359, 362);
+            this.MinimumSize = new System.Drawing.Size(359, 362);
             this.Name = "UserFrame";
-            this.Text = "Spis Użytkowników";
+            this.Text = "Użytkownicy systemu";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserFrame_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsers)).EndInit();
             this.panel1.ResumeLayout(false);

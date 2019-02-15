@@ -111,7 +111,7 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.mainPanel);
             this.Name = "JuxEditCell";
-            this.Text = "JuxEditCell";
+            this.Text = "Edytuj elementy zestawienia";
             this.bottomPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

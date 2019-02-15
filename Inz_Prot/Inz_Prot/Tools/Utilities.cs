@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Inz_Prot
 {
 
-    /*
+    /* Inspired by Source: 
      * https://www.codeproject.com/articles/415732/reading-and-writing-csv-files-in-csharp
      */
 
@@ -131,15 +131,21 @@ namespace Inz_Prot
 
         public static bool isStringNumber(string str)
         {
-         
-            int result = 0;
-            if (!Int32.TryParse(str, out result))
-            {
-                return false;
-            }
 
-            return true;
+            int result = 0;
+            if (Int32.TryParse(str, out result))
+            {
+                return true;
+            }
+            float fResult = 0;
+            if(float.TryParse(str,out fResult))
+            {
+                return true;
+            }
+            return false;
         }
+
+        
         public static bool StringContainsSpecialChars(string str)
         {
             foreach (char c in str)
